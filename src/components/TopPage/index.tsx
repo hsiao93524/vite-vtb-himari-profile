@@ -20,9 +20,14 @@ export default function TopPage({ videos }: TopPageProps) {
 
   return (
     <section className="hero-section" id="hero">
+      <div className="hero-visual">
+        <img alt="結萌ひまり archive visual" src={heroImage} />
+      </div>
       <div className="hero-content">
-        <p className="eyebrow">Re:AcT Gaming Archive</p>
-        <h1>結萌ひまり 卒業アルバム</h1>
+        <p className="eyebrow">Vtuber's Archive</p>
+        <h1 className="hero-title">
+          <span>結萌ひまり</span>
+        </h1>
         <p className="hero-copy">
           配信一覧、タグ、統計、関連リンクを一か所にまとめるための React
           アーカイブです。
@@ -39,9 +44,7 @@ export default function TopPage({ videos }: TopPageProps) {
             YouTube
           </a>
         </div>
-      </div>
-      <div className="hero-visual">
-        <img alt="結萌ひまり archive visual" src={heroImage} />
+        <p className="last-updated">Last updated: 2026-05-05</p>
       </div>
       <dl className="stats-grid">
         <div>

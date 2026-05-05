@@ -43,7 +43,7 @@ export default function VideoTable({ videos }: VideoTableProps) {
               <td>{getPlaylistLabel(video.playlist)}</td>
               <td>{formatDuration(video.duration)}</td>
               <td>
-                {video.isMembers || video.isMembersOnly ? 'Members' : 'Public'}
+                {video.isMembers || video.isMembersOnly ? 'メン限' : '公開'}
               </td>
             </tr>
           ))}
