@@ -22,7 +22,7 @@ import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment
 
 # ── 設定 ──────────────────────────────────────────────────────────────────────
-API_KEY    = "AIzaSyABY8X9SR2aADEmthdPWwNYNKW9AFDnFDc"
+API_KEY    = ""
 CHANNEL_ID = "UChmCIfTk8UsT4igvKZ6Huqw"   # 結萌ひまり
 OUTPUT     = "卒業アルバム_修正版.xlsx"
 
