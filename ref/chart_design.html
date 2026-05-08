@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VideoAnalytics デザイン案 — 結萌ひまり</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #fffbf0;
+    --surface:  #fff8e6;
+    --card:     #ffffff;
+    --border:   #f0d9a0;
+    --text:     #2c1f0a;
+    --text-dim: #a08050;
+    --main:     #f59e0b;
+    --accent:   #f97316;
+    --deep:     #b45309;
+    --light:    #fef3c7;
+    --gold2:    #fbbf24;
+    --cream:    #fdf6e3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── コントロールバー ── */
+  .controls {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 12px rgba(245,158,11,0.08);
+  }
+
+  .ctrl-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* 統計依據ドロップダウン */
+  .select-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .select-wrap select {
+    appearance: none;
+    background: var(--light);
+    border: 1.5px solid var(--main);
+    border-radius: 10px;
+    padding: 8px 36px 8px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--deep);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .select-wrap select:focus { border-color: var(--accent); }
+  .select-wrap::after {
+    content: "▾";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--main);
+    pointer-events: none;
+    font-size: 12px;
+  }
+
+  /* グラフ切り替えボタン */
+  .chart-btns {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+  }
+  .chart-btn {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 7px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .chart-btn:hover { border-color: var(--main); color: var(--deep); }
+  .chart-btn.active {
+    background: var(--main);
+    border-color: var(--main);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(245,158,11,0.35);
+  }
+
+  /* ── グラフカード ── */
+  .chart-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 28px 20px;
+    box-shadow: 0 4px 24px rgba(245,158,11,0.07);
+    min-height: 360px;
+    position: relative;
+    overflow: hidden;
+  }
+  .chart-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--main), var(--accent));
+    border-radius: 20px 20px 0 0;
+  }
+
+  .chart-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .chart-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+
+  .chart-panel { display: none; }
+  .chart-panel.active { display: block; }
+
+  /* ── 横棒グラフ ── */
+  .bar-list { display: flex; flex-direction: column; gap: 10px; }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 36px;
+    align-items: center;
+    gap: 10px;
+  }
+  .bar-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bar-track {
+    height: 26px;
+    background: var(--light);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--main), var(--accent));
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    position: relative;
+  }
+  .bar-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(255,255,255,0.15) 8px,
+      rgba(255,255,255,0.15) 10px
+    );
+  }
+  .bar-val {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--deep);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── 円グラフ ── */
+  .pie-wrap {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pie-svg { flex-shrink: 0; }
+  .pie-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-name { color: var(--text); font-weight: 700; }
+  .legend-pct  { color: var(--text-dim); font-size: 12px; font-family: 'DM Mono', monospace; margin-left: auto; min-width: 36px; text-align: right; }
+
+  /* ── バブルチャート ── */
+  .bubble-wrap {
+    position: relative;
+    width: 100%;
+    height: 280px;
+  }
+  .bubble-wrap svg { width: 100%; height: 100%; }
+  .bubble-label {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 700;
+  }
+
+  /* ── ツールチップ風のホバーカード ── */
+  .tooltip {
+    display: none;
+    position: absolute;
+    background: var(--text);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 7px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  /* ── フッター注記 ── */
+  .chart-footer {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .total-badge {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--deep);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- コントロールバー -->
+  <div class="controls">
+    <span class="ctrl-label">統計依據</span>
+
+    <div class="select-wrap">
+      <select id="metric-select" onchange="updateMetric(this.value)">
+        <option value="category">直播種類（カテゴリ）</option>
+        <option value="collab">コラボ相手</option>
+      </select>
+    </div>
+
+    <div class="chart-btns">
+      <button class="chart-btn active" onclick="switchChart('bar', this)">
+        ☰ 横棒
+      </button>
+      <button class="chart-btn" onclick="switchChart('pie', this)">
+        ◉ 円グラフ
+      </button>
+      <button class="chart-btn" onclick="switchChart('bubble', this)">
+        ◎ バブル
+      </button>
+    </div>
+  </div>
+
+  <!-- グラフカード -->
+  <div class="chart-card">
+    <div class="chart-title" id="chart-title">直播種類の内訳</div>
+    <div class="chart-sub" id="chart-sub">カテゴリ別に配信数を集計しています</div>
+
+    <!-- 横棒グラフ -->
+    <div class="chart-panel active" id="panel-bar">
+      <div class="bar-list" id="bar-list"></div>
+    </div>
+
+    <!-- 円グラフ -->
+    <div class="chart-panel" id="panel-pie">
+      <div class="pie-wrap">
+        <svg class="pie-svg" id="pie-svg" width="200" height="200" viewBox="0 0 200 200"></svg>
+        <div class="pie-legend" id="pie-legend"></div>
+      </div>
+    </div>
+
+    <!-- バブルチャート -->
+    <div class="chart-panel" id="panel-bubble">
+      <div class="bubble-wrap">
+        <svg id="bubble-svg" viewBox="0 0 700 280"></svg>
+      </div>
+    </div>
+
+    <div class="chart-footer">
+      <span>合計</span>
+      <span class="total-badge" id="total-badge">279 件</span>
+      <span style="margin-left: auto;">videos.json より自動集計</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── データ ───────────────────────────────────────────────────────────────────
+const DATA = {
+  category: [
+    { name: "メン限",       count: 76 },
+    { name: "格ゲー",       count: 72 },
+    { name: "RPG",         count: 26 },
+    { name: "その他",       count: 21 },
+    { name: "ショート",     count: 20 },
+    { name: "マイクラ",     count: 19 },
+    { name: "ホラー",       count: 12 },
+    { name: "コラボ",       count: 10 },
+    { name: "雑談",         count: 10 },
+    { name: "記念配信",     count: 8  },
+    { name: "カードゲーム", count: 5  },
+  ],
+  collab: [
+    { name: "ゲムぼく。",       count: 8  },
+    { name: "矢凪ゆい",         count: 5  },
+    { name: "音羽奏來",         count: 4  },
+    { name: "杏夜くもり",       count: 4  },
+    { name: "白妙とき",         count: 3  },
+    { name: "伊達つかさ",       count: 3  },
+    { name: "宮原ふくじろう",   count: 2  },
+    { name: "天晴ほかる",       count: 2  },
+    { name: "泡々いるか",       count: 2  },
+    { name: "罪揺える",         count: 2  },
+    { name: "白音ゆき",         count: 2  },
+    { name: "星ノ音コロン",     count: 1  },
+  ],
+};
+
+const COLORS = [
+  "#f59e0b","#f97316","#fbbf24","#d97706","#fb923c",
+  "#fde68a","#b45309","#fdba74","#92400e","#fef3c7","#ea580c",
+];
+
+const TITLES = {
+  category: { title: "直播種類の内訳", sub: "カテゴリ別に配信数を集計しています" },
+  collab:   { title: "コラボ相手の内訳", sub: "コラボ相手別に配信数を集計しています" },
+};
+
+let currentMetric = "category";
+let currentChart  = "bar";
+
+// ── 描画関数 ─────────────────────────────────────────────────────────────────
+function getItems() {
+  return DATA[currentMetric];
+}
+
+function renderBar() {
+  const items = getItems();
+  const max   = Math.max(...items.map(d => d.count));
+  const html  = items.map((d, i) => `
+    <div class="bar-row">
+      <div class="bar-name">${d.name}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${(d.count/max*100).toFixed(1)}%; background: linear-gradient(90deg,${COLORS[i % COLORS.length]}, ${COLORS[(i+2) % COLORS.length]})"></div>
+      </div>
+      <div class="bar-val">${d.count}</div>
+    </div>`).join("");
+  document.getElementById("bar-list").innerHTML = html;
+}
+
+function renderPie() {
+  const items = getItems();
+  const total = items.reduce((s, d) => s + d.count, 0);
+  const svg   = document.getElementById("pie-svg");
+  const leg   = document.getElementById("pie-legend");
+  const cx = 100, cy = 100, r = 88, inner = 44;
+  let angle = -Math.PI / 2;
+  let paths = "";
+
+  items.forEach((d, i) => {
+    const slice = (d.count / total) * Math.PI * 2;
+    const x1 = cx + r * Math.cos(angle);
+    const y1 = cy + r * Math.sin(angle);
+    const x2 = cx + r * Math.cos(angle + slice);
+    const y2 = cy + r * Math.sin(angle + slice);
+    const xi1 = cx + inner * Math.cos(angle);
+    const yi1 = cy + inner * Math.sin(angle);
+    const xi2 = cx + inner * Math.cos(angle + slice);
+    const yi2 = cy + inner * Math.sin(angle + slice);
+    const large = slice > Math.PI ? 1 : 0;
+    const col = COLORS[i % COLORS.length];
+    paths += `<path d="M${xi1},${yi1} L${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2} L${xi2},${yi2} A${inner},${inner} 0 ${large} 0 ${xi1},${yi1}" fill="${col}" stroke="#fff" stroke-width="2">
+      <title>${d.name}: ${d.count}件 (${(d.count/total*100).toFixed(1)}%)</title>
+    </path>`;
+    angle += slice;
+  });
+
+  svg.innerHTML = paths +
+    `<text x="100" y="96" text-anchor="middle" font-size="22" font-weight="900" fill="#2c1f0a" font-family="Zen Kaku Gothic New">${total}</text>
+     <text x="100" y="114" text-anchor="middle" font-size="10" fill="#a08050" font-family="Zen Kaku Gothic New">合計</text>`;
+
+  leg.innerHTML = items.map((d, i) => `
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${COLORS[i % COLORS.length]}"></div>
+      <span class="legend-name">${d.name}</span>
+      <span class="legend-pct">${(d.count/total*100).toFixed(0)}%</span>
+    </div>`).join("");
+}
+
+function renderBubble() {
+  const items = getItems();
+  const max   = Math.max(...items.map(d => d.count));
+  const svg   = document.getElementById("bubble-svg");
+  const W = 700, H = 280;
+
+  // 簡易パッキング
+  const minR = 18, maxR = 72;
+  const circles = items.map((d, i) => ({
+    ...d,
+    r: minR + (d.count / max) * (maxR - minR),
+    color: COLORS[i % COLORS.length],
+  }));
+
+  // 配置（簡易グリッド → ランダム感）
+  const positions = [];
+  const offsets = [
+    [110,120],[220,80],[340,130],[460,90],[570,120],
+    [160,200],[280,210],[400,190],[510,210],[90,65],
+    [620,180],[350,50]
+  ];
+  circles.forEach((c, i) => {
+    const pos = offsets[i] || [
+      c.r + Math.random() * (W - c.r * 2),
+      c.r + Math.random() * (H - c.r * 2),
+    ];
+    positions.push({ ...c, x: pos[0], y: pos[1] });
+  });
+
+  let paths = "";
+  positions.forEach((c, i) => {
+    const textColor = c.count > max * 0.4 ? "#fff" : c.color;
+    const textOutline = c.count > max * 0.4 ? "" : `stroke="#fff" stroke-width="3" paint-order="stroke"`;
+    paths += `
+      <circle cx="${c.x}" cy="${c.y}" r="${c.r}" fill="${c.color}" fill-opacity="0.85" stroke="#fff" stroke-width="2">
+        <title>${c.name}: ${c.count}件</title>
+      </circle>
+      <text x="${c.x}" y="${c.y - (c.r > 30 ? 8 : 0)}" text-anchor="middle" dominant-baseline="middle"
+        font-size="${c.r > 40 ? 13 : c.r > 25 ? 11 : 9}"
+        font-weight="700" fill="${c.r > 35 ? '#fff' : '#2c1f0a'}"
+        font-family="Zen Kaku Gothic New" class="bubble-label"
+        ${c.r > 35 ? '' : `stroke="#fff" stroke-width="3" paint-order="stroke"`}>
+        ${c.name}
+      </text>
+      ${c.r > 30 ? `<text x="${c.x}" y="${c.y + 14}" text-anchor="middle" dominant-baseline="middle"
+        font-size="12" font-weight="900" fill="rgba(255,255,255,0.9)"
+        font-family="DM Mono">${c.count}</text>` : ''}
+    `;
+  });
+
+  svg.innerHTML = paths;
+}
+
+// ── 切り替え ─────────────────────────────────────────────────────────────────
+function updateMetric(val) {
+  currentMetric = val;
+  const t = TITLES[val];
+  document.getElementById("chart-title").textContent = t.title;
+  document.getElementById("chart-sub").textContent   = t.sub;
+  const total = DATA[val].reduce((s, d) => s + d.count, 0);
+  document.getElementById("total-badge").textContent = `${total} 件`;
+  render();
+}
+
+function switchChart(type, btn) {
+  currentChart = type;
+  document.querySelectorAll(".chart-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll(".chart-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById(`panel-${type}`).classList.add("active");
+  btn.classList.add("active");
+  render();
+}
+
+function render() {
+  if (currentChart === "bar")    renderBar();
+  if (currentChart === "pie")    renderPie();
+  if (currentChart === "bubble") renderBubble();
+}
+
+// 初期描画
+render();
+</script>
+</body>
+</html>

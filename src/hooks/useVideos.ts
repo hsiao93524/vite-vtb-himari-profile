@@ -2,7 +2,18 @@ import { useMemo, useState } from 'react'
 import rawData from '../data/videos.json'
 import type { Video } from '../types/video'
 
-const data = rawData as Video[]
+function withBaseUrl(path: string) {
+  if (!path.startsWith('/')) {
+    return path
+  }
+
+  return `${import.meta.env.BASE_URL.replace(/\/$/, '')}${path}`
+}
+
+const data = (rawData as Video[]).map((video) => ({
+  ...video,
+  thumbnailUrl: withBaseUrl(video.thumbnailUrl),
+}))
 
 function toList(value: string | string[] | undefined) {
   if (!value) {

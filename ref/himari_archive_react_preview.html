@@ -1,0 +1,144 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0}
+.header{background:linear-gradient(135deg,#ffeef5,#f9c8dc);border-radius:var(--border-radius-lg);padding:1.5rem;margin-bottom:1rem;border:0.5px solid #e87fab}
+.header h1{font-size:18px;font-weight:500;color:#3d2b3d}
+.header p{font-size:12px;color:#7a5c7a;margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:1rem 0}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px;text-align:center}
+.stat-label{font-size:11px;color:var(--color-text-secondary)}
+.stat-val{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-top:2px}
+.search-bar{display:flex;gap:8px;margin-bottom:1rem}
+.search-bar input{flex:1;padding:8px 12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:13px;background:var(--color-background-primary);color:var(--color-text-primary)}
+.filter-btn{padding:6px 12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:12px;background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;white-space:nowrap}
+.filter-btn.active{background:#ffeef5;border-color:#e87fab;color:#3d2b3d}
+.playlist{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:8px;overflow:hidden}
+.pl-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;background:var(--color-background-primary)}
+.pl-header:hover{background:var(--color-background-secondary)}
+.pl-title{font-size:13px;font-weight:500;color:var(--color-text-primary);display:flex;align-items:center;gap:8px}
+.pl-count{font-size:11px;color:var(--color-text-secondary)}
+.pl-arrow{font-size:10px;color:var(--color-text-tertiary);transition:transform 0.2s}
+.pl-arrow.open{transform:rotate(90deg)}
+.pl-body{border-top:0.5px solid var(--color-border-tertiary)}
+.video-row{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.video-row:last-child{border-bottom:none}
+.video-row:hover{background:var(--color-background-secondary)}
+.thumb{width:64px;height:36px;border-radius:4px;background:#f9c8dc;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.video-info{flex:1;min-width:0}
+.video-title{font-size:12px;color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.video-date{font-size:11px;color:var(--color-text-secondary);margin-top:2px}
+.video-link{font-size:11px;color:#e87fab;text-decoration:none;flex-shrink:0}
+.tag{display:inline-block;font-size:10px;padding:2px 6px;border-radius:99px;background:#ffeef5;color:#e87fab;border:0.5px solid #f9c8dc;margin-left:6px}
+.form-btn{display:block;text-align:center;padding:10px;background:#f3e8ff;border:0.5px solid #9b6fc8;border-radius:var(--border-radius-md);font-size:12px;color:#9b6fc8;text-decoration:none;margin-bottom:1rem;cursor:pointer}
+</style>
+<div class="wrap">
+  <div class="header">
+    <h1>🏵️ 結萌ひまり 卒業アルバム</h1>
+    <p>Musubime Himari｜Re:AcT Gaming｜配信アーカイブまとめ</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-label">プレイリスト</div><div class="stat-val">28</div></div>
+    <div class="stat"><div class="stat-label">動画総数</div><div class="stat-val">230</div></div>
+    <div class="stat"><div class="stat-label">最終更新</div><div class="stat-val">260427</div></div>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="動画タイトルで検索..." id="search" oninput="filterVideos()">
+    <button class="filter-btn active" onclick="setFilter('all',this)">すべて</button>
+    <button class="filter-btn" onclick="setFilter('members',this)">メン限</button>
+    <button class="filter-btn" onclick="setFilter('game',this)">ゲーム</button>
+  </div>
+
+  <div class="form-btn" onclick="sendPrompt('情報提供フォームについて教えて')">📝 情報提供フォーム（協力募集中）</div>
+
+  <div id="playlists"></div>
+</div>
+
+<script>
+const data = [
+  {name:"メン限",tag:"members",videos:[
+    {date:"260426",title:"【メン限】お知らせしました···！！",id:"0MtP3d-3brc"},
+    {date:"260412",title:"【メン限】参加型雀魂＆いっぱい雑談！",id:"KRYggh_lwn8"},
+    {date:"260409",title:"【メン限】作業雑談！一緒に作業しよう",id:"bzt1YNJlYAM"},
+  ]},
+  {name:"VALORANT",tag:"game",videos:[
+    {date:"260101",title:"【VALORANT】ランク戦！",id:"abc001"},
+    {date:"251215",title:"【VALORANT】初めてのVALORANT",id:"abc002"},
+  ]},
+  {name:"スト6配信（C舞）",tag:"game",videos:[
+    {date:"260320",title:"【スト6】C舞でランクマ！",id:"abc003"},
+    {date:"260310",title:"【スト6】対戦会参加！",id:"abc004"},
+    {date:"260301",title:"【スト6】C舞始めました",id:"abc005"},
+  ]},
+  {name:"雑談",tag:"game",videos:[
+    {date:"260415",title:"【雑談】近況報告とか色々！",id:"abc006"},
+    {date:"260402",title:"【雑談】4月の配信予定について",id:"abc007"},
+  ]},
+];
+
+let currentFilter = 'all';
+let openPlaylists = new Set([0]);
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function filterVideos() {
+  render();
+}
+
+function render() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const container = document.getElementById('playlists');
+  container.innerHTML = '';
+
+  data.forEach((pl, pi) => {
+    if (currentFilter !== 'all' && pl.tag !== currentFilter) return;
+    const videos = pl.videos.filter(v => !q || v.title.toLowerCase().includes(q));
+    if (q && videos.length === 0) return;
+
+    const isOpen = openPlaylists.has(pi);
+    const div = document.createElement('div');
+    div.className = 'playlist';
+
+    const tag = pl.tag === 'members' ? '<span class="tag">メン限</span>' : '';
+    div.innerHTML = `
+      <div class="pl-header" onclick="togglePl(${pi})">
+        <div class="pl-title">${pl.name}${tag}</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="pl-count">${videos.length}本</span>
+          <span class="pl-arrow ${isOpen?'open':''}">▶</span>
+        </div>
+      </div>
+      ${isOpen ? `<div class="pl-body">${videos.map(v => `
+        <div class="video-row">
+          <div class="thumb">
+            <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" onerror="this.style.display='none'">
+          </div>
+          <div class="video-info">
+            <div class="video-title">${v.title}</div>
+            <div class="video-date">${v.date}</div>
+          </div>
+          <a class="video-link" href="https://youtu.be/${v.id}" target="_blank">視聴 →</a>
+        </div>
+      `).join('')}</div>` : ''}
+    `;
+    container.appendChild(div);
+  });
+}
+
+function togglePl(i) {
+  if (openPlaylists.has(i)) openPlaylists.delete(i);
+  else openPlaylists.add(i);
+  render();
+}
+
+render();
+</script>
