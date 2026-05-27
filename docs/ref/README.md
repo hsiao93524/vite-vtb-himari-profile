@@ -98,6 +98,27 @@ himari_archive_react_preview.html
 }
 ```
 
+透過 `migrate_videos.py` 轉換正式格式如下
+
+```json
+{
+  "id": "playlist-slug-001",
+  "date": "2026-04-27",
+  "title": "影片標題",
+  "url": "https://youtu.be/...",
+  "videoId": "YouTube影片ID",
+  "thumbnailUrl": "https://img.youtube.com/vi/.../mqdefault.jpg",
+  "playlist": ["播放清單名稱"],
+  "visibility": "public",
+  "isMembersOnly": false,
+  "duration": 3600,
+  "tags": [],
+  "collab": [],
+}
+```
+
+未來由excel轉換出的格式也預定與上面相同
+
 ## 風險與整理建議
 
 - `fetch_himari.py` 與 `fetch_himari_modified_streaming_time.py` 內有硬編碼 YouTube API key，建議移到環境變數或本機 `.env`，並檢查該 key 是否需要停用 / 輪替。

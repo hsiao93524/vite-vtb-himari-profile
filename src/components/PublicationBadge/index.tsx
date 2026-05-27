@@ -1,0 +1,7 @@
+type PublicationBadgeProps = {
+  children: string
+}
+
+export default function PublicationBadge({ children }: PublicationBadgeProps) {
+  return <span className="publication-badge">[{children}]</span>
+}

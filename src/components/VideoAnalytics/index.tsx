@@ -1,14 +1,19 @@
+import PublicationBadge from '../PublicationBadge'
 import type { Video } from '../../types/video'
 
 type VideoAnalyticsProps = {
   videos: Video[]
+  showInProgress?: boolean
 }
 
 function getPlaylistLabel(playlist: string | string[]) {
   return Array.isArray(playlist) ? playlist[0] : playlist
 }
 
-export default function VideoAnalytics({ videos }: VideoAnalyticsProps) {
+export default function VideoAnalytics({
+  videos,
+  showInProgress = false,
+}: VideoAnalyticsProps) {
   const byPlaylist = Array.from(
     videos.reduce((map, video) => {
       const key = getPlaylistLabel(video.playlist) || 'Unknown'
@@ -25,7 +30,10 @@ export default function VideoAnalytics({ videos }: VideoAnalyticsProps) {
     <section className="section-block" id="analytics">
       <div className="section-heading">
         <p className="eyebrow">Video Analyze</p>
-        <h2>Playlist Distribution</h2>
+        <h2>
+          Playlist Distribution
+          {showInProgress && <PublicationBadge>In progress</PublicationBadge>}
+        </h2>
       </div>
       <div className="bar-chart" aria-label="Playlist video counts">
         {byPlaylist.map(([playlist, count]) => (

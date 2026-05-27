@@ -19,6 +19,49 @@ This project displays stream history, video archives, and channel information in
 - Responsive layout
 - Data-driven rendering from a curated JSON dataset
 
+## Publication Modes
+
+This project publishes two versions at the same time:
+
+- Public: `/vite-vtb-himari-profile/`
+- HR: `/vite-vtb-himari-profile/hr/`
+
+Section visibility is controlled in `src/config/publication.ts`.
+
+- `public`: visible in both versions
+- `wip-visible`: visible only in the HR version, with `[In progress]`
+- `hidden`: hidden in both versions
+
+Build both versions into `dist/`:
+
+```bash
+npm run build:publications
+```
+
+Deploy publishes both versions:
+
+```bash
+npm run deploy
+```
+
+## Live Site
+
+- [GitHub Pages](https://hsiao93524.github.io/vite-vtb-himari-profile/)
+- [GitHub Pages deployments](https://github.com/hsiao93524/vite-vtb-himari-profile/deployments/github-pages)
+
+## Design Docs
+
+- [Top Visual Docs](docs/01-top-visual/top-visual/README.md)
+- [Top Visual Block Design](docs/01-top-visual/top-visual/top-visual-block-design.md)
+- [Top Visual Data Design](docs/01-top-visual/top-visual/top-visual-data-design.md)
+- [Product Design](docs/00-overview/product-design.md)
+- [Data Model](docs/00-overview/data-model.md)
+- [Roadmap](docs/00-overview/roadmap.md)
+- [Data Flow](docs/00-overview/data-flow.md)
+- [Wireframe](docs/framework.png)
+- [Original Wireframe Workbook](docs/design.xlsx)
+- [Notion source](https://www.notion.so/React-35254a9cebff81df8fc7c1fc381d26b4)
+
 ## Background
 
 Built as a side project to practice frontend development with React and TypeScript, as well as data pipeline work (Python scripts for fetching and structuring YouTube data via the YouTube Data API).

@@ -200,6 +200,15 @@ main {
   line-height: 1.2;
 }
 
+.publication-badge {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--himari-deep-orange);
+  font-size: 13px;
+  font-weight: 800;
+  vertical-align: middle;
+}
+
 .toolbar {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) auto auto;

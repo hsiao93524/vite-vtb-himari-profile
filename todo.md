@@ -1,10 +1,18 @@
 # TODO
 
+## others
+
+- 調整 video.json 的新格式
+  - [ ] 轉換 video.json
+    - ref: https://claude.ai/chat/34f302af-77b4-4839-b648-c7a0adad08f7
+  - [ ] 轉換完之後透過 codex 重新修改前端
+
 ## Category 欄位清理
 
 目標：依照設計書，將 `category` 從資料結構中移除，改由 `tags` 統一管理分類資訊。
 
-- [ ] 清理 Excel -> JSON 轉換流程中產生 `category` 的邏輯
+- [x] 清理 Excel -> JSON 轉換流程中產生 `category` 的邏輯
+  > 將 category 當作 tag 的初始值，放到tags list裡
 - [ ] 確認轉換後的 `videos.json` 不再輸出 `category`
 - [ ] 將原本 `category` 的分類值合併或轉換到 `tags`
 - [ ] 清理 `src/types/video.ts` 裡的 `category?: string`
@@ -16,7 +24,7 @@
 
 目標：依照設計書，將會員影片欄位統一為 `isMembersOnly`，移除舊欄位 `isMembers`。
 
-- [ ] 清理 Excel -> JSON 轉換流程中產生 `isMembers` 的邏輯
+- [x] 清理 Excel -> JSON 轉換流程中產生 `isMembers` 的邏輯
 - [ ] 將轉換流程改成輸出 `isMembersOnly`
 - [ ] 確認轉換後的 `videos.json` 不再輸出 `isMembers`
 - [ ] 將既有 `videos.json` 的 `isMembers` 資料遷移為 `isMembersOnly`
@@ -30,7 +38,7 @@
 
 目標：依照設計書，將 `playlist` 統一為 `string[]`，支援同一影片存在於多個 playlist 的情況。
 
-- [ ] 清理 Excel -> JSON 轉換流程中產生 `playlist: string` 的邏輯
+- [x] 清理 Excel -> JSON 轉換流程中產生 `playlist: string` 的邏輯
 - [ ] 將轉換流程改成固定輸出 `playlist: string[]`
 - [ ] 確認轉換後的 `videos.json` 每筆資料都使用陣列格式
 - [ ] 將既有 `videos.json` 的 `playlist: string` 遷移為 `playlist: string[]`
@@ -44,7 +52,7 @@
 
 目標：依照設計書，移除 `status` 欄位。此欄位目前只有 `ongoing` / `completed`，但卒業済み資料集不需要再用它表示狀態。
 
-- [ ] 清理 Excel -> JSON 轉換流程中產生 `status` 的邏輯
+- [x] 清理 Excel -> JSON 轉換流程中產生 `status` 的邏輯
 - [ ] 確認轉換後的 `videos.json` 不再輸出 `status`
 - [ ] 將既有 `videos.json` 的 `status` 欄位移除
 - [ ] 清理 `src/types/video.ts` 裡的 `status?: string`
@@ -54,16 +62,19 @@
 
 ## isDeleted 欄位補齊
 
-目標：依照設計書，未來轉換後的每筆影片資料都需要有 `isDeleted` 欄位；如果沒有刪檔資訊，預設為 `false`。
+> 目標：依照設計書，未來轉換後的每筆影片資料都需要有 `isDeleted` 欄位；如果沒有刪檔資訊，預設為 `false`。
+> 
+> - [ ] 更新 Excel -> JSON 轉換流程，固定輸出 `isDeleted`
+> - [ ] 如果來源資料沒有刪檔資訊，將 `isDeleted` 預設為 `false`
+> - [ ] 補上人工標記刪檔影片的資料來源或欄位規則
+> - [ ] 確認轉換後的 `videos.json` 每筆資料都有 `isDeleted`
+> - [ ] 將既有 `videos.json` 補上 `isDeleted: false`
+> - [ ] 將 `src/types/video.ts` 的 `isDeleted?: boolean` 改成必> 要欄位 `isDeleted: boolean`
+> - [ ] 檢查 `useVideos` 等前端邏輯是否需要依照 `isDeleted` 顯示標籤或篩選
+> - [ ] 重新執行資料轉換與前端 build，確認沒有型別錯誤
 
-- [ ] 更新 Excel -> JSON 轉換流程，固定輸出 `isDeleted`
-- [ ] 如果來源資料沒有刪檔資訊，將 `isDeleted` 預設為 `false`
-- [ ] 補上人工標記刪檔影片的資料來源或欄位規則
-- [ ] 確認轉換後的 `videos.json` 每筆資料都有 `isDeleted`
-- [ ] 將既有 `videos.json` 補上 `isDeleted: false`
-- [ ] 將 `src/types/video.ts` 的 `isDeleted?: boolean` 改成必要欄位 `isDeleted: boolean`
-- [ ] 檢查 `useVideos` 等前端邏輯是否需要依照 `isDeleted` 顯示標籤或篩選
-- [ ] 重新執行資料轉換與前端 build，確認沒有型別錯誤
+isDeleted 廢除，改以 `visibility` 代替
+(visibility: 'public' | 'unlisted' | 'unavailable')
 
 ## 左側章節選單
 

@@ -7,9 +7,10 @@
     "start": "vite",
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:publications": "node scripts/build-publications.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build:publications && gh-pages -d dist"
   },
   "dependencies": {
     "react": "^19.2.5",

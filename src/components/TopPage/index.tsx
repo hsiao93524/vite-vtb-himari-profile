@@ -1,4 +1,4 @@
-import heroImage from '../../assets/hero.png'
+import heroImage from '../../assets/profile/hero.png'
 import type { Video } from '../../types/video'
 
 type TopPageProps = {
