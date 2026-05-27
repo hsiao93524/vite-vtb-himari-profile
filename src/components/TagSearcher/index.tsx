@@ -5,9 +5,11 @@ type TagSearcherProps = {
   selectedTags: string[]
   onToggleTag: (tag: string) => void
   showInProgress?: boolean
+  publicationLabel?: string | null
 }
 
 export default function TagSearcher({
+  publicationLabel,
   tags,
   selectedTags,
   onToggleTag,
@@ -19,6 +21,7 @@ export default function TagSearcher({
         <p className="eyebrow">Tag Block</p>
         <h2>
           タグ検索
+          {publicationLabel && <PublicationBadge>{publicationLabel}</PublicationBadge>}
           {showInProgress && <PublicationBadge>In progress</PublicationBadge>}
         </h2>
       </div>

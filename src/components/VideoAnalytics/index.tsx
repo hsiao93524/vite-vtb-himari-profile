@@ -4,6 +4,7 @@ import type { Video } from '../../types/video'
 type VideoAnalyticsProps = {
   videos: Video[]
   showInProgress?: boolean
+  publicationLabel?: string | null
 }
 
 function getPlaylistLabel(playlist: string | string[]) {
@@ -11,6 +12,7 @@ function getPlaylistLabel(playlist: string | string[]) {
 }
 
 export default function VideoAnalytics({
+  publicationLabel,
   videos,
   showInProgress = false,
 }: VideoAnalyticsProps) {
@@ -32,6 +34,7 @@ export default function VideoAnalytics({
         <p className="eyebrow">Video Analyze</p>
         <h2>
           Playlist Distribution
+          {publicationLabel && <PublicationBadge>{publicationLabel}</PublicationBadge>}
           {showInProgress && <PublicationBadge>In progress</PublicationBadge>}
         </h2>
       </div>

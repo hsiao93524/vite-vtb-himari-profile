@@ -1,15 +1,17 @@
 import heroImage from '../../assets/profile/hero.png'
+import PublicationBadge from '../PublicationBadge'
 import type { Video } from '../../types/video'
 
 type TopPageProps = {
   videos: Video[]
+  publicationLabel?: string | null
 }
 
 function formatHours(seconds: number) {
   return Math.round(seconds / 3600)
 }
 
-export default function TopPage({ videos }: TopPageProps) {
+export default function TopPage({ publicationLabel, videos }: TopPageProps) {
   const membersCount = videos.filter(
     (video) => video.isMembers || video.isMembersOnly,
   ).length
@@ -28,6 +30,11 @@ export default function TopPage({ videos }: TopPageProps) {
         <h1 className="hero-title">
           <span>結萌ひまり</span>
         </h1>
+        {publicationLabel && (
+          <p className="publication-status">
+            <PublicationBadge>{publicationLabel}</PublicationBadge>
+          </p>
+        )}
         <p className="hero-copy">
           配信一覧、タグ、統計、関連リンクを一か所にまとめるための React
           アーカイブです。

@@ -209,6 +209,14 @@ main {
   vertical-align: middle;
 }
 
+.publication-status {
+  margin: -8px 0 12px;
+}
+
+.publication-status .publication-badge {
+  margin-left: 0;
+}
+
 .toolbar {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) auto auto;

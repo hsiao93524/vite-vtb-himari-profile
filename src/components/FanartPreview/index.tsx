@@ -2,9 +2,11 @@ import PublicationBadge from '../PublicationBadge'
 
 type FanartPreviewProps = {
   showInProgress?: boolean
+  publicationLabel?: string | null
 }
 
 export default function FanartPreview({
+  publicationLabel,
   showInProgress = false,
 }: FanartPreviewProps) {
   return (
@@ -13,6 +15,7 @@ export default function FanartPreview({
         <p className="eyebrow">Fanarts</p>
         <h2>
           Fanart Preview
+          {publicationLabel && <PublicationBadge>{publicationLabel}</PublicationBadge>}
           {showInProgress && <PublicationBadge>In progress</PublicationBadge>}
         </h2>
       </div>

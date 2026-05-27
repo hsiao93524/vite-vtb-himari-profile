@@ -7,7 +7,12 @@ import TopPage from './components/TopPage'
 import VideoAnalytics from './components/VideoAnalytics'
 import VideoGallery from './components/VideoGallery'
 import VideoTable from './components/VideoTable'
-import { isSectionInProgress, isSectionVisible } from './config/publication'
+import PublicationBadge from './components/PublicationBadge'
+import {
+  getSectionVisibilityLabel,
+  isSectionInProgress,
+  isSectionVisible,
+} from './config/publication'
 import useVideos from './hooks/useVideos'
 import type { ViewMode } from './types/video'
 
@@ -33,13 +38,25 @@ export default function App() {
 
   return (
     <main>
-      {isSectionVisible('hero') && <TopPage videos={allVideos} />}
+      {isSectionVisible('hero') && (
+        <TopPage
+          publicationLabel={getSectionVisibilityLabel('hero')}
+          videos={allVideos}
+        />
+      )}
 
       {isSectionVisible('videos') && (
         <section className="section-block" id="videos">
           <div className="section-heading">
             <p className="eyebrow">Video Block</p>
-            <h2>配信一覧</h2>
+            <h2>
+              配信一覧
+              {getSectionVisibilityLabel('videos') && (
+                <PublicationBadge>
+                  {getSectionVisibilityLabel('videos')}
+                </PublicationBadge>
+              )}
+            </h2>
           </div>
 
           <div className="toolbar">
@@ -102,6 +119,7 @@ export default function App() {
 
       {isSectionVisible('analytics') && (
         <VideoAnalytics
+          publicationLabel={getSectionVisibilityLabel('analytics')}
           showInProgress={isSectionInProgress('analytics')}
           videos={allVideos}
         />
@@ -109,15 +127,21 @@ export default function App() {
       {isSectionVisible('tagSearcher') && (
         <TagSearcher
           onToggleTag={toggleTag}
+          publicationLabel={getSectionVisibilityLabel('tagSearcher')}
           selectedTags={selectedTags}
           showInProgress={isSectionInProgress('tagSearcher')}
           tags={allTags}
         />
       )}
       {isSectionVisible('fanartPreview') && (
-        <FanartPreview showInProgress={isSectionInProgress('fanartPreview')} />
+        <FanartPreview
+          publicationLabel={getSectionVisibilityLabel('fanartPreview')}
+          showInProgress={isSectionInProgress('fanartPreview')}
+        />
       )}
-      {isSectionVisible('links') && <RelatedLinks />}
+      {isSectionVisible('links') && (
+        <RelatedLinks publicationLabel={getSectionVisibilityLabel('links')} />
+      )}
     </main>
   )
 }

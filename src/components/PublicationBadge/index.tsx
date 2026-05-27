@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react'
+
 type PublicationBadgeProps = {
-  children: string
+  children: ReactNode
 }
 
 export default function PublicationBadge({ children }: PublicationBadgeProps) {

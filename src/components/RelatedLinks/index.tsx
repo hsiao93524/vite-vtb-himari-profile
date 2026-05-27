@@ -1,3 +1,5 @@
+import PublicationBadge from '../PublicationBadge'
+
 const links = [
   {
     href: 'https://x.com/RAG_Himari',
@@ -9,12 +11,19 @@ const links = [
   },
 ]
 
-export default function RelatedLinks() {
+type RelatedLinksProps = {
+  publicationLabel?: string | null
+}
+
+export default function RelatedLinks({ publicationLabel }: RelatedLinksProps) {
   return (
     <section className="section-block" id="links">
       <div className="section-heading">
         <p className="eyebrow">Related Links</p>
-        <h2>関連リンク集</h2>
+        <h2>
+          関連リンク集
+          {publicationLabel && <PublicationBadge>{publicationLabel}</PublicationBadge>}
+        </h2>
       </div>
       <div className="link-list">
         {links.map((link) => (
