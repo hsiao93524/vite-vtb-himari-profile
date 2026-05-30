@@ -82,7 +82,14 @@ export default function TopPage({ publicationLabel, videos }: TopPageProps) {
 
       <div className="top-profile-content">
         <h1 className="top-profile-name">
-          <span>{profile.name}</span>
+          <span className="top-profile-name-text">
+            <span>{profile.name}</span>
+          </span>
+          <span className="top-profile-name-trails" aria-hidden="true">
+            <span className="top-profile-name-trail top-profile-name-trail-primary" />
+            <span className="top-profile-name-trail top-profile-name-trail-secondary" />
+            <span className="top-profile-name-trail top-profile-name-trail-tertiary" />
+          </span>
         </h1>
         {publicationLabel && (
           <p className="top-profile-publication">
