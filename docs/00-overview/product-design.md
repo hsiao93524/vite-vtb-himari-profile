@@ -2,11 +2,29 @@
 
 Source: [Notion design document](https://www.notion.so/React-35254a9cebff81df8fc7c1fc381d26b4)
 
-This document is the repository snapshot of the product design for the React web version. Use the Notion page as the working draft, and use this file as the implementation reference inside the codebase.
+This document is the repository-side product design reference for the React web version. Use the Notion page as the working draft, and keep this file aligned with implementation decisions that affect the codebase.
 
-## Project Overview
+## Document Role
+
+This file answers three questions:
+
+1. What kind of site is this project building?
+2. Which page blocks and user interactions are in scope?
+3. Which decisions are already fixed, and which specifications still need design detail?
+
+Related detailed documents:
+
+- [Data Model](data-model.md): `videos.json` schema and data migration rules.
+- [Data Flow](data-flow.md): current React data flow and hook/component boundaries.
+- [Roadmap](roadmap.md): implementation phases and release readiness.
+- [Top Visual Block Design](../01-top-visual/top-visual-block-design.md): detailed Top/Profile UI design.
+- [Top Visual Data Design](../01-top-visual/top-visual-data-design.md): Top/Profile data requirements.
+
+## Project Summary
 
 Build a one-page React site for the VTuber archive/profile of 結萌ひまり and publish it on GitHub Pages.
+
+The site should work as a fan-made profile and archive page. It collects public channel/profile information, organizes preserved video metadata, and provides entry points to tags, fanart, and recreated historical pages.
 
 | Item | Content |
 | --- | --- |
@@ -19,38 +37,69 @@ Build a one-page React site for the VTuber archive/profile of 結萌ひまり an
 | Members-only videos | 76 |
 | Playlist count | 28 |
 
+## Design Goals
+
+- Preserve profile and archive information in a static site that can be hosted on GitHub Pages.
+- Make the page readable as a memorial/profile page first, then usable as a video archive.
+- Keep data and UI boundaries explicit so later sections can be implemented in phases.
+- Avoid requiring a backend for the initial release.
+
 ## Page Structure
 
 The page is divided into five major blocks.
 
-1. Profile
-   - Main visual, short profile, channel links, and core stats.
-   - Stats include total videos, playlist count, and active period.
+| Order | Block | Purpose | Main Content |
+| --- | --- | --- | --- |
+| 1 | Profile | First-view identity and summary | Main visual, short profile, channel links, total videos, playlist count, active period |
+| 2 | Video Analyze | Archive exploration | Stream type charts, collaboration analysis, full video archive, detail/search mode |
+| 3 | Tag Block | Tag discovery and external search | Related tags and X/Twitter search handoff |
+| 4 | Fanarts | Fanart preview | Horizontal carousel, auto-scroll, pause-on-hover, left/right controls |
+| 5 | Recreated Pages | Preserved historical material | Litlink, YouTube, Twitch, Twitter, sub-Twitter page candidates |
 
-2. Video Analyze
-   - Shows the major stream types, collaboration targets, and the full video archive.
-   - Expected visualizations: bar chart, pie chart, and bubble chart.
-   - Includes a detail/search mode similar to `docs/ref/videos_check.html`.
+## Interaction Design
 
-3. Tag Block
-   - Lists related tags.
-   - Tag clicks should open an X/Twitter search page for that tag.
+### Primary Navigation
 
-4. Fanarts
-   - Shows fanart fetched or linked by a specific X/Twitter tag.
-   - Intended UI: horizontal carousel, auto-scroll when not hovered, pause on hover, left/right controls.
+- The site is a single-page experience.
+- Section-level navigation should scroll to the relevant block instead of opening separate pages.
+- CTA buttons in the Top/Profile block should support these targets:
+  - `#videos`
+  - `#tag-searcher`
 
-5. Recreated Pages
-   - Recreates deleted or historical pages from locally preserved material.
-   - Candidate targets: Litlink, YouTube, Twitch, Twitter, and sub-Twitter pages.
+### Video Archive
 
-## Wireframe Assets
+- Video Analyze should support both overview charts and detailed archive browsing.
+- Expected visualizations:
+  - Bar chart for major stream categories.
+  - Pie/cake chart for composition summary.
+  - Bubble chart for collaboration or tag distribution.
+- Detail/search behavior can refer to [videos_check.html](../ref/videos_check.html), but the final UI should be adapted for the public-facing React page.
 
-- [Wireframe PNG](framework.png)
-- [Original wireframe workbook](design.xlsx)
+### Tag Search
+
+- Tag clicks should open an X/Twitter search page for that tag.
+- Site-side filtering and external X/Twitter search should be treated as separate actions.
+- AND/OR matching rules are not finalized yet.
+
+### Fanart Preview
+
+- Intended UI is a horizontal carousel.
+- Auto-scroll should run only when the user is not hovering or interacting.
+- Hover should pause movement.
+- Left/right controls should remain available for manual navigation.
+
+### Recreated Pages
+
+- Recreated pages should expose preserved local material without implying official ownership.
+- Public/private boundaries must be decided before publishing any recreated or archived content.
+
+## Wireframe And Assets
+
+- [Wireframe PNG](../framework.png)
+- [Original wireframe workbook](../design.xlsx)
 - Figma source: [結萌ひまり 卒業アルバム - Wireframe](https://www.figma.com/design/qRIG39WtxY0JosIujPBGd7)
 
-## Color Palette
+## Visual Tokens
 
 | Usage | Color |
 | --- | --- |
@@ -107,10 +156,12 @@ src/
 
 These need more detail before implementation.
 
-- Video filters: exact filter list, sort order, pagination or no pagination.
-- VideoTable and VideoGallery switch behavior and default view.
-- TagSearcher logic: AND/OR behavior, partial match, and difference between site filter vs X/Twitter search.
-- FanartPreview API policy: X/Twitter API auth, rate limits, cache strategy, fallback when API is unavailable.
-- Recreated Pages: `.mhtml` conversion, static delivery, iframe/modal approach, and public/private content boundary.
-- GitHub Pages: repository name, base path, custom domain, and GitHub Actions deployment.
+| Area | Missing Decision |
+| --- | --- |
+| Video filters | Exact filter list, sort order, pagination or no pagination |
+| Video view switch | Default view and switch behavior between `VideoTable` and `VideoGallery` |
+| TagSearcher | AND/OR behavior, partial match, site filter vs X/Twitter search behavior |
+| FanartPreview | X/Twitter API auth, rate limits, cache strategy, fallback when API is unavailable |
+| Recreated Pages | `.mhtml` conversion, static delivery, iframe/modal approach, public/private content boundary |
+| GitHub Pages | Repository name, base path, custom domain, GitHub Actions deployment |
 
