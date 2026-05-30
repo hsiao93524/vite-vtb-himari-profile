@@ -21,13 +21,9 @@ Main elements:
 ```text
 profile block
 |-- left: full-body main visual
-|-- right:
-  |-- slanted name banner
-  |-- profile text area
-  |-- active period
-  |-- x/Youtube Link
-  |-- expression images
-  `-- statistics
+|-- top/right: slanted name banner
+|-- right: profile text area
+`-- lower center: icons / channel links / expression variations
 ```
 
 ## Layout
@@ -36,9 +32,9 @@ Desktop layout:
 
 - Use a two-column hero composition.
 - Place the character main visual on the left.
-- Place the profile panel on the right, including name, short profile text, and links.
-- The right-column content order follows the structure shown in the Wireframe Reference.
+- Place the profile panel on the right, including name, short profile copy, and links.
 - Allow the name banner to overlap the upper area, echoing the slanted orange title shape in the wireframe.
+- Place statistics below the profile content while keeping them visually connected to the Top/Profile block.
 
 Mobile layout:
 
@@ -68,7 +64,7 @@ Profile 文字與連結不應該 hardcode 在 `TopPage` 內。
 檔案：
 
 ```text
-src/data/profile.json
+src/data/profile.ts
 ```
 
 規則：
@@ -76,20 +72,8 @@ src/data/profile.json
 - `name` 是橘色 banner 中的顯示名稱。
 - `description` 是名稱 banner 下方的主要 profile 文案。
 - `links` 用來驅動圓形 X/YT icons。
-- `debutDate` 考慮未來當作active-period的開始時間資料。
-- `graduationDate` 可用於 active-period 顯示。
-
-## 其他靜態資料
-
-檔案：
-
-```text
-src/data/site.json
-```
-
-規則：
-
 - `lastUpdated` 顯示在 top visual 區塊的右下角。
+- `graduationDate` 可用於 active-period 顯示或未來的 profile 詳細資料。
 
 ## 隨機表情選擇
 
@@ -140,7 +124,7 @@ Primary interactions:
 - X link opens `https://x.com/RAG_Himari`.
 - YouTube link opens `https://www.youtube.com/@raghimari`.
 
-## Future Ideas
+次要互動項目：
 
 - 吸引觀眾回來：
   - 貓貓點擊器
@@ -151,7 +135,3 @@ Primary interactions:
   - 表情解鎖器
     - 把表情分作N、R、SR、SSR等級，作為出現機率
     - Todo: 要怎麼讓使用者知道已經解鎖過哪些表情
-
-## Checklist
-
-[Checklist](./top-visual-checklist.md)

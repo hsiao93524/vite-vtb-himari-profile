@@ -32,15 +32,15 @@ Section visibility is controlled in `src/config/publication.ts`.
 - `wip-visible`: visible only in the HR version, with `[In progress]`
 - `hidden`: hidden in both versions
 
-In local development, the default view shows every section with its visibility
-label: `[public]`, `[limit]`, or `[hidden]`.
+Local development defaults to the public view. Use `?v=d` to show every
+section with its visibility label: `[public]`, `[limit]`, or `[hidden]`.
 
 Preview publication views without restarting the dev server:
 
 ```bash
 http://localhost:5173/vite-vtb-himari-profile/
-http://localhost:5173/vite-vtb-himari-profile/?view=public
-http://localhost:5173/vite-vtb-himari-profile/?view=hr
+http://localhost:5173/vite-vtb-himari-profile/?v=h
+http://localhost:5173/vite-vtb-himari-profile/?v=d
 ```
 
 Build both versions into `dist/`:
@@ -62,9 +62,10 @@ npm run deploy
 
 ## Design Docs
 
-- [Top Visual Docs](docs/01-top-visual/top-visual/README.md)
-- [Top Visual Block Design](docs/01-top-visual/top-visual/top-visual-block-design.md)
-- [Top Visual Data Design](docs/01-top-visual/top-visual/top-visual-data-design.md)
+- [Design Doc Map](docs/design-doc-map.md)
+- [Top Visual Docs](docs/01-top-visual/README.md)
+- [Top Visual Block Design](docs/01-top-visual/top-visual-block-design.md)
+- [Top Visual Data Design](docs/01-top-visual/top-visual-data-design.md)
 - [Product Design](docs/00-overview/product-design.md)
 - [Data Model](docs/00-overview/data-model.md)
 - [Roadmap](docs/00-overview/roadmap.md)

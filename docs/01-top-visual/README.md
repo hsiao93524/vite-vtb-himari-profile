@@ -58,7 +58,6 @@ docs/01-top-visual/
 ## 實作前待確認
 
 - 正式顯示名稱與 profile 文案。
-- Top/Profile 是否要顯示 `VIDEOS / MEMBERS / HOURS`，或改成 `VIDEOS / PLAYLISTS / ACTIVE`。
 - `totalHours` 是否保留在 Top 區塊，或移到 analytics。
 - 表情圖是每次載入隨機 3 張，還是固定設計稿指定 3 張。
 - 手機版是否保留完整主視覺，或使用裁切版。

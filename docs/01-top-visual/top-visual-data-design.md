@@ -1,24 +1,18 @@
-# Top Visual Data Design
+# Top Visual 資料設計
 
-This document defines the data needed by the top visual/profile block preview and the future `TopPage` implementation.
+本文件定義 top visual/profile 區塊預覽，以及未來 `TopPage` 實作所需的資料。
 
-## Asset Directory
+## 資產目錄
 
-Expression images are stored here:
-
-```text
-src/assets/profile/expressions/
-```
-
-Main visual image:
+[主視覺圖片](../../src/assets/profile/hero.png)
 
 ```text
 src/assets/profile/hero.png
 ```
 
-Current files:
+目前檔案：
 
-| File | Size |
+| 檔案 | 尺寸 |
 | --- | --- |
 | `expression-01.jpg` | 360 x 360 |
 | `expression-02.jpg` | 360 x 360 |
@@ -36,14 +30,12 @@ Current files:
 | `expression-14.jpg` | 360 x 360 |
 | `expression-15.jpg` | 360 x 360 |
 
-Conclusion:
+- 圖片尺寸並非全都相同。
+- 多數圖片是 `360 x 360` 的正方形。
+- 未來 UI 應該把這些圖片放在固定的正方形框內，並使用 `object-fit: cover`。
+- 不要依賴原始圖片尺寸來決定 layout。
 
-- The image sizes are not all identical.
-- Most images are square `360 x 360`.
-- The future UI should render them inside a fixed square frame with `object-fit: cover`.
-- Do not rely on raw image dimensions for layout.
-
-Recommended render rule:
+渲染規則：
 
 ```css
 .expression-image {
@@ -53,18 +45,9 @@ Recommended render rule:
 }
 ```
 
-## Random Expression Selection
+## 隨機表情選擇
 
-The top visual block should show three expression images.
-
-Behavior:
-
-- On each page entry/load, randomly select three unique images from `src/assets/profile/expressions/`.
-- Keep the selected three stable during the same render session.
-- Do not reshuffle on every component re-render.
-- The random choice does not need to persist across browser refreshes.
-
-Recommended implementation:
+實作：
 
 ```ts
 const expressionImages = [
@@ -84,19 +67,11 @@ const selectedExpressions = useMemo(
 )
 ```
 
-If deterministic testing is needed later, replace `Math.random()` with a seeded shuffle helper.
+如果之後需要 deterministic testing，請用 seeded shuffle helper 取代 `Math.random()`。
 
-## Profile Static Data
+## Profile 靜態資料
 
-Profile text and links should not be hardcoded inside `TopPage`.
-
-Recommended file:
-
-```text
-src/data/profile.ts
-```
-
-Recommended shape:
+資料形狀：
 
 ```ts
 export const profile = {
@@ -115,39 +90,23 @@ export const profile = {
       href: 'https://www.youtube.com/@raghimari',
     },
   ],
-  lastUpdated: '2026-05-05',
   graduationDate: '2026-04-27',
 }
 ```
 
-Rules:
+## 統計資料
 
-- `name` is the display name in the orange banner.
-- `description` is the main profile copy under the name banner.
-- `links` drives the circular X/YT icons.
-- `lastUpdated` is shown at the lower-right of the top visual block.
-- `graduationDate` can be used for active-period display or future profile details.
+統計資料應該透過 `useVideos` 或 helper function，從 `src/data/videos.json` 推導出來。
 
-## Statistics Data
+目前 top visual 統計：
 
-Statistics should be derived from `src/data/videos.json` through `useVideos` or a helper function.
-
-Current top visual stats:
-
-| Label | Meaning | Source |
+| Label | 意義 | 來源 |
 | --- | --- | --- |
-| `VIDEOS` | Total archive video count | `videos.length` |
-| `MEMBERS` | Members-only video count | `video.isMembersOnly || video.isMembers` |
-| `HOURS` | Total streaming/video hours | Sum of `duration`, converted from seconds to hours |
+| `VIDEOS` | archive 影片總數 | `videos.length` |
+| `MEMBERS` | members-only 影片數 | `video.isMembersOnly || video.isMembers` |
+| `HOURS` | 直播/影片總時數 | `duration` 加總後從秒換算成小時 |
 
-Possible future stats:
-
-| Label | Meaning | Source |
-| --- | --- | --- |
-| `PLAYLISTS` | Unique playlist count | Unique values from `playlist` |
-| `ACTIVE` | Active period | Min `date` to graduation date or latest video date |
-
-Recommended helper logic:
+建議 helper 邏輯：
 
 ```ts
 function toList(value: string | string[]) {
@@ -172,14 +131,14 @@ export function getTopVisualStats(videos: Video[]) {
 }
 ```
 
-Rules:
+規則：
 
-- Do not duplicate stats as separate static JSON unless the design intentionally freezes a release snapshot.
-- Tests should not hardcode `279`, `76`, or `907`; they should compare against values derived from the current `videos.json`.
-- During the schema migration, support both `isMembers` and `isMembersOnly`.
-- During the playlist migration, support both `string` and `string[]`.
+- 除非設計上刻意凍結某個 release snapshot，否則不要把統計資料複製成另一份靜態 JSON。
+- Tests 不應 hardcode `279`、`76` 或 `907`；應該與目前 `videos.json` 推導出的值比較。
+- Schema migration 期間，同時支援 `isMembers` 與 `isMembersOnly`。
+- Playlist migration 期間，同時支援 `string` 與 `string[]`。
 
-## Suggested Final Structure
+## 建議最終結構
 
 ```text
 src/
@@ -199,66 +158,3 @@ src/
     └── TopPage/
         └── index.tsx
 ```
-
-## Test Checklist
-
-### Data And Images
-
-- [ ] Main visual `src/assets/profile/hero.png` is displayed.
-- [ ] The screen shows exactly three expression images.
-- [ ] The three expression images are unique.
-- [ ] Reloading the page can show a different expression-image combination.
-- [ ] Expression images with different source sizes are cropped into consistent square frames.
-- [ ] Display name is `結萌ひまり`.
-- [ ] Profile description is visible.
-- [ ] `Last updated: 2026-05-05` is visible.
-- [ ] `VIDEOS` value matches the current `videos.json` total count.
-- [ ] `MEMBERS` value matches the current members-only count derived from `videos.json`.
-- [ ] `HOURS` value matches the current total duration derived from `videos.json`.
-
-### Desktop Layout
-
-- [ ] Full-body main visual appears on the left.
-- [ ] Name banner appears on the right.
-- [ ] Name banner has a slanted shape.
-- [ ] Name banner has diagonal stripe decoration on the right.
-- [ ] Profile description appears below the name banner.
-- [ ] X / YT icons appear to the left of the expression images.
-- [ ] Three expression images are arranged horizontally.
-- [ ] Three statistic circles are arranged horizontally.
-- [ ] Last updated text appears at the lower-right.
-- [ ] Overall composition is close to the 1280 x 720 reference layout.
-
-### Mobile Layout
-
-- [ ] Layout becomes a single column on mobile width.
-- [ ] Main visual does not overflow the viewport.
-- [ ] Name banner does not overflow.
-- [ ] Profile description does not overlap other elements.
-- [ ] Three expression images remain square.
-- [ ] Statistic circles become vertically arranged.
-- [ ] Last updated text remains visible.
-- [ ] Page has no horizontal scrollbar.
-
-### Links And Interaction
-
-- [ ] X icon links to `https://x.com/RAG_Himari`.
-- [ ] YT icon links to `https://www.youtube.com/@raghimari`.
-- [ ] External links use `target="_blank"`.
-- [ ] External links use `rel="noreferrer"`.
-
-### Accessibility
-
-- [ ] Main visual has alt text.
-- [ ] Expression images have alt text.
-- [ ] Social links have understandable `aria-label` values.
-- [ ] Statistics use `dl`, `dt`, and `dd`.
-- [ ] Main top visual section has an understandable `aria-label`.
-- [ ] Text is readable against the background.
-
-### Edge Cases
-
-- [ ] Layout remains stable when expression source images have different dimensions.
-- [ ] Longer profile description does not compress or overlap the stats area.
-- [ ] Four-digit stat values remain readable inside statistic circles.
-- [ ] Page does not collapse if one image fails to load.

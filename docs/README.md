@@ -6,13 +6,16 @@
 
 ## 推薦閱讀順序
 
+0. [Design Doc Map](design-doc-map.md)
+   - 設計書地圖，用來快速判斷要看哪份文件。
+
 1. [Product Design](00-overview/product-design.md)
    - 專案目標、頁面區塊、元件設計、色票與尚未定義的規格。
 
-2. [Top Visual Block Design](01-top-visual/top-visual/top-visual-block-design.md)
+2. [Top Visual Block Design](01-top-visual/top-visual-block-design.md)
    - Top/Profile 區塊的畫面設計、版面與 UI 元素規劃。
 
-3. [Top Visual Data Design](01-top-visual/top-visual/top-visual-data-design.md)
+3. [Top Visual Data Design](01-top-visual/top-visual-data-design.md)
    - Top/Profile 區塊需要的資料、欄位來源與顯示規則。
 
 4. [Data Model](00-overview/data-model.md)
@@ -37,15 +40,15 @@
 
 | 檔案 | 用途 |
 | --- | --- |
-| [01-top-visual/top-visual/README.md](01-top-visual/top-visual/README.md) | Top/Profile 區塊設計資料夾索引。 |
-| [01-top-visual/top-visual/top-visual-block-design.md](01-top-visual/top-visual/top-visual-block-design.md) | Top/Profile 區塊的 UI 設計說明。 |
-| [01-top-visual/top-visual/top-visual-data-design.md](01-top-visual/top-visual/top-visual-data-design.md) | Top/Profile 區塊的資料需求與欄位設計。 |
-| [01-top-visual/top-visual/top-section-design.pptx](01-top-visual/top-visual/top-section-design.pptx) | Top 區塊設計簡報原始檔。 |
-| [01-top-visual/top-visual/assets/top-section-design.png](01-top-visual/top-visual/assets/top-section-design.png) | Top 區塊設計圖預覽。 |
+| [01-top-visual/README.md](01-top-visual/README.md) | Top/Profile 區塊設計資料夾索引。 |
+| [01-top-visual/top-visual-block-design.md](01-top-visual/top-visual-block-design.md) | Top/Profile 區塊的 UI 設計說明。 |
+| [01-top-visual/top-visual-data-design.md](01-top-visual/top-visual-data-design.md) | Top/Profile 區塊的資料需求與欄位設計。 |
+| [01-top-visual/top-section-design.pptx](01-top-visual/top-section-design.pptx) | Top 區塊設計簡報原始檔。 |
+| [01-top-visual/assets/top-section-design.png](01-top-visual/assets/top-section-design.png) | Top 區塊設計圖預覽。 |
 
 ### Top 區塊設計圖
 
-![Top section design](01-top-visual/top-visual/assets/top-section-design.png)
+![Top section design](01-top-visual/assets/top-section-design.png)
 
 ## Wireframe / 原始草稿
 

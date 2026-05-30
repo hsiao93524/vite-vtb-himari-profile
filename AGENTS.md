@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## Top Page / Top Profile 工作守則
+
+Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
+
+- Top/Profile 的主要實作位置是 `src/components/TopPage/index.tsx`，相關樣式通常在 `src/App.css` 的 `.top-profile*` 區塊。
+- 修改前先檢查 `docs/01-top-visual/top-visual-block-design.md`、`docs/01-top-visual/top-visual-data-design.md`、`docs/01-top-visual/top-visual-checklist.md`，並對照根目錄 `top-visual-preview.html`。
+- Profile 文字、外部連結、出道日、畢業日使用 `src/data/profile.json`；不要重新 hardcode 到 component。
+- 桌面版維持主視覺與 profile 內容的雙欄構圖；手機版可垂直排列，但主視覺、名稱、profile 文案與 stats 都要可讀。
+- 若移動或替換 Top/Profile 資產，同步檢查 React import、Markdown docs、根目錄 preview HTML。
+
 ## 基本回覆規則
 
 - 一律用繁體中文回答。

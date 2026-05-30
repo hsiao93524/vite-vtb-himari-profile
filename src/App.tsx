@@ -51,11 +51,8 @@ export default function App() {
             <p className="eyebrow">Video Block</p>
             <h2>
               配信一覧
-              {getSectionVisibilityLabel('videos') && (
-                <PublicationBadge>
-                  {getSectionVisibilityLabel('videos')}
-                </PublicationBadge>
-              )}
+              {getSectionVisibilityLabel('videos') && <PublicationBadge>{getSectionVisibilityLabel('videos')}</PublicationBadge>}
+              {isSectionInProgress('videos') && <PublicationBadge>In progress</PublicationBadge>}
             </h2>
           </div>
 

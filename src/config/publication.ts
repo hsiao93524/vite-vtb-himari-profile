@@ -15,24 +15,21 @@ export type SectionId = (typeof sectionIds)[number]
 
 const sectionStatus: Record<SectionId, SectionStatus> = {
   hero: 'public',
-  videos: 'public',
+  videos: 'wip-visible',
   analytics: 'wip-visible',
   tagSearcher: 'wip-visible',
   fanartPreview: 'wip-visible',
-  links: 'public',
+  links: 'wip-visible',
 }
 
 function getPublicationAudience(): PublicationAudience {
-  const previewAudience = new URLSearchParams(window.location.search).get('view')
+  const previewAudience = new URLSearchParams(window.location.search).get('v')
 
-  if (
-    import.meta.env.DEV &&
-    (previewAudience === 'public' || previewAudience === 'hr')
-  ) {
-    return previewAudience
+  if (import.meta.env.DEV && previewAudience === 'h') {
+    return 'hr'
   }
 
-  if (import.meta.env.DEV) {
+  if (import.meta.env.DEV && previewAudience === 'd') {
     return 'development'
   }
 
