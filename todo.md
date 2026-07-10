@@ -1,5 +1,19 @@
 # TODO
 
+## 功能模組整理
+
+- [ ] 重整 `todo.md` 架構，改以功能模組分類
+  - [ ] 定義各功能模組的分類方式
+  - [ ] 將現有任務移入對應模組
+  - [ ] 保留既有任務狀態與決策脈絡
+
+- [ ] 將 Tag Searcher 從 Video Analyze 的影片 tag 篩選功能中拆分
+  - [ ] 保留原本的影片 tag 篩選功能
+  - [ ] 將 `TagSearcher` 改為獨立的 X/Twitter 搜尋入口
+  - [x] 建立 `docs/03-tag-searcher/tag-searcher-migration-checklist.md`
+  - [ ] 完成 `docs/03-tag-searcher/tag-searcher-migration-checklist.md` 的全部項目
+  - [ ] 依 migration checklist 驗證新舊功能
+
 ## others
 
 - 調整 video.json 的新格式
