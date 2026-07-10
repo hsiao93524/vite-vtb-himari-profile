@@ -4,29 +4,6 @@
 
 建議先從 `00-overview/product-design.md` 看整體方向，再看 Top 區塊設計與資料模型。
 
-## 推薦閱讀順序
-
-0. [Design Doc Map](design-doc-map.md)
-   - 設計書地圖，用來快速判斷要看哪份文件。
-
-1. [Product Design](00-overview/product-design.md)
-   - 專案目標、頁面區塊、元件設計、色票與尚未定義的規格。
-
-2. [Top Visual Block Design](01-top-visual/top-visual-block-design.md)
-   - Top/Profile 區塊的畫面設計、版面與 UI 元素規劃。
-
-3. [Top Visual Data Design](01-top-visual/top-visual-data-design.md)
-   - Top/Profile 區塊需要的資料、欄位來源與顯示規則。
-
-4. [Data Model](00-overview/data-model.md)
-   - `videos.json` 目標 schema、欄位遷移方向、tag/collab 規則。
-
-5. [Roadmap](00-overview/roadmap.md)
-   - Phase 切分、發布順序與各階段完成條件。
-
-6. [Data Flow](00-overview/data-flow.md)
-   - 目前 React app 的資料流、hook、components 與縮圖路徑處理。
-
 ## 00 Overview
 
 | 檔案 | 用途 |
@@ -43,6 +20,7 @@
 | [01-top-visual/README.md](01-top-visual/README.md) | Top/Profile 區塊設計資料夾索引。 |
 | [01-top-visual/top-visual-block-design.md](01-top-visual/top-visual-block-design.md) | Top/Profile 區塊的 UI 設計說明。 |
 | [01-top-visual/top-visual-data-design.md](01-top-visual/top-visual-data-design.md) | Top/Profile 區塊的資料需求與欄位設計。 |
+| [01-top-visual/top-visual-checklist.md](01-top-visual/top-visual-checklist.md) | Top/Profile 實作完成後的驗收清單。 |
 | [01-top-visual/top-section-design.pptx](01-top-visual/top-section-design.pptx) | Top 區塊設計簡報原始檔。 |
 | [01-top-visual/assets/top-section-design.png](01-top-visual/assets/top-section-design.png) | Top 區塊設計圖預覽。 |
 

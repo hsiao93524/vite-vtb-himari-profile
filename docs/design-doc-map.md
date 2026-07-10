@@ -74,7 +74,6 @@ ref/python/
 1. [01-top-visual/top-visual-block-design.md](01-top-visual/top-visual-block-design.md)
 2. [01-top-visual/top-visual-data-design.md](01-top-visual/top-visual-data-design.md)
 3. [01-top-visual/assets/top-section-design.png](01-top-visual/assets/top-section-design.png)
-4. [../top-visual-preview.html](../../top-visual-preview.html)
 
 ### 要整理影片資料
 
@@ -102,5 +101,3 @@ ref/python/
 - 移動文件後，同步更新：
   - [README.md](../README.md)
   - [docs/README.md](README.md)
-  - [design-doc-map.md](design-doc-map.md)
-  - [design-docs.html](../../design-docs.html)

@@ -78,8 +78,6 @@ The page is divided into five major blocks.
 ### Tag Search
 
 - Tag clicks should open an X/Twitter search page for that tag.
-- Site-side filtering and external X/Twitter search should be treated as separate actions.
-- AND/OR matching rules are not finalized yet.
 
 ### Fanart Preview
 
@@ -120,7 +118,7 @@ src/
 │   ├── TopPage/          # Main visual, profile, and stats
 │   ├── VideoTable/       # Dense table view
 │   ├── VideoGallery/     # Thumbnail card view
-│   ├── TagSearcher/      # Tag search, filter, and X/Twitter handoff
+│   ├── TagSearcher/      # Categorized X/Twitter tag search links
 │   ├── VideoAnalytics/   # Charts: bar, bubble, pie
 │   ├── FanartPreview/    # Fanart preview/gallery
 │   └── RelatedLinks/     # Related and recreated links
@@ -130,16 +128,6 @@ src/
 │   └── useVideos.ts
 └── App.tsx
 ```
-
-| Previous idea | Final component | Notes |
-| --- | --- | --- |
-| TopPage | TopPage | Main profile block |
-| VideoTable | VideoTable + VideoGallery | User can switch between table and gallery |
-| FilterBar | TagSearcher | Integrated into tag/filter entry |
-| PlaylistNav | Tag/filter behavior | Playlist is handled as filtering data |
-| New | VideoAnalytics | Bar, bubble, and pie/cake charts |
-| New | FanartPreview | Fanart preview block |
-| New | RelatedLinks | Related/recreated links |
 
 ## Technology Choices
 
@@ -151,17 +139,3 @@ src/
 | Data source | Static `videos.json` | No backend required for early phases |
 | Deploy | GitHub Pages | Free static hosting |
 | Future data sync | Google Sheets API | Possible later automation path |
-
-## Open Specifications
-
-These need more detail before implementation.
-
-| Area | Missing Decision |
-| --- | --- |
-| Video filters | Exact filter list, sort order, pagination or no pagination |
-| Video view switch | Default view and switch behavior between `VideoTable` and `VideoGallery` |
-| TagSearcher | AND/OR behavior, partial match, site filter vs X/Twitter search behavior |
-| FanartPreview | X/Twitter API auth, rate limits, cache strategy, fallback when API is unavailable |
-| Recreated Pages | `.mhtml` conversion, static delivery, iframe/modal approach, public/private content boundary |
-| GitHub Pages | Repository name, base path, custom domain, GitHub Actions deployment |
-
