@@ -1,11 +1,28 @@
 # AGENTS.md
 
+## 暫時限制紀錄：Staged 內容待確認（已停用）
+
+本章節只保留有 Staged 內容時需要使用的 agent.md 文本，不再作為有效工作規則。
+
+```text
+## 暫時限制：Staged 內容待確認（啟用中）
+
+- 目前 Git index 內已有一批 staged 內容等待使用者確認。
+- 只要使用者要求修改本專案的任何檔案，開始修改前都必須先提醒：「目前 staged 內容尚待確認。」
+- 在使用者明確表示「已完成確認」或同等意思之前：
+  - 不得 commit、unstage、restore 或改寫目前 staged 內容。
+  - 不得把其他檔案加入 staged 內容。
+  - 可以依使用者要求修改 working tree，但修改前仍需先提醒 staged 內容尚待確認。
+- 純讀取、調查、說明或執行不會改變檔案與 Git index 的唯讀操作，不需要重複提醒。
+- 使用者明確表示已完成確認後，將本章節改成「已停用」紀錄。
+```
+
 ## Top Page / Top Profile 工作守則
 
 Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
 
 - Top/Profile 的主要實作位置是 `src/components/TopPage/index.tsx`，相關樣式通常在 `src/App.css` 的 `.top-profile*` 區塊。
-- 修改前先檢查 `docs/01-top-visual/top-visual-block-design.md`、`docs/01-top-visual/top-visual-data-design.md`、`docs/01-top-visual/top-visual-checklist.md`，並對照根目錄 `top-visual-preview.html`。
+- 修改前先檢查 `docs/01-top-visual/top-visual-block-design.md`、`docs/01-top-visual/top-visual-data-design.md`、`docs/01-top-visual/top-visual-checklist.md`。
 - Profile 文字、外部連結、出道日、畢業日使用 `src/data/profile.json`；不要重新 hardcode 到 component。
 - 桌面版維持主視覺與 profile 內容的雙欄構圖；手機版可垂直排列，但主視覺、名稱、profile 文案與 stats 都要可讀。
 - 若移動或替換 Top/Profile 資產，同步檢查 React import、Markdown docs、根目錄 preview HTML。
