@@ -17,7 +17,7 @@ const sectionStatus: Record<SectionId, SectionStatus> = {
   hero: 'public',
   videos: 'wip-visible',
   analytics: 'wip-visible',
-  tagSearcher: 'wip-visible',
+  tagSearcher: 'public',
   fanartPreview: 'wip-visible',
   links: 'wip-visible',
 }

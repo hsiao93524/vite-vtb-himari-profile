@@ -6,6 +6,7 @@ import TagSearcher from './components/TagSearcher'
 import TopPage from './components/TopPage'
 import VideoAnalytics from './components/VideoAnalytics'
 import VideoGallery from './components/VideoGallery'
+import VideoTagFilter from './components/VideoTagFilter'
 import VideoTable from './components/VideoTable'
 import PublicationBadge from './components/PublicationBadge'
 import {
@@ -102,6 +103,12 @@ export default function App() {
             ))}
           </div>
 
+          <VideoTagFilter
+            onToggleTag={toggleTag}
+            selectedTags={selectedTags}
+            tags={allTags}
+          />
+
           <p className="result-count">
             Showing {filteredVideos.length} / {allVideos.length} videos
           </p>
@@ -123,11 +130,8 @@ export default function App() {
       )}
       {isSectionVisible('tagSearcher') && (
         <TagSearcher
-          onToggleTag={toggleTag}
           publicationLabel={getSectionVisibilityLabel('tagSearcher')}
-          selectedTags={selectedTags}
           showInProgress={isSectionInProgress('tagSearcher')}
-          tags={allTags}
         />
       )}
       {isSectionVisible('fanartPreview') && (

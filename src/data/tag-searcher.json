@@ -1,0 +1,54 @@
+{
+  "categories": [
+    {
+      "id": "official",
+      "label": "公式・関連タグ",
+      "description": "本人名、コミュニティ、ファンアート、所属関連。",
+      "tags": [
+        {
+          "id": "himari-name",
+          "label": "#結萌ひまり",
+          "query": "#結萌ひまり",
+          "description": "本人名タグ。"
+        },
+        {
+          "id": "himarink",
+          "label": "#ひまりんく",
+          "query": "#ひまりんく",
+          "description": "コミュニティ向けタグ。"
+        },
+        {
+          "id": "fanart",
+          "label": "#ひまり色",
+          "query": "#ひまり色",
+          "description": "ファンアート向けタグ。"
+        },
+        {
+          "id": "rag",
+          "label": "#RAG",
+          "query": "#RAG",
+          "description": "Re:AcT Gaming 関連。"
+        },
+        {
+          "id": "react-gaming",
+          "label": "#リアクトゲーミング",
+          "query": "#リアクトゲーミング",
+          "description": "Re:AcT Gaming 関連。"
+        }
+      ]
+    },
+    {
+      "id": "unofficial",
+      "label": "ファン・アーカイブタグ",
+      "description": "ファン発の話題や思い出の整理向け。",
+      "tags": [
+        {
+          "id": "musubime-story",
+          "label": "#むすびめから始まる物語",
+          "query": "#むすびめから始まる物語",
+          "description": "むすびめ発の生活・思い出タグ。"
+        }
+      ]
+    }
+  ]
+}
