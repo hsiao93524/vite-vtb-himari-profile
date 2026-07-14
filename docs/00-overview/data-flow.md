@@ -51,7 +51,7 @@
    - 呼叫 `useVideos()`
    - 將 `allVideos` 傳給 `TopPage` 與 `VideoAnalytics`
    - 將 `filteredVideos` 傳給 `VideoTable` 或 `VideoGallery`
-   - 將 `allTags`、`selectedTags`、`toggleTag` 傳給 `TagSearcher`
+   - 將 `allTags`、`selectedTags`、`toggleTag` 傳給 `VideoTagFilter`
    - 在 `useEffect` 裡執行 `console.log(filteredVideos)`
 
 5. Components

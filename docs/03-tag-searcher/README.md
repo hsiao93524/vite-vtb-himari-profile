@@ -2,16 +2,6 @@
 
 This folder contains the design documents for the third homepage block, `Tag Searcher`. Its scope is limited to generating X/Twitter search entry points from prepared tag data. It does not cover site-side video filtering or AND/OR search conditions.
 
-The `^` filename prefix means the document is still a draft pending confirmation.
-
-## Current Purpose
-
-- Define what the Tag Searcher block should present.
-- Describe the tag JSON categories, fields, and empty-data rules.
-- Define the X/Twitter search URL generated when a tag label is clicked.
-- Provide the specification entry point before implementing the future `TagSearcher` component.
-- Keep the acceptance and migration checklists used during implementation and review.
-
 ## Recommended Reading Order
 
 1. [Tag Searcher Block Design](tag-searcher-block-design.md)

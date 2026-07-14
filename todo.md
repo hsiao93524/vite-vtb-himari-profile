@@ -9,7 +9,7 @@
 
 - [ ] 將 Tag Searcher 從 Video Analyze 的影片 tag 篩選功能中拆分
   - [ ] 保留原本的影片 tag 篩選功能
-  - [ ] 將 `TagSearcher` 改為獨立的 X/Twitter 搜尋入口
+  - [x] 將 `TagSearcher` 改為獨立的 X/Twitter 搜尋入口
   - [x] 建立 `docs/03-tag-searcher/tag-searcher-migration-checklist.md`
   - [ ] 完成 `docs/03-tag-searcher/tag-searcher-migration-checklist.md` 的全部項目
   - [ ] 依 migration checklist 驗證新舊功能

@@ -135,7 +135,6 @@ Release: fifth public release with Fanarts.
 - Replace `isDeleted` with `visibility`.
 - Replace `isMembers` with `isMembersOnly`.
 - Merge `category` into `tags`.
-- Decide whether TagSearcher is a site filter, an X/Twitter search launcher, or both.
 - Decide chart library before implementing advanced analytics.
 - Decide deploy base path and GitHub Pages automation.
 
