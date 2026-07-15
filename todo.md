@@ -8,7 +8,7 @@
   - [ ] 保留既有任務狀態與決策脈絡
 
 - [ ] 將 Tag Searcher 從 Video Analyze 的影片 tag 篩選功能中拆分
-  - [ ] 保留原本的影片 tag 篩選功能
+  - [x] 保留原本的影片 tag 篩選功能
   - [x] 將 `TagSearcher` 改為獨立的 X/Twitter 搜尋入口
   - [x] 建立 `docs/03-tag-searcher/tag-searcher-migration-checklist.md`
   - [ ] 完成 `docs/03-tag-searcher/tag-searcher-migration-checklist.md` 的全部項目
@@ -20,6 +20,7 @@
   - [ ] 轉換 video.json
     - ref: https://claude.ai/chat/34f302af-77b4-4839-b648-c7a0adad08f7
   - [ ] 轉換完之後透過 codex 重新修改前端
+  - note: 此項目與下方 Category / Members / Playlist / Status / Visibility 欄位清理重複，之後可合併成「影片資料新格式遷移」。
 
 ## Category 欄位清理
 
@@ -39,7 +40,7 @@
 目標：依照設計書，將會員影片欄位統一為 `isMembersOnly`，移除舊欄位 `isMembers`。
 
 - [x] 清理 Excel -> JSON 轉換流程中產生 `isMembers` 的邏輯
-- [ ] 將轉換流程改成輸出 `isMembersOnly`
+- [x] 將轉換流程改成輸出 `isMembersOnly`
 - [ ] 確認轉換後的 `videos.json` 不再輸出 `isMembers`
 - [ ] 將既有 `videos.json` 的 `isMembers` 資料遷移為 `isMembersOnly`
 - [ ] 清理 `src/types/video.ts` 裡的 `isMembers?: boolean`
@@ -53,7 +54,7 @@
 目標：依照設計書，將 `playlist` 統一為 `string[]`，支援同一影片存在於多個 playlist 的情況。
 
 - [x] 清理 Excel -> JSON 轉換流程中產生 `playlist: string` 的邏輯
-- [ ] 將轉換流程改成固定輸出 `playlist: string[]`
+- [x] 將轉換流程改成固定輸出 `playlist: string[]`
 - [ ] 確認轉換後的 `videos.json` 每筆資料都使用陣列格式
 - [ ] 將既有 `videos.json` 的 `playlist: string` 遷移為 `playlist: string[]`
 - [ ] 清理 `src/types/video.ts` 裡的 `playlist: string | string[]`
@@ -74,27 +75,26 @@
 - [ ] 移除或改寫所有依賴 `status` 的顯示、篩選、統計邏輯
 - [ ] 重新執行資料轉換與前端 build，確認沒有型別錯誤
 
-## isDeleted 欄位補齊
+## Visibility 欄位導入
 
-> 目標：依照設計書，未來轉換後的每筆影片資料都需要有 `isDeleted` 欄位；如果沒有刪檔資訊，預設為 `false`。
-> 
-> - [ ] 更新 Excel -> JSON 轉換流程，固定輸出 `isDeleted`
-> - [ ] 如果來源資料沒有刪檔資訊，將 `isDeleted` 預設為 `false`
-> - [ ] 補上人工標記刪檔影片的資料來源或欄位規則
-> - [ ] 確認轉換後的 `videos.json` 每筆資料都有 `isDeleted`
-> - [ ] 將既有 `videos.json` 補上 `isDeleted: false`
-> - [ ] 將 `src/types/video.ts` 的 `isDeleted?: boolean` 改成必> 要欄位 `isDeleted: boolean`
-> - [ ] 檢查 `useVideos` 等前端邏輯是否需要依照 `isDeleted` 顯示標籤或篩選
-> - [ ] 重新執行資料轉換與前端 build，確認沒有型別錯誤
+目標：廢除 `isDeleted`，改以 `visibility` 表示影片公開狀態。
 
-isDeleted 廢除，改以 `visibility` 代替
-(visibility: 'public' | 'unlisted' | 'unavailable')
+`visibility: 'public' | 'unlisted' | 'unavailable'`
+
+- [x] 決定廢除 `isDeleted`，改以 `visibility` 代替
+- [x] 更新 Excel -> JSON 轉換流程，支援輸出 `visibility`
+- [ ] 確認轉換後的 `videos.json` 每筆資料都有 `visibility`
+- [ ] 確認轉換後的 `videos.json` 不再輸出 `isDeleted`
+- [ ] 清理 `src/types/video.ts` 裡的 `isDeleted?: boolean`
+- [ ] 在 `src/types/video.ts` 新增必要欄位 `visibility: 'public' | 'unlisted' | 'unavailable'`
+- [ ] 檢查 `useVideos` 等前端邏輯是否需要依照 `visibility` 顯示標籤或篩選
+- [ ] 重新執行資料轉換與前端 build，確認沒有型別錯誤
 
 ## 左側章節選單
 
 目標：在畫面左側加入章節選單，讓使用者可以快速跳到各個 block。
 
-- [ ] 確認每個主要 block 都有穩定的 `id`，例如 `hero`、`videos`、`analytics`、`tag-searcher`、`fanart-preview`、`links`
+- [x] 確認每個主要 block 都有穩定的 `id`，例如 `hero`、`videos`、`analytics`、`tag-searcher`、`fanart-preview`、`links`
 - [ ] 新增章節選單資料結構，例如 `{ id: 'videos', label: 'Video Block' }`
 - [ ] 建立 `SectionNav` 或類似元件
 - [ ] 在桌面版將章節選單固定於左側，使用 `position: sticky`
