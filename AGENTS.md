@@ -48,9 +48,11 @@ Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
 
 - `npm run dev`：啟動本機開發伺服器。
 - `npm run build`：執行 TypeScript build 與 Vite build。
+- `npm run build:publications`：建置 Public 與 HR 兩個發布版本到 `dist/`。
+- `npm run build:pages`：目前等同 `npm run build:publications`，供部署流程使用。
 - `npm run lint`：執行 ESLint。
 - `npm run preview`：預覽 build 後的成果。
-- `npm run deploy`：先 build，再以 `gh-pages -d dist` 發布；不要在未經要求時主動部署。
+- `npm run deploy:local`：先執行 `npm run build:pages`，再以 `gh-pages -d dist` 發布；不要在未經要求時主動部署。
 
 ## 開發流程
 

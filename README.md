@@ -52,7 +52,7 @@ npm run build:publications
 Deploy publishes both versions:
 
 ```bash
-npm run deploy
+npm run deploy:local
 ```
 
 ## Live Site
