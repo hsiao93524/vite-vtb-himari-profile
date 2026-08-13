@@ -1,18 +1,18 @@
-# Profile 資料設計
+# Profile Data Design
 
-本文件定義 Profile 區塊預覽，以及未來 `TopPage` 實作所需的資料。
+This document defines the Profile block preview and the data needed for the future `TopPage` implementation.
 
-## 資產目錄
+## Asset Folder
 
-[主視覺圖片](../../src/assets/profile/hero.png)
+[Main visual image](../../src/assets/profile/hero.png)
 
 ```text
 src/assets/profile/hero.png
 ```
 
-目前檔案：
+Current files:
 
-| 檔案 | 尺寸 |
+| File | Size |
 | --- | --- |
 | `expression-01.jpg` | 360 x 360 |
 | `expression-02.jpg` | 360 x 360 |
@@ -30,12 +30,12 @@ src/assets/profile/hero.png
 | `expression-14.jpg` | 360 x 360 |
 | `expression-15.jpg` | 360 x 360 |
 
-- 圖片尺寸並非全都相同。
-- 多數圖片是 `360 x 360` 的正方形。
-- 未來 UI 應該把這些圖片放在固定的正方形框內，並使用 `object-fit: cover`。
-- 不要依賴原始圖片尺寸來決定 layout。
+- Image sizes are not all the same.
+- Most images are `360 x 360` squares.
+- The future UI should place these images in fixed square frames and use `object-fit: cover`.
+- Do not use the original image size to decide the layout.
 
-渲染規則：
+Render rule:
 
 ```css
 .expression-image {
@@ -45,9 +45,9 @@ src/assets/profile/hero.png
 }
 ```
 
-## 隨機表情選擇
+## Random Expression Selection
 
-實作：
+Implementation:
 
 ```ts
 const expressionImages = [
@@ -67,17 +67,17 @@ const selectedExpressions = useMemo(
 )
 ```
 
-如果之後需要 deterministic testing，請用 seeded shuffle helper 取代 `Math.random()`。
+If stable test results are needed later, replace `Math.random()` with a seeded shuffle helper.
 
-## Profile 靜態資料
+## Profile Static Data
 
-資料形狀：
+Data shape:
 
 ```ts
 export const profile = {
   name: '結萌ひまり',
   description:
-    '個人介紹個人介紹個人介紹個人介紹個人介紹個人介紹個人介紹...',
+    'Profile copy profile copy profile copy profile copy profile copy...',
   links: [
     {
       label: 'X',
@@ -94,16 +94,17 @@ export const profile = {
 }
 ```
 
-規則：
+Rules:
 
-- `links` 目前是 Profile 的官方連結資料，語意上等同 official profile links。
-- `links` 只保存目前官方 X account 與 YouTube channel。與 Recreated Pages 的資料不同。
+- `links` stores the official Profile links.
+- `links` only stores the current official X account and YouTube channel. It is different from Recreated Pages data.
 
-## 區塊標題與區塊描述
+## Block Titles And Descriptions
 
-注意：
-- `Profile` block 內的人物介紹同樣使用 description 但不為區塊的功能描述
-- `Profile` block 本身不使用description，也不使用label，但為了確保每個block統一性，json內還是會保留該欄位，且維持資料清空的狀態
+Notes:
+
+- The character profile text inside the `Profile Static Data` also uses `description` as key, but it is not the block function description.
+- The `Profile` block itself does not use `description` or `label`. To keep every block consistent, the JSON still keeps these fields and leaves them empty.
 
 ```json
 {
@@ -114,24 +115,24 @@ export const profile = {
 }
 ```
 
-## 統計資料
+## Statistics Data
 
-統計資料應該透過 `useVideos` 或 helper function，從 `src/data/videos.json` 推導出來。
+Statistics are loaded from `src/data/videos.json` through `useVideos`, then calculated inside `TopPage`.
 
-目前 Profile 統計：
+Current Profile statistics:
 
-| Label | 意義 | 來源 |
+| Label | Meaning | Source |
 | --- | --- | --- |
-| `VIDEOS` | archive 影片總數 | `videos.length` |
-| `MEMBERS` | members-only 影片數 | `video.isMembersOnly || video.isMembers` |
-| `HOURS` | 直播/影片總時數 | `duration` 加總後從秒換算成小時 |
+| `VIDEOS` | Total archive video count | `videos.length` |
+| `MEMBERS` | Members-only video count | `video.isMembers || video.isMembersOnly` |
+| `HOURS` | Total stream/video hours | Sum `duration`, then convert seconds to hours |
 
-建議 helper 邏輯：
+Suggested helper logic:
 
 ```ts
 export function getProfileStats(videos: Video[]) {
   const membersCount = videos.filter(
-    (video) => video.isMembersOnly || video.isMembers,
+    (video) => video.isMembers || video.isMembersOnly,
   ).length
   const totalHours = Math.round(
     videos.reduce((total, video) => total + (video.duration ?? 0), 0) / 3600,
@@ -145,30 +146,30 @@ export function getProfileStats(videos: Video[]) {
 }
 ```
 
-規則：
+Rules:
 
-- 除非設計上刻意凍結某個 release snapshot，否則不要把統計資料複製成另一份靜態 JSON。
-- Tests 不應 hardcode `279`、`76` 或 `907`；應該與目前 `videos.json` 推導出的值比較。
-- Schema migration 期間，同時支援 `isMembers` 與 `isMembersOnly`。
-- Playlist migration 期間，同時支援 `string` 與 `string[]`。
+- Do not copy statistics into another static JSON file unless the design intentionally freezes a release snapshot.
+- Future tests should not hardcode `279`, `76`, or `907` as assets imgs. They should compare against values derived from the current `videos.json`.
+- The members-only count should reflect the current data. Use `isMembers` now, and also count `isMembersOnly` if it appears during schema migration.
+- Keep playlist support for both `string` and `string[]`, because one video may belong to multiple playlists.
 
-## 建議最終結構
+## Suggested Final Structure
 
 ```text
 src/
-├── assets/
-│   └── profile/
-│       ├── hero.png
-│       └── expressions/
-│           ├── expression-01.jpg
-│           ├── expression-02.jpg
-│           └── ...
-├── data/
-│   ├── profile.ts
-│   └── videos.json
-├── hooks/
-│   └── useVideos.ts
-└── components/
-    └── TopPage/
-        └── index.tsx
+|-- assets/
+|   `-- profile/
+|       |-- hero.png
+|       `-- expressions/
+|           |-- expression-01.jpg
+|           |-- expression-02.jpg
+|           `-- ...
+|-- data/
+|   |-- profile.ts
+|   `-- videos.json
+|-- hooks/
+|   `-- useVideos.ts
+`-- components/
+    `-- TopPage/
+        `-- index.tsx
 ```

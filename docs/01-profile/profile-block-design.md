@@ -61,24 +61,24 @@ Mobile layout:
 | Total hours | Show archive volume | Sum of `duration`, rounded to hours |
 | Active period | Provide historical context | Derived from min/max `date` or static graduation data |
 
-## Profile 靜態資料
+## Profile Static Data
 
-Profile 文字與連結不應該 hardcode 在 `TopPage` 內。
+Profile text and links should not be hardcoded in `TopPage`.
 
-檔案：
+File:
 
 ```text
 src/data/profile.json
 ```
 
-規則：
+Rules:
 
-- `name` 是橘色 banner 中的顯示名稱。
-- `description` 是名稱 banner 下方的主要 profile 文案。
-- `links` 用來驅動官方 X / YT icons。
-- `links` 只放 Profile 的官方SNS入口，不放使用於 `Recreated Pages` 的內容。
-- `debutDate` 考慮未來當作active-period的開始時間資料。
-- `graduationDate` 可用於 active-period 顯示。
+- `name` is the display name in the orange banner.
+- `description` is the main profile copy under the name banner.
+- `links` drive the official X / YT icons.
+- `links` only include official SNS entry points for Profile. Do not put `Recreated Pages` content here.
+- `debutDate` may be used later as the start date for the active period.
+- `graduationDate` can be used for active-period display.
 
 ## Boundary of Profile Links in Profile block
 
@@ -86,30 +86,30 @@ src/data/profile.json
 - They help visitors to make a quick jump to official SNS page.
 - The function of these links / pages is different from links / pages in `Recreated Pages` block.
 
-## 其他靜態資料
+## Other Static Data
 
-檔案：
+File:
 
 ```text
 src/data/site.json
 ```
 
-規則：
+Rules:
 
-- `lastUpdated` 顯示在 Profile 區塊的右下角。
+- `lastUpdated` is shown at the lower-right side of the Profile block.
 
-## 隨機表情選擇
+## Random Expression Selection
 
-Profile 區塊應顯示三張表情圖片。
+The Profile block should show three expression images.
 
-行為：
+Behavior:
 
-- 每次進入或載入頁面時，從 `src/assets/profile/expressions/` 隨機選出三張不重複的圖片。
-- 在同一次 render session 中保持選出的三張圖片穩定。
-- 不要在每次 component re-render 時重新洗牌。
-- 隨機選擇不需要在瀏覽器重新整理後持續保留。
+- On each page entry or page load, randomly pick three different images from `src/assets/profile/expressions/`.
+- Keep the three selected images stable during the same render session.
+- Do not shuffle again on every component re-render.
+- The random choice does not need to persist after a browser refresh.
 
-[表情圖片資料夾](../../src/assets/profile/expressions/)
+[Expression image folder](../../src/assets/profile/expressions/)
 
 ```text
 src/assets/profile/expressions/
@@ -150,15 +150,15 @@ Primary interactions:
 
 ## Future Ideas
 
-- 吸引觀眾回來：
-  - 貓貓點擊器
-    - 點擊貓貓會觸發計數器
-    - 計數器是全網共通
-      - Todo: 要怎麼在github page上實現共通計數？
-    - Todo: 計數器的名子？
-  - 表情解鎖器
-    - 把表情分作N、R、SR、SSR等級，作為出現機率
-    - Todo: 要怎麼讓使用者知道已經解鎖過哪些表情
+- Bring visitors back:
+  - Cat clicker
+    - Clicking the cat starts a counter.
+    - The counter is shared by all visitors.
+      - Todo: Decide how to make a shared counter on GitHub Pages.
+    - Todo: Decide the counter name.
+  - Expression unlocker
+    - Group expressions by N, R, SR, and SSR levels, and use them as appearance rates.
+    - Todo: Decide how to show users which expressions they have unlocked.
 
 ## Checklist
 
