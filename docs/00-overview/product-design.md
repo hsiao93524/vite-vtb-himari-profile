@@ -52,9 +52,43 @@ The page is divided into five major blocks.
 | --- | --- | --- | --- |
 | 1 | Profile | First-view identity and summary | Main visual, short profile, official SNS links, total videos, members-only count, total hours, active period |
 | 2 | Video Analyze | Archive exploration | Stream type charts, collaboration analysis, full video archive, detail/search mode |
-| 3 | Tag Block | Tag discovery and external search | Related tags and X/Twitter search handoff |
+| 3 | X Tag Searcher | Tag discovery and external search | Related tags and X/Twitter search handoff |
 | 4 | Fanarts | Fanart preview | Horizontal carousel, auto-scroll, pause-on-hover, left/right controls |
 | 5 | Recreated Pages | Preserved historical material | Litlink, YouTube, Twitch, Twitter, sub-Twitter page candidates |
+
+## Block Titles And Descriptions
+
+For future expansion, each main block title and purpose are provided by JSON.
+This section defines that JSON only. The detailed data for each block is defined in that block's own design document.
+
+JSON shape:
+
+```json
+{
+  "[id]": {
+    "label": "string",
+    "desc": "string"
+  }
+}
+```
+
+Rules:
+
+- Each top-level id in the shared block description JSON means one main block.
+- Internal data fields and item ids are defined in each block's own design document.
+- `label` is the block title shown on the page. It may be an empty string when the block design does not show a shared block title.
+- `desc` explains what the block is for, what users can do there, and whether the content is public or limited. It may be an empty string when the block design does not show a shared block description.
+- If `label` is an empty string, `desc` is not shown even when `desc` has text.
+
+Current spec:
+
+- When `label` is not empty, use the block name from the Page Structure table.
+- There are five main blocks. Their ids are:
+  - `profile`: `Profile`
+  - `videoAnalyze`: `Video Analyze`
+  - `xTagSearcher`: `X Tag Searcher`
+  - `fanarts`: `Fanarts`
+  - `recreatedPages`: `Recreated Pages`
 
 ## Interaction Design
 
@@ -62,9 +96,6 @@ The page is divided into five major blocks.
 
 - The site is a single-page experience.
 - Section-level navigation should scroll to the relevant block instead of opening separate pages.
-- CTA buttons in the Profile block should support these targets:
-  - `#videos`
-  - `#tag-searcher`
 - detail: [docs/01-profile/profile-block-design.md](../01-profile/profile-block-design.md)
 
 ### Video Archive
@@ -123,7 +154,7 @@ src/
 │   ├── TagSearcher/      # Categorized X/Twitter tag search links
 │   ├── VideoAnalytics/   # Charts: bar, bubble, pie
 │   ├── FanartPreview/    # Fanart preview/gallery
-│   └── RelatedLinks/     # Related and recreated links
+│   └── RelatedLinks/     # Recreated links
 ├── data/
 │   └── videos.json
 ├── hooks/

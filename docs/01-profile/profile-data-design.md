@@ -99,6 +99,21 @@ export const profile = {
 - `links` 目前是 Profile 的官方連結資料，語意上等同 official profile links。
 - `links` 只保存目前官方 X account 與 YouTube channel。與 Recreated Pages 的資料不同。
 
+## 區塊標題與區塊描述
+
+注意：
+- `Profile` block 內的人物介紹同樣使用 description 但不為區塊的功能描述
+- `Profile` block 本身不使用description，也不使用label，但為了確保每個block統一性，json內還是會保留該欄位，且維持資料清空的狀態
+
+```json
+{
+  "profile": {
+    "label": "",
+    "desc": ""
+  }
+}
+```
+
 ## 統計資料
 
 統計資料應該透過 `useVideos` 或 helper function，從 `src/data/videos.json` 推導出來。
