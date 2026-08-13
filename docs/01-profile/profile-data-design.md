@@ -114,12 +114,7 @@ export const profile = {
 建議 helper 邏輯：
 
 ```ts
-function toList(value: string | string[]) {
-  return Array.isArray(value) ? value : [value]
-}
-
 export function getProfileStats(videos: Video[]) {
-  const playlistCount = new Set(videos.flatMap((video) => toList(video.playlist))).size
   const membersCount = videos.filter(
     (video) => video.isMembersOnly || video.isMembers,
   ).length
@@ -129,7 +124,6 @@ export function getProfileStats(videos: Video[]) {
 
   return {
     videos: videos.length,
-    playlists: playlistCount,
     members: membersCount,
     hours: totalHours,
   }

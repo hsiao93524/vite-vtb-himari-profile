@@ -57,8 +57,8 @@ Mobile layout:
 | X link | Link to the official external identity source | Static URL |
 | YouTube link | Link to the official external channel | Static URL |
 | Total videos | Show archive scale | `videos.length` |
-| Playlist count | Show archive structure | Derived from `playlist` |
 | Members-only count | Signal archive completeness | `isMembersOnly` or current transitional member field |
+| Total hours | Show archive volume | Sum of `duration`, rounded to hours |
 | Active period | Provide historical context | Derived from min/max `date` or static graduation data |
 
 ## Profile 靜態資料

@@ -43,10 +43,10 @@
 - [ ] The YouTube link is visible.
 - [ ] The total video count is displayed.
 - [ ] The displayed total video count equals `videos.length`.
-- [ ] The playlist count is displayed.
-- [ ] The displayed playlist count equals the number of unique normalized playlist values.
 - [ ] The members-only count is displayed.
 - [ ] The displayed members-only count equals the number of videos where `isMembersOnly` or the transitional member field is true.
+- [ ] The total hours count is displayed.
+- [ ] The displayed total hours count equals the sum of `duration` rounded to hours.
 - [ ] The active period is displayed.
 - [ ] The displayed active period is derived from min/max `date` or the configured graduation date.
 - [ ] `Last updated: 2026-xx-xx` 有顯示。

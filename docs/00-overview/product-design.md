@@ -50,7 +50,7 @@ The page is divided into five major blocks.
 
 | Order | Block | Purpose | Main Content |
 | --- | --- | --- | --- |
-| 1 | Profile | First-view identity and summary | Main visual, short profile, official SNS links, total videos, playlist count, active period |
+| 1 | Profile | First-view identity and summary | Main visual, short profile, official SNS links, total videos, members-only count, total hours, active period |
 | 2 | Video Analyze | Archive exploration | Stream type charts, collaboration analysis, full video archive, detail/search mode |
 | 3 | Tag Block | Tag discovery and external search | Related tags and X/Twitter search handoff |
 | 4 | Fanarts | Fanart preview | Horizontal carousel, auto-scroll, pause-on-hover, left/right controls |
