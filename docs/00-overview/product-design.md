@@ -17,8 +17,8 @@ Related detailed documents:
 - [Data Model](data-model.md): `videos.json` schema and data migration rules.
 - [Data Flow](data-flow.md): current React data flow and hook/component boundaries.
 - [Roadmap](roadmap.md): implementation phases and release readiness.
-- [Top Visual Block Design](../01-top-visual/top-visual-block-design.md): detailed Top/Profile UI design.
-- [Top Visual Data Design](../01-top-visual/top-visual-data-design.md): Top/Profile data requirements.
+- [Profile Block Design](../01-profile/profile-block-design.md): detailed Profile UI design.
+- [Profile Data Design](../01-profile/profile-data-design.md): Profile data requirements.
 
 ## Project Summary
 
@@ -58,11 +58,11 @@ The page is divided into five major blocks.
 
 ## Interaction Design
 
-### Primary Navigation
+### Profile
 
 - The site is a single-page experience.
 - Section-level navigation should scroll to the relevant block instead of opening separate pages.
-- CTA buttons in the Top/Profile block should support these targets:
+- CTA buttons in the Profile block should support these targets:
   - `#videos`
   - `#tag-searcher`
 

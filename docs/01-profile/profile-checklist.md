@@ -3,7 +3,7 @@
 
 ## Identity
 
-- [ ] The Top/Profile block is rendered before the video/archive list section.
+- [ ] The Profile block is rendered before the video/archive list section.
 - [ ] The visible display name text is exactly `結萌ひまり`.
 - [ ] 主視覺 `src/assets/profile/hero.png` 有顯示。
 - [ ] 畫面剛好顯示三張表情圖片。
@@ -63,8 +63,8 @@
 
 ## Visual Direction
 
-- [ ] The Top/Profile block uses `#E87FAB` for the main accent or name-banner accent.
-- [ ] The Top/Profile block uses `#FFEEF5` as a soft background or background tint.
+- [ ] The Profile block uses `#E87FAB` for the main accent or name-banner accent.
+- [ ] The Profile block uses `#FFEEF5` as a soft background or background tint.
 - [ ] Body/profile text uses `#3D2B3D` or another approved main text color from `product-design.md`.
 - [ ] Secondary/supporting text uses `#7A5C7A` or another approved muted text color from `product-design.md`.
 

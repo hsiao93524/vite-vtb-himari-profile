@@ -1,6 +1,6 @@
-# Top Visual 資料設計
+# Profile 資料設計
 
-本文件定義 top visual/profile 區塊預覽，以及未來 `TopPage` 實作所需的資料。
+本文件定義 Profile 區塊預覽，以及未來 `TopPage` 實作所需的資料。
 
 ## 資產目錄
 
@@ -98,7 +98,7 @@ export const profile = {
 
 統計資料應該透過 `useVideos` 或 helper function，從 `src/data/videos.json` 推導出來。
 
-目前 top visual 統計：
+目前 Profile 統計：
 
 | Label | 意義 | 來源 |
 | --- | --- | --- |
@@ -113,7 +113,7 @@ function toList(value: string | string[]) {
   return Array.isArray(value) ? value : [value]
 }
 
-export function getTopVisualStats(videos: Video[]) {
+export function getProfileStats(videos: Video[]) {
   const playlistCount = new Set(videos.flatMap((video) => toList(video.playlist))).size
   const membersCount = videos.filter(
     (video) => video.isMembersOnly || video.isMembers,

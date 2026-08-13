@@ -2,7 +2,7 @@
 
 這裡整理專案內的設計書、資料規格、roadmap、草圖與參考資料。
 
-建議先從 `00-overview/product-design.md` 看整體方向，再看 Top 區塊設計與資料模型。
+建議先從 `00-overview/product-design.md` 看整體方向，再看 Profile 區塊設計與資料模型。
 
 ## 00 Overview
 
@@ -13,20 +13,20 @@
 | [00-overview/roadmap.md](00-overview/roadmap.md) | 實作階段、發布順序與高優先缺口。 |
 | [00-overview/data-flow.md](00-overview/data-flow.md) | 目前 app 的資料流與 component 串接方式。 |
 
-## 01 Top Visual
+## 01 Profile
 
 | 檔案 | 用途 |
 | --- | --- |
-| [01-top-visual/README.md](01-top-visual/README.md) | Top/Profile 區塊設計資料夾索引。 |
-| [01-top-visual/top-visual-block-design.md](01-top-visual/top-visual-block-design.md) | Top/Profile 區塊的 UI 設計說明。 |
-| [01-top-visual/top-visual-data-design.md](01-top-visual/top-visual-data-design.md) | Top/Profile 區塊的資料需求與欄位設計。 |
-| [01-top-visual/top-visual-checklist.md](01-top-visual/top-visual-checklist.md) | Top/Profile 實作完成後的驗收清單。 |
-| [01-top-visual/top-section-design.pptx](01-top-visual/top-section-design.pptx) | Top 區塊設計簡報原始檔。 |
-| [01-top-visual/assets/top-section-design.png](01-top-visual/assets/top-section-design.png) | Top 區塊設計圖預覽。 |
+| [01-profile/README.md](01-profile/README.md) | Profile 區塊設計資料夾索引。 |
+| [01-profile/profile-block-design.md](01-profile/profile-block-design.md) | Profile 區塊的 UI 設計說明。 |
+| [01-profile/profile-data-design.md](01-profile/profile-data-design.md) | Profile 區塊的資料需求與欄位設計。 |
+| [01-profile/profile-checklist.md](01-profile/profile-checklist.md) | Profile 實作完成後的驗收清單。 |
+| [01-profile/profile-section-design.pptx](01-profile/profile-section-design.pptx) | Profile 區塊設計簡報原始檔。 |
+| [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png) | Profile 區塊設計圖預覽。 |
 
-### Top 區塊設計圖
+### Profile 區塊設計圖
 
-![Top section design](01-top-visual/assets/top-section-design.png)
+![Profile section design](01-profile/assets/profile-section-design.png)
 
 ## 03 Tag Searcher
 

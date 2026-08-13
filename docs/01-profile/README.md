@@ -1,11 +1,13 @@
-# 01 Top Visual Docs
+# 01 Profile Docs
 
-這個資料夾整理首頁最上方 `Top/Profile` 區塊的設計資料。範圍只包含第一眼看到的 profile visual block，不包含 Video、Tag、Fanart 或 Related Links 區塊。
+這個資料夾整理首頁最上方 `Profile` 區塊的設計資料。範圍只包含第一眼看到的 Profile block，不包含 Video、Tag、Fanart 或 Related Links 區塊。
+
+PPT、PNG 與 Markdown 檔名已收斂為 `Profile`。
 
 ## 目前用途
 
-- 定義 Top/Profile 區塊要呈現什麼。
-- 保存 Top/Profile 的設計圖、簡報原始檔與驗收清單。
+- 定義 Profile 區塊要呈現什麼。
+- 保存 Profile 的設計圖、簡報原始檔與驗收清單。
 - 說明 React 實作時需要哪些圖片、文字、連結與統計資料。
 - 作為 `src/components/TopPage/` 實作前的規格入口。
 - 區分 React app 會 import 的資產，以及只給設計文件使用的預覽資產。
@@ -13,21 +15,21 @@
 ## 檔案地圖
 
 ```text
-docs/01-top-visual/
+docs/01-profile/
 ├── README.md
-├── top-visual-block-design.md
-├── top-visual-checklist.md
-├── top-visual-data-design.md
-├── top-section-design.pptx
+├── profile-block-design.md
+├── profile-checklist.md
+├── profile-data-design.md
+├── profile-section-design.pptx
 └── assets/
-    └── top-section-design.png
+    └── profile-section-design.png
 ```
 
 ## 實作對應
 
 | 設計項目 | 目前或預計位置 |
 | --- | --- |
-| Top/Profile component | `src/components/TopPage/index.tsx` |
+| Profile component | `src/components/TopPage/index.tsx` |
 | Main visual image | `src/assets/profile/hero.png` |
 | Expression images | `src/assets/profile/expressions/` |
 | Profile static data | `src/data/profile.json` |
@@ -36,8 +38,8 @@ docs/01-top-visual/
 ## 資產規則
 
 - 會被 React app import 的圖片放在 `src/assets/profile/`。
-- 只給設計書或預覽用的圖片放在 `docs/01-top-visual/assets/`。
-- `top-section-design.pptx` 是原始設計檔，`assets/top-section-design.png` 是預覽用輸出。
+- 只給設計書或預覽用的圖片放在 `docs/01-profile/assets/`。
+- `profile-section-design.pptx` 是原始設計檔，`assets/profile-section-design.png` 是預覽用輸出。
 
 ## 與總設計書的關係
 

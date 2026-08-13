@@ -1,25 +1,25 @@
-# Top Visual Block Design
+# Profile Block Design
 
-Source: [Top/Profile design image](assets/top-section-design.png) and [wireframe image](../framework.png)
+Source: [Profile design image](assets/profile-section-design.png) and [wireframe image](../framework.png)
 
-This document defines the top `profile block` in the wireframe. It is the first Top/Profile area visitors see on the public page.
+This document defines the `Profile` block in the wireframe. It is the first Profile area visitors see on the public page.
 
 ## Goal
 
-The Top/Profile block is the first impression of the site. It should immediately communicate:
+The Profile block is the first impression of the site. It should immediately communicate:
 
-- This is the Top/Profile area for 結萌ひまり.
+- This is the Profile area for 結萌ひまり.
 - The site is a fan archive with memorial and preservation intent, while also functioning as a dashboard for the VTuber's activity record.
 - The statistics should quickly show the shape of the VTuber's streaming and video activity.
 
 ## Wireframe Reference
 
-In `docs/framework.png`, this block corresponds to the upper yellow `profile block`.
+In `docs/framework.png`, this block corresponds to the upper yellow `Profile` block.
 
 Main elements:
 
 ```text
-profile block
+Profile block
 |-- left: full-body main visual
 |-- right:
   |-- slanted name banner
@@ -34,7 +34,7 @@ profile block
 
 Desktop layout:
 
-- Use a two-column hero composition.
+- Use a two-column first-view composition.
 - Place the character main visual on the left.
 - Place the profile panel on the right, including name, short profile text, and links.
 - The right-column content order follows the structure shown in the Wireframe Reference.
@@ -89,11 +89,11 @@ src/data/site.json
 
 規則：
 
-- `lastUpdated` 顯示在 top visual 區塊的右下角。
+- `lastUpdated` 顯示在 Profile 區塊的右下角。
 
 ## 隨機表情選擇
 
-Top visual 區塊應顯示三張表情圖片。
+Profile 區塊應顯示三張表情圖片。
 
 行為：
 
@@ -154,4 +154,4 @@ Primary interactions:
 
 ## Checklist
 
-[Checklist](./top-visual-checklist.md)
+[Checklist](./profile-checklist.md)

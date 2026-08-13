@@ -10,9 +10,9 @@
 | 了解資料欄位與 schema | [00-overview/data-model.md](00-overview/data-model.md) |
 | 了解實作與發布順序 | [00-overview/roadmap.md](00-overview/roadmap.md) |
 | 了解目前 React 資料流 | [00-overview/data-flow.md](00-overview/data-flow.md) |
-| 了解 Top/Profile 畫面 | [01-top-visual/top-visual-block-design.md](01-top-visual/top-visual-block-design.md) |
-| 了解 Top/Profile 需要哪些資料 | [01-top-visual/top-visual-data-design.md](01-top-visual/top-visual-data-design.md) |
-| 預覽 Top/Profile 設計圖 | [01-top-visual/assets/top-section-design.png](01-top-visual/assets/top-section-design.png) |
+| 了解 Profile 畫面 | [01-profile/profile-block-design.md](01-profile/profile-block-design.md) |
+| 了解 Profile 需要哪些資料 | [01-profile/profile-data-design.md](01-profile/profile-data-design.md) |
+| 預覽 Profile 設計圖 | [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png) |
 | 看全頁 wireframe | [framework.png](framework.png) |
 
 ## 資料夾地圖
@@ -26,13 +26,14 @@ docs/
 │   ├── data-model.md
 │   ├── roadmap.md
 │   └── data-flow.md
-├── 01-top-visual/
+├── 01-profile/
 │   ├── README.md
-│   ├── top-visual-block-design.md
-│   ├── top-visual-data-design.md
-│   ├── top-section-design.pptx
+│   ├── profile-block-design.md
+│   ├── profile-data-design.md
+│   ├── profile-checklist.md
+│   ├── profile-section-design.pptx
 │   └── assets/
-│       └── top-section-design.png
+│       └── profile-section-design.png
 ├── framework.png
 ├── design.xlsx
 └── ref/
@@ -53,9 +54,9 @@ Notion design source
       -> 00-overview/data-flow.md
 
 framework.png / design.xlsx
-  -> 01-top-visual/top-visual-block-design.md
-      -> 01-top-visual/top-visual-data-design.md
-      -> 01-top-visual/assets/top-section-design.png
+  -> 01-profile/profile-block-design.md
+      -> 01-profile/profile-data-design.md
+      -> 01-profile/assets/profile-section-design.png
 
 ref/python/
   -> videos.json generation and checking
@@ -69,11 +70,11 @@ ref/python/
 1. [00-overview/product-design.md](00-overview/product-design.md)
 2. [00-overview/roadmap.md](00-overview/roadmap.md)
 
-### 要實作 Top Profile 畫面
+### 要實作 Profile 畫面
 
-1. [01-top-visual/top-visual-block-design.md](01-top-visual/top-visual-block-design.md)
-2. [01-top-visual/top-visual-data-design.md](01-top-visual/top-visual-data-design.md)
-3. [01-top-visual/assets/top-section-design.png](01-top-visual/assets/top-section-design.png)
+1. [01-profile/profile-block-design.md](01-profile/profile-block-design.md)
+2. [01-profile/profile-data-design.md](01-profile/profile-data-design.md)
+3. [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png)
 
 ### 要整理影片資料
 
@@ -87,7 +88,7 @@ ref/python/
 | 類型 | 位置 | 原則 |
 | --- | --- | --- |
 | 總設計 | `00-overview/` | 跨頁面、跨功能的核心設計與資料規則 |
-| 單一區塊設計 | `01-top-visual/` 等 numbered folder | 專注於某個 UI block 的規格 |
+| 單一區塊設計 | `01-profile/` 等 numbered folder | 專注於某個 UI block 的規格 |
 | 原始草稿 | `design.xlsx`, `framework.png` | 保留設計來源，不直接當實作規格 |
 | 參考資料 | `ref/` | 舊版 HTML、資料檢查、腳本與歷史參考 |
 | 實際 app 圖片 | `src/assets/` | React 程式會 import 的圖片 |

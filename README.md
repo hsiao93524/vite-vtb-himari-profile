@@ -63,9 +63,9 @@ npm run deploy:local
 ## Design Docs
 
 - [Design Doc Map](docs/design-doc-map.md)
-- [Top Visual Docs](docs/01-top-visual/README.md)
-- [Top Visual Block Design](docs/01-top-visual/top-visual-block-design.md)
-- [Top Visual Data Design](docs/01-top-visual/top-visual-data-design.md)
+- [Profile Docs](docs/01-profile/README.md)
+- [Profile Block Design](docs/01-profile/profile-block-design.md)
+- [Profile Data Design](docs/01-profile/profile-data-design.md)
 - [Product Design](docs/00-overview/product-design.md)
 - [Data Model](docs/00-overview/data-model.md)
 - [Roadmap](docs/00-overview/roadmap.md)

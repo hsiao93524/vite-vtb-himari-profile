@@ -46,7 +46,7 @@ Tasks:
 Completion criteria:
 
 - Page has a coherent visual style.
-- Home/Profile block is usable.
+- Profile block is usable.
 - Tags are clickable and useful.
 
 Release: first public release with Profile + TagSearcher.
