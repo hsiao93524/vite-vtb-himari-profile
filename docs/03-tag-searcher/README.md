@@ -57,7 +57,4 @@ docs/03-tag-searcher/
 ## Relationship To Overview Docs
 
 - Site direction: [`../00-overview/product-design.md`](../00-overview/product-design.md)
-- Data model: [`../00-overview/data-model.md`](../00-overview/data-model.md)
-- Data flow: [`../00-overview/data-flow.md`](../00-overview/data-flow.md)
-- Implementation order: [`../00-overview/roadmap.md`](../00-overview/roadmap.md)
 - Document map: [`../design-doc-map.md`](../design-doc-map.md)

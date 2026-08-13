@@ -14,9 +14,6 @@ This file answers three questions:
 
 Related detailed documents:
 
-- [Data Model](data-model.md): `videos.json` schema and data migration rules.
-- [Data Flow](data-flow.md): current React data flow and hook/component boundaries.
-- [Roadmap](roadmap.md): implementation phases and release readiness.
 - [Profile Block Design](../01-profile/profile-block-design.md): detailed Profile UI design.
 - [Profile Data Design](../01-profile/profile-data-design.md): Profile data requirements.
 

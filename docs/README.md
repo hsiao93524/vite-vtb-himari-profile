@@ -1,17 +1,14 @@
 # Docs Index
 
-這裡整理專案內的設計書、資料規格、roadmap、草圖與參考資料。
+這裡整理專案內的設計書、資料規格、草圖與參考資料。
 
-建議先從 `00-overview/product-design.md` 看整體方向，再看 Profile 區塊設計與資料模型。
+建議先從 `00-overview/product-design.md` 看現行整體方向，再看各 block 的設計文件。
 
 ## 00 Overview
 
 | 檔案 | 用途 |
 | --- | --- |
 | [00-overview/product-design.md](00-overview/product-design.md) | 主設計書快照，整理 Notion 的核心規格。 |
-| [00-overview/data-model.md](00-overview/data-model.md) | 影片資料 schema 與資料清理方向。 |
-| [00-overview/roadmap.md](00-overview/roadmap.md) | 實作階段、發布順序與高優先缺口。 |
-| [00-overview/data-flow.md](00-overview/data-flow.md) | 目前 app 的資料流與 component 串接方式。 |
 
 ## 01 Profile
 
@@ -32,7 +29,7 @@
 
 | 檔案 | 用途 |
 | --- | --- |
-| [03-tag-searcher/^README.md](03-tag-searcher/^README.md) | Tag Searcher 區塊設計資料夾索引。 |
+| [03-tag-searcher/README.md](03-tag-searcher/README.md) | Tag Searcher 區塊設計資料夾索引。 |
 | [03-tag-searcher/tag-searcher-block-design.md](03-tag-searcher/tag-searcher-block-design.md) | Tag Searcher 區塊的 UI、layout 與 X/Twitter 搜尋互動規格。 |
 | [03-tag-searcher/tag-searcher-data-design.md](03-tag-searcher/tag-searcher-data-design.md) | Tag Searcher 使用的 JSON schema、分類定義與資料規則。 |
 | [03-tag-searcher/tag-searcher-checklist.md](03-tag-searcher/tag-searcher-checklist.md) | Tag Searcher 實作完成後的驗收清單。 |
@@ -58,6 +55,7 @@
 | [ref/himari_archive_react_preview.html](ref/himari_archive_react_preview.html) | 舊版 React 風格預覽。 |
 | [ref/videos_check.html](ref/videos_check.html) | `videos.json` 檢查報告 HTML。 |
 | [ref/python/](ref/python/) | YouTube 資料取得、轉換、檢查與縮圖下載腳本。 |
+| [ref/legacy-overview/](ref/legacy-overview/README.md) | 舊 overview 文件，只作為參考資料。 |
 
 ## 外部來源
 

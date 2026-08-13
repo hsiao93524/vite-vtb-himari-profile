@@ -7,9 +7,6 @@
 | 目的 | 先看 |
 | --- | --- |
 | 了解整個專案要做什麼 | [00-overview/product-design.md](00-overview/product-design.md) |
-| 了解資料欄位與 schema | [00-overview/data-model.md](00-overview/data-model.md) |
-| 了解實作與發布順序 | [00-overview/roadmap.md](00-overview/roadmap.md) |
-| 了解目前 React 資料流 | [00-overview/data-flow.md](00-overview/data-flow.md) |
 | 了解 Profile 畫面 | [01-profile/profile-block-design.md](01-profile/profile-block-design.md) |
 | 了解 Profile 需要哪些資料 | [01-profile/profile-data-design.md](01-profile/profile-data-design.md) |
 | 預覽 Profile 設計圖 | [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png) |
@@ -22,10 +19,7 @@ docs/
 ├── README.md
 ├── design-doc-map.md
 ├── 00-overview/
-│   ├── product-design.md
-│   ├── data-model.md
-│   ├── roadmap.md
-│   └── data-flow.md
+│   └── product-design.md
 ├── 01-profile/
 │   ├── README.md
 │   ├── profile-block-design.md
@@ -38,6 +32,11 @@ docs/
 ├── design.xlsx
 └── ref/
     ├── README.md
+    ├── legacy-overview/
+    │   ├── README.md
+    │   ├── data-flow.md
+    │   ├── data-model.md
+    │   └── roadmap.md
     ├── chart_design.html
     ├── himari_archive_react_preview.html
     ├── videos_check.html
@@ -49,9 +48,9 @@ docs/
 ```text
 Notion design source
   -> 00-overview/product-design.md
-      -> 00-overview/roadmap.md
-      -> 00-overview/data-model.md
-      -> 00-overview/data-flow.md
+
+Legacy overview notes
+  -> ref/legacy-overview/README.md
 
 framework.png / design.xlsx
   -> 01-profile/profile-block-design.md
@@ -68,7 +67,6 @@ ref/python/
 ### 只想知道專案方向
 
 1. [00-overview/product-design.md](00-overview/product-design.md)
-2. [00-overview/roadmap.md](00-overview/roadmap.md)
 
 ### 要實作 Profile 畫面
 
@@ -76,12 +74,11 @@ ref/python/
 2. [01-profile/profile-data-design.md](01-profile/profile-data-design.md)
 3. [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png)
 
-### 要整理影片資料
+### 要查看舊影片資料整理脈絡
 
-1. [00-overview/data-model.md](00-overview/data-model.md)
-2. [00-overview/data-flow.md](00-overview/data-flow.md)
-3. [ref/README.md](ref/README.md)
-4. [ref/videos_check.html](ref/videos_check.html)
+1. [ref/README.md](ref/README.md)
+2. [ref/legacy-overview/README.md](ref/legacy-overview/README.md)
+3. [ref/videos_check.html](ref/videos_check.html)
 
 ## 文件定位
 
@@ -91,6 +88,7 @@ ref/python/
 | 單一區塊設計 | `01-profile/` 等 numbered folder | 專注於某個 UI block 的規格 |
 | 原始草稿 | `design.xlsx`, `framework.png` | 保留設計來源，不直接當實作規格 |
 | 參考資料 | `ref/` | 舊版 HTML、資料檢查、腳本與歷史參考 |
+| 舊 overview | `ref/legacy-overview/` | 過舊的 data flow、data model 與 roadmap，只作參考 |
 | 實際 app 圖片 | `src/assets/` | React 程式會 import 的圖片 |
 | 文件用圖片 | `docs/**/assets/` | 只給設計書或預覽文件使用 |
 

@@ -42,7 +42,4 @@ docs/01-profile/
 ## 與總設計書的關係
 
 - 全站方向：[`../00-overview/product-design.md`](../00-overview/product-design.md)
-- 資料模型：[`../00-overview/data-model.md`](../00-overview/data-model.md)
-- 資料流：[`../00-overview/data-flow.md`](../00-overview/data-flow.md)
-- 實作順序：[`../00-overview/roadmap.md`](../00-overview/roadmap.md)
 - 文件地圖：[`../design-doc-map.md`](../design-doc-map.md)

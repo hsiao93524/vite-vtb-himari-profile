@@ -1,6 +1,6 @@
 # ref 資料夾目錄與檔案說明
 
-本資料夾是一組「結萌ひまり影片資料整理」的參考原型，涵蓋 YouTube 撈取、Excel 產生、Excel 轉 JSON、縮圖下載、JSON 檢查頁、React 介面草稿與統計圖表設計。
+本資料夾是一組「結萌ひまり影片資料整理」的參考原型，涵蓋 YouTube 撈取、Excel 產生、Excel 轉 JSON、縮圖下載、JSON 檢查頁、React 介面草稿、統計圖表設計與舊 overview 文件。
 
 > 注意：部分檔案在目前環境中顯示為 mojibake 亂碼，但從檔名、函式、常數與 HTML 結構可判讀其功能。若後續要沿用，建議先統一確認原始編碼與文字內容。
 
@@ -11,6 +11,11 @@ ref/
 ├─ chart_design.html
 ├─ himari_archive_react_preview.html
 ├─ videos_check.html
+├─ legacy-overview/
+│  ├─ README.md
+│  ├─ data-flow.md
+│  ├─ data-model.md
+│  └─ roadmap.md
 └─ python/
    ├─ check.py
    ├─ download_thumbnails.py
@@ -27,6 +32,12 @@ ref/
 | `chart_design.html` | 靜態 HTML / CSS / JavaScript | 影片統計圖表設計稿。內建 `DATA` 範例資料，支援分類統計與合作對象統計，並可切換橫條圖、圓餅圖、泡泡圖。主要用於前端視覺與互動原型參考。 |
 | `himari_archive_react_preview.html` | 靜態 HTML / CSS / JavaScript | 類 React 風格的影片封存頁面預覽稿。包含頁首統計、搜尋列、篩選按鈕、表單入口、播放清單折疊區塊與 YouTube 縮圖。資料為內嵌範例 `data`。 |
 | `videos_check.html` | 產生出的檢查報表 HTML | `videos.json` 的資料檢查結果頁。含統計卡、分類篩選、警告篩選、文字搜尋與完整影片表格。應是由 `python/check.py` 產生，內含約 279 筆影片資料。 |
+
+## 舊 overview 參考文件
+
+| 位置 | 類型 | 功能 / 內容 |
+| --- | --- | --- |
+| [`legacy-overview/`](legacy-overview/README.md) | 舊設計文件 | 從 active `docs/00-overview/` 移出的 data flow、data model 與 roadmap。內容可能過舊，只作為整理或重寫時的參考。 |
 
 ## python 腳本
 
