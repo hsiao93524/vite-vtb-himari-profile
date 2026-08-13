@@ -1,8 +1,6 @@
 # 01 Profile Docs
 
-這個資料夾整理首頁最上方 `Profile` 區塊的設計資料。範圍只包含第一眼看到的 Profile block，不包含 Video、Tag、Fanart 或 Related Links 區塊。
-
-PPT、PNG 與 Markdown 檔名已收斂為 `Profile`。
+這個資料夾整理首頁最上方 `Profile` 區塊的設計資料。
 
 ## 目前用途
 

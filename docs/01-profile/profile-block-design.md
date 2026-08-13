@@ -54,8 +54,8 @@ Mobile layout:
 | Name | Clearly identify the page subject | Static profile text |
 | Main visual | Create the first visual anchor | `src/assets/profile/hero.png` or replacement asset |
 | Short profile copy | Explain the archive purpose | Static profile text |
-| X link | Link to the external identity source | Static URL |
-| YouTube link | Link to the external channel | Static URL |
+| X link | Link to the official external identity source | Static URL |
+| YouTube link | Link to the official external channel | Static URL |
 | Total videos | Show archive scale | `videos.length` |
 | Playlist count | Show archive structure | Derived from `playlist` |
 | Members-only count | Signal archive completeness | `isMembersOnly` or current transitional member field |
@@ -75,9 +75,16 @@ src/data/profile.json
 
 - `name` 是橘色 banner 中的顯示名稱。
 - `description` 是名稱 banner 下方的主要 profile 文案。
-- `links` 用來驅動圓形 X/YT icons。
+- `links` 用來驅動官方 X / YT icons。
+- `links` 只放 Profile 的官方SNS入口，不放使用於 `Recreated Pages` 的內容。
 - `debutDate` 考慮未來當作active-period的開始時間資料。
 - `graduationDate` 可用於 active-period 顯示。
+
+## Boundary of Profile Links in Profile block
+
+- Profile links are the official links shown in the Profile block.
+- They help visitors to make a quick jump to official SNS page.
+- The function of these links / pages is different from links / pages in `Recreated Pages` block.
 
 ## 其他靜態資料
 
@@ -139,6 +146,7 @@ Primary interactions:
 
 - X link opens `https://x.com/RAG_Himari`.
 - YouTube link opens `https://www.youtube.com/@raghimari`.
+- These links should not be reused as Recreated Pages items.
 
 ## Future Ideas
 

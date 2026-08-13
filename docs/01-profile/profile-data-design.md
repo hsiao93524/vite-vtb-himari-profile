@@ -94,6 +94,11 @@ export const profile = {
 }
 ```
 
+規則：
+
+- `links` 目前是 Profile 的官方連結資料，語意上等同 official profile links。
+- `links` 只保存目前官方 X account 與 YouTube channel。與 Recreated Pages 的資料不同。
+
 ## 統計資料
 
 統計資料應該透過 `useVideos` 或 helper function，從 `src/data/videos.json` 推導出來。

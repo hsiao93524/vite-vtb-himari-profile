@@ -50,7 +50,7 @@ The page is divided into five major blocks.
 
 | Order | Block | Purpose | Main Content |
 | --- | --- | --- | --- |
-| 1 | Profile | First-view identity and summary | Main visual, short profile, channel links, total videos, playlist count, active period |
+| 1 | Profile | First-view identity and summary | Main visual, short profile, official SNS links, total videos, playlist count, active period |
 | 2 | Video Analyze | Archive exploration | Stream type charts, collaboration analysis, full video archive, detail/search mode |
 | 3 | Tag Block | Tag discovery and external search | Related tags and X/Twitter search handoff |
 | 4 | Fanarts | Fanart preview | Horizontal carousel, auto-scroll, pause-on-hover, left/right controls |
@@ -65,10 +65,11 @@ The page is divided into five major blocks.
 - CTA buttons in the Profile block should support these targets:
   - `#videos`
   - `#tag-searcher`
+- detail: [docs/01-profile/profile-block-design.md](../01-profile/profile-block-design.md)
 
 ### Video Archive
 
-- Video Analyze should support both overview charts and detailed archive browsing.
+- `Video Analyze` should support both overview charts and detailed archive browsing.
 - Expected visualizations:
   - Bar chart for major stream categories.
   - Pie/cake chart for composition summary.
@@ -88,8 +89,9 @@ The page is divided into five major blocks.
 
 ### Recreated Pages
 
-- Recreated pages should expose preserved local material without implying official ownership.
+- `Recreated pages` should expose preserved local material without implying official ownership.
 - Public/private boundaries must be decided before publishing any recreated or archived content.
+- Links / pages in `Recreated Pages` should be different from the official links shown in the `Profile` block.
 
 ## Wireframe And Assets
 
