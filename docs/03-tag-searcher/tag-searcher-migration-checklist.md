@@ -1,73 +1,76 @@
 # X Tag Searcher Migration Checklist
 
-這份清單用於將目前混合在 `TagSearcher` 裡的影片 tag 篩選功能拆分出去，並將 `TagSearcher` 改為 `X Tag Searcher` 的內部 component，負責獨立的 X / Twitter 搜尋入口，同時避免破壞既有的 Video Analyze 功能。
+Use this checklist to move the video tag filter out of `TagSearcher`.
+Then change `TagSearcher` into the `X Tag Searcher` component.
+It should be a separate X / Twitter search entry.
+Do this without breaking the current Video Analyze feature.
 
-## 調查
+## Check Current State
 
-- [ ] 確認目前 `TagSearcher` component 的 props、事件與顯示內容。
-- [ ] 確認 `App.tsx` 傳入 `TagSearcher` 的資料與 callback。
-- [ ] 確認 `useVideos` 提供的 `allTags`、`selectedTags`、`toggleTag` 與篩選流程。
-- [ ] 確認影片 tag filter 如何影響 `filteredVideos`。
-- [ ] 確認目前影片文字搜尋、playlist filter 與 tag filter 是否能同時使用。
-- [ ] 記錄目前 Video tag filter 的操作步驟與預期結果，作為拆分後的比較基準。
-- [ ] 確認現有 `.tag-list`、`.tag-pill` 等 CSS 是否同時被其他區塊使用。
-- [ ] 確認 X Tag Searcher 的 publication visibility 與 `In progress` 標記流程。
+- [ ] Check the current `TagSearcher` props, events, and display content.
+- [ ] Check the data and callbacks that `App.tsx` sends to `TagSearcher`.
+- [ ] Check how `useVideos` provides `allTags`, `selectedTags`, `toggleTag`, and the filter flow.
+- [ ] Check how the video tag filter changes `filteredVideos`.
+- [ ] Check if text search, playlist filter, and tag filter can work together.
+- [ ] Write down the current Video tag filter steps and expected results. Use them as the baseline after the split.
+- [ ] Check if CSS such as `.tag-list` and `.tag-pill` is also used by other sections.
+- [ ] Check when X Tag Searcher is shown for each publication version and when it gets the `In progress` label.
 
-## 拆分
+## Split Work
 
-- [ ] 建立獨立的 Video tag filter component。
-- [ ] 將目前 `TagSearcher` 的影片 tag 按鈕與選取狀態移到 Video tag filter component。
-- [ ] 在 Video Analyze 區域接回 `allTags`、`selectedTags` 與 `toggleTag`。
-- [ ] 確認 `useVideos` 的既有 tag filter 邏輯不需要因拆分而改變行為。
-- [ ] 建立 X Tag Searcher 專用 JSON 資料檔。
-- [ ] 依 `tag-searcher-data-design.md` 定義 category 與 tag 資料。
-- [ ] 將 `TagSearcher` 改為讀取獨立 JSON。
-- [ ] 將 `TagSearcher` 改為依 category 顯示 tag。
-- [ ] 讓 tag label 使用 `query` 產生 X / Twitter search URL。
-- [ ] 讓 tag label 在新分頁開啟搜尋結果。
-- [ ] 確保 description 不是連結的一部分。
-- [ ] 加入 X Tag Searcher 專用桌機與手機版樣式。
-- [ ] 避免 X Tag Searcher 新樣式改變 Video tag filter 的外觀或行為。
+- [ ] Create a separate Video tag filter component.
+- [ ] Move the video tag buttons and selected state from `TagSearcher` to the Video tag filter component.
+- [ ] Connect `allTags`, `selectedTags`, and `toggleTag` back to the Video Analyze section.
+- [ ] Make sure the existing tag filter logic in `useVideos` keeps the same behavior after the split.
+- [ ] Create a JSON data file only for X Tag Searcher.
+- [ ] Define category and tag data based on `tag-searcher-data-design.md`.
+- [ ] Change `TagSearcher` to read the separate JSON file.
+- [ ] Change `TagSearcher` to show tags by category.
+- [ ] Use each tag `query` to create an X / Twitter search URL.
+- [ ] Open the search result in a new tab when the tag label is clicked.
+- [ ] Make sure the description is not part of the link.
+- [ ] Add desktop and mobile styles only for X Tag Searcher.
+- [ ] Make sure the new X Tag Searcher styles do not change the Video tag filter look or behavior.
 
-## 驗證
+## Check Results
 
-### Video Tag Filter 回歸
+### Video Tag Filter Regression
 
-- [ ] Video tag filter 仍會顯示目前影片資料中的 tag。
-- [ ] 點擊一個 video tag 後，影片結果只顯示符合條件的項目。
-- [ ] 再次點擊已選取的 video tag 可以取消該條件。
-- [ ] 多個 video tag 的既有選取行為沒有改變。
-- [ ] `Clear` 可以清除 video tag、playlist 與文字搜尋條件。
-- [ ] 影片文字搜尋仍可正常使用。
-- [ ] Playlist filter 仍可正常使用。
-- [ ] Table 與 Gallery 切換後仍保留目前篩選結果。
-- [ ] 顯示的影片結果數量與實際篩選結果一致。
+- [ ] The Video tag filter still shows tags from the current video data.
+- [ ] After clicking one video tag, the video results only show matching items.
+- [ ] Clicking the selected video tag again removes that filter.
+- [ ] The existing behavior for selecting multiple video tags does not change.
+- [ ] `Clear` clears video tags, playlist filter, and text search.
+- [ ] Video text search still works.
+- [ ] Playlist filter still works.
+- [ ] Switching between Table and Gallery keeps the current filter results.
+- [ ] The shown video count matches the real filter results.
 
-### X Tag Searcher 功能
+### X Tag Searcher Feature
 
-- [ ] X Tag Searcher 使用獨立 JSON，而不是 `videos.json` 的 tag 清單。
-- [ ] Category 與 tag 依 JSON 順序顯示。
-- [ ] 有 description 的 tag 會顯示說明。
-- [ ] description 留空或缺少時不顯示空白說明區域。
-- [ ] 只有 tag label 可以點擊。
-- [ ] 點擊 tag label 會開啟新分頁。
-- [ ] 搜尋 URL 使用 `https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query`。
-- [ ] 日文、英文、空格、`#` 與引號等字元會正確 URL encode。
-- [ ] 搜尋 URL 不會加入 `&f=live` 或其他排序參數。
-- [ ] 空 category 不顯示。
-- [ ] 所有 category 都沒有 tag 時，整個 X Tag Searcher 區塊不顯示。
+- [ ] X Tag Searcher uses its own JSON file, not the tag list from `videos.json`.
+- [ ] Categories and tags are shown in JSON order.
+- [ ] A tag with a description shows that description.
+- [ ] No empty description area is shown when the description is empty or missing.
+- [ ] Only the tag label is clickable.
+- [ ] Clicking a tag label opens a new tab.
+- [ ] The search URL uses `https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query`.
+- [ ] Japanese, English, spaces, `#`, quotes, and other characters are URL encoded correctly.
+- [ ] The search URL does not add `&f=live` or any other sort option.
+- [ ] Empty categories are not shown.
+- [ ] If all categories have no tags, the whole X Tag Searcher section is not shown.
 
-### 畫面與可用性
+### Layout And Usability
 
-- [ ] 桌機版 category 與 tag 排版沒有重疊或溢出。
-- [ ] 手機版 category 與 tag 可以垂直排列或換行。
-- [ ] 手機版沒有水平捲軸。
-- [ ] 手機版不依賴 hover 才能看到 description。
-- [ ] Tag label 的點擊範圍足以在手機上操作。
-- [ ] Video tag filter 與 X Tag Searcher 的 X / Twitter search handoff 在畫面與語意上可清楚區分。
+- [ ] On desktop, categories and tags do not overlap or overflow.
+- [ ] On mobile, categories and tags can stack or wrap.
+- [ ] On mobile, there is no horizontal scroll.
+- [ ] On mobile, the description does not depend on hover.
+- [ ] The tag label tap area is large enough for mobile use.
+- [ ] The Video tag filter and the X Tag Searcher handoff to X / Twitter are easy to tell apart on screen and in meaning.
 
-### 自動檢查
+### Automatic Checks
 
-- [ ] 執行 lint 並確認沒有錯誤。
-- [ ] 執行 build 並確認沒有型別或打包錯誤。
-- [ ] 依 `tag-searcher-checklist.md` 完成 X Tag Searcher 最終驗收。
+- [ ] Run lint and check that there are no errors.
+- [ ] Run build and check that there are no type or bundle errors.
+- [ ] Finish the final X Tag Searcher acceptance check in `tag-searcher-checklist.md`.
