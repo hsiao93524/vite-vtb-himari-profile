@@ -2,7 +2,15 @@
 
 Use this checklist to move the video tag filter out of `TagSearcher`.
 Then change `TagSearcher` into the `X Tag Searcher` component.
-It should be a separate X / Twitter search entry.
+
+This checklist exists because the first Tag Searcher design was not clear enough.
+In the first version, clicking a tag did not open an X / Twitter search.
+Instead, the app treated the clicked tag as a video filter and changed the video results shown in Video Analyze.
+Because of that, Tag Searcher behaved like another Video Analyze filter instead of a separate X / Twitter search entry.
+
+This migration separates the two jobs.
+Video Analyze keeps the video tag filter.
+X Tag Searcher becomes a simple entry point for X / Twitter search.
 Do this without breaking the current Video Analyze feature.
 
 ## Check Current State
