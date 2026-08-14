@@ -6,7 +6,7 @@ The project should be published block by block instead of waiting for every feat
 
 Publication order:
 
-1. Profile + TagSearcher
+1. Profile + X Tag Searcher
 2. Video search/list
 3. VideoAnalytics
 4. Recreated pages
@@ -49,7 +49,7 @@ Completion criteria:
 - Profile block is usable.
 - Tags are clickable and useful.
 
-Release: first public release with Profile + TagSearcher.
+Release: first public release with Profile + X Tag Searcher.
 
 ## Phase 3: Video Searcher
 

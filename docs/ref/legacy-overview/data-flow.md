@@ -1,6 +1,6 @@
 # Himari Profile React Data Flow
 
-這份文件對應 Notion 設計書的 Phase 2：Profile + Video Block。
+這份文件對應 Notion 設計書的 Phase 2：Profile + Video Analyze。
 
 ## 資料流
 
@@ -52,6 +52,7 @@
    - 將 `allVideos` 傳給 `TopPage` 與 `VideoAnalytics`
    - 將 `filteredVideos` 傳給 `VideoTable` 或 `VideoGallery`
    - 將 `allTags`、`selectedTags`、`toggleTag` 傳給 `VideoTagFilter`
+   - 顯示 `TagSearcher` 作為 `X Tag Searcher`，但不把影片篩選狀態傳給它
    - 在 `useEffect` 裡執行 `console.log(filteredVideos)`
 
 5. Components
@@ -59,7 +60,8 @@
    - `TopPage`: 顯示主視覺、Profile 概要、影片統計
    - `VideoTable`: 表格形式顯示影片
    - `VideoGallery`: 卡片形式顯示影片
-   - `TagSearcher`: tag 選取與篩選入口
+   - `VideoTagFilter`: 站內影片 tag 篩選入口，使用 `allTags`、`selectedTags`、`toggleTag`
+   - `TagSearcher`: `X Tag Searcher` 的內部 component，從 prepared tag data 產生外部 X / Twitter search links
    - `VideoAnalytics`: playlist 分布統計
    - `FanartPreview`: Phase 4 預留區塊
    - `RelatedLinks`: 外部連結
@@ -96,8 +98,10 @@ flowchart LR
   D --> I["VideoTable"]
   D --> J
   U --> J
-  E --> K["TagSearcher"]
+  E --> K["VideoTagFilter"]
   F --> L["Playlist Filters"]
+  Q["src/data/tag-searcher.json"] --> R["TagSearcher / X Tag Searcher"]
+  R --> S["External X / Twitter search"]
 
   K --> B
   L --> B
@@ -115,11 +119,13 @@ flowchart TD
   C --> D["用 BASE_URL 修正 thumbnailUrl"]
   D --> E["顯示 Profile 與統計"]
   D --> F["顯示影片列表"]
+  D --> P["顯示 X Tag Searcher"]
 
   F --> G{"使用者操作"}
   G --> H["輸入搜尋文字"]
   G --> I["點選 playlist filter"]
-  G --> J["點選 tag"]
+  G --> J["點選 video tag filter"]
+  G --> Q["點選 X Tag Searcher tag"]
   G --> K["切換 Table / Gallery"]
 
   I --> K
@@ -131,6 +137,7 @@ flowchart TD
   L --> N["更新畫面"]
   L --> O["Console 印出 filteredVideos"]
   M --> N
+  Q --> R["開啟外部 X / Twitter search"]
 ```
 
 ## 靜態資源規則
@@ -148,6 +155,7 @@ flowchart TD
 - Phase 2: VideoTable
 - Phase 2: VideoGallery
 - Phase 2: VideoAnalytics
-- Phase 3 前置: TagSearcher 可篩選 tag
+- Phase 3 前置: VideoTagFilter 可篩選影片 tag
+- Phase 3 前置: X Tag Searcher 可從 prepared tag data 開啟外部 X / Twitter search
 - Phase 4 預留: FanartPreview
 - Phase 5 前置: RelatedLinks

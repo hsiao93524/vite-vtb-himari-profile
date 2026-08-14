@@ -25,15 +25,15 @@
 
 ![Profile section design](01-profile/assets/profile-section-design.png)
 
-## 03 Tag Searcher
+## 03 X Tag Searcher
 
 | 檔案 | 用途 |
 | --- | --- |
-| [03-tag-searcher/README.md](03-tag-searcher/README.md) | Tag Searcher 區塊設計資料夾索引。 |
-| [03-tag-searcher/tag-searcher-block-design.md](03-tag-searcher/tag-searcher-block-design.md) | Tag Searcher 區塊的 UI、layout 與 X/Twitter 搜尋互動規格。 |
-| [03-tag-searcher/tag-searcher-data-design.md](03-tag-searcher/tag-searcher-data-design.md) | Tag Searcher 使用的 JSON schema、分類定義與資料規則。 |
-| [03-tag-searcher/tag-searcher-checklist.md](03-tag-searcher/tag-searcher-checklist.md) | Tag Searcher 實作完成後的驗收清單。 |
-| [03-tag-searcher/tag-searcher-migration-checklist.md](03-tag-searcher/tag-searcher-migration-checklist.md) | 拆分影片 tag filter 與 X/Twitter Tag Searcher 行為的 migration checklist。 |
+| [03-tag-searcher/README.md](03-tag-searcher/README.md) | X Tag Searcher 區塊設計資料夾索引。 |
+| [03-tag-searcher/tag-searcher-block-design.md](03-tag-searcher/tag-searcher-block-design.md) | X Tag Searcher 區塊的 UI、layout 與 X / Twitter 搜尋互動規格。 |
+| [03-tag-searcher/tag-searcher-data-design.md](03-tag-searcher/tag-searcher-data-design.md) | X Tag Searcher 使用的 JSON schema、分類定義與資料規則。 |
+| [03-tag-searcher/tag-searcher-checklist.md](03-tag-searcher/tag-searcher-checklist.md) | X Tag Searcher 實作完成後的驗收清單。 |
+| [03-tag-searcher/tag-searcher-migration-checklist.md](03-tag-searcher/tag-searcher-migration-checklist.md) | 拆分影片 tag filter 與 X Tag Searcher 的 X / Twitter search handoff 行為的 migration checklist。 |
 
 ## Wireframe / 原始草稿
 

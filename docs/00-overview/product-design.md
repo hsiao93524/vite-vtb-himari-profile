@@ -49,7 +49,7 @@ The page is divided into five major blocks.
 | --- | --- | --- | --- |
 | 1 | Profile | First-view identity and summary | Main visual, short profile, official SNS links, total videos, members-only count, total hours, active period |
 | 2 | Video Analyze | Archive exploration | Stream type charts, collaboration analysis, full video archive, detail/search mode |
-| 3 | X Tag Searcher | Tag discovery and external search | Related tags and X/Twitter search handoff |
+| 3 | X Tag Searcher | External X / Twitter search entry points from prepared tag data | Prepared tags, category display, X / Twitter search handoff |
 | 4 | Fanarts | Fanart preview | Horizontal carousel, auto-scroll, pause-on-hover, left/right controls |
 | 5 | Recreated Pages | Preserved historical material | Litlink, YouTube, Twitch, Twitter, sub-Twitter page candidates |
 
@@ -104,9 +104,11 @@ Current spec:
   - Bubble chart for collaboration or tag distribution.
 - Detail/search behavior can refer to [videos_check.html](../ref/videos_check.html), but the final UI should be adapted for the public-facing React page.
 
-### Tag Search
+### X Tag Searcher
 
-- Tag clicks should open an X/Twitter search page for that tag.
+- X Tag Searcher turns prepared tag data into external X / Twitter search links.
+- Tag clicks should open an X / Twitter search page for that tag.
+- This block does not control the site-side video tag filter or video list state.
 
 ### Fanart Preview
 
