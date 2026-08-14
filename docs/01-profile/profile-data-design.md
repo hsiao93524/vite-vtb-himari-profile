@@ -71,26 +71,30 @@ If stable test results are needed later, replace `Math.random()` with a seeded s
 
 ## Profile Static Data
 
+Current data file: `src/data/profile.json`.
+
 Data shape:
 
-```ts
-export const profile = {
-  name: '結萌ひまり',
-  description:
-    'Profile copy profile copy profile copy profile copy profile copy...',
-  links: [
+```json
+{
+  "name": "結萌ひまり",
+  "description": "A zinnia spirit who connects people through good bonds. She woke up in a flower field and has unclear memories of being human.",
+  "links": [
     {
-      label: 'X',
-      shortLabel: 'X',
-      href: 'https://x.com/RAG_Himari',
+      "label": "X",
+      "shortLabel": "X",
+      "href": "https://x.com/RAG_Himari",
+      "kind": "x"
     },
     {
-      label: 'YouTube',
-      shortLabel: 'YT',
-      href: 'https://www.youtube.com/@raghimari',
-    },
+      "label": "YouTube",
+      "shortLabel": "YT",
+      "href": "https://www.youtube.com/@raghimari",
+      "kind": "youtube"
+    }
   ],
-  graduationDate: '2026-04-27',
+  "debutDate": "2025-04-19",
+  "graduationDate": "2026-04-27"
 }
 ```
 
@@ -175,7 +179,7 @@ src/
 |           |-- expression-02.jpg
 |           `-- ...
 |-- data/
-|   |-- profile.ts
+|   |-- profile.json
 |   `-- videos.json
 |-- hooks/
 |   `-- useVideos.ts
