@@ -1,12 +1,14 @@
-# Tag Searcher Block Design
+# X Tag Searcher Block Design
 
-This document defines the Tag Searcher block. This block provides X/Twitter search entry points generated from prepared tag data.
+This document defines the X Tag Searcher block. This block provides X / Twitter search entry points generated from prepared tag data.
 
 ## Scope
 
-This block provides prepared tag links that open X/Twitter search results.
+This block provides prepared tag links that open X / Twitter search results.
 
-The block is responsible for turning each configured tag into an external X/Twitter search entry point.
+The block is responsible for turning each configured tag into an external X / Twitter search entry point.
+
+This block does not control the site-side video tag filter or video list state. The internal React component can remain named `TagSearcher`.
 
 ## Layout
 
@@ -31,7 +33,7 @@ On narrow screens, categories and tags should stack vertically.
 
 Clicking a tag label opens a new browser tab.
 
-The generated X/Twitter search URL format is:
+The generated X / Twitter search URL format is:
 
 ```text
 https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query

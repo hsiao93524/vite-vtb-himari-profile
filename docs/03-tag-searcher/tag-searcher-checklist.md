@@ -1,9 +1,9 @@
-# Tag Searcher Acceptance Checklist
+# X Tag Searcher Acceptance Checklist
 
 ## Data Source
 
-- [x] Tag Searcher reads tag entries from an independent JSON file.
-- [x] The JSON file should be in `src/data/`.
+- [x] X Tag Searcher reads tag entries from an independent JSON file.
+- [x] The JSON file is `src/data/tag-searcher.json`.
 - [x] The JSON has a top-level `categories` array.
 - [x] Each category has `id`, `label`, and `tags`.
 - [x] Category `description` is optional.
@@ -17,7 +17,7 @@
 
 ## Required Content
 
-- [x] The Tag Searcher block is visible when the JSON contains at least one visible tag.
+- [x] The X Tag Searcher block is visible when the JSON contains at least one visible tag.
 - [x] Category labels must be visible.
 - [x] Category descriptions are visible when provided.
 - [x] Empty or missing category descriptions are not rendered.
@@ -50,7 +50,7 @@
 ## Interaction
 
 - [x] Clicking a tag label opens a new browser tab.
-- [x] X/Twitter search URL generation uses `query`.
+- [x] X / Twitter search URL generation uses `query`.
 - [x] The generated URL uses `https://x.com/search?q=${encodeURIComponent(query)}&src=typed_query`.
 - [x] The generated URL does not add `&f=live` or other sorting/result-type parameters.
 - [x] Only the tag label is clickable.
@@ -62,6 +62,6 @@
 ## Empty Data Rules
 
 - [x] A category with no tags is not displayed.
-- [x] If all categories have no visible tags, the Tag Searcher block is not displayed.
+- [x] If all categories have no visible tags, the X Tag Searcher block is not displayed.
 - [x] Invalid JSON is treated as a build or development error, not as a runtime empty state.
   - Result: Removed a closing bracket, pressed F5, and the page did not render. Vite reported `expected ',' or '}' at line 52 column 3`.

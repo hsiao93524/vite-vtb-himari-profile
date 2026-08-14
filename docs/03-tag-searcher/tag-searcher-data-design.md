@@ -1,10 +1,10 @@
-# Tag Searcher Data Design
+# X Tag Searcher Data Design
 
-This document defines the JSON data shape used by the Tag Searcher block.
+This document defines the JSON data shape used by the X Tag Searcher block.
 
 ## Data Source
 
-Tag Searcher uses an independent JSON file as its data source.
+X Tag Searcher uses an independent JSON file as its data source.
 
 The JSON top level is `categories`. Each category represents a group of tag search entries and defines the meaning of that group.
 
@@ -71,7 +71,7 @@ Official and unofficial are temporary categories. They can be replaced with cust
 | --- | --- | --- |
 | `id` | Yes | Stable tag identifier. |
 | `label` | Yes | Display text shown to users. |
-| `query` | Yes | Text used to generate the X/Twitter search URL. |
+| `query` | Yes | Text used to generate the X / Twitter search URL. |
 | `description` | No | Optional explanation shown below the tag label. |
 
 `label` and `query` may be different. For example, the label can be `結萌ひまり` while the query is `"結萌ひまり"`.
@@ -82,12 +82,12 @@ The initial version supports one query per tag. It does not support multiple que
 
 - If `description` is empty or missing, do not show description text.
 - If a category has no tags, do not show that category.
-- If the JSON has no visible tags at all, do not show the Tag Searcher block.
+- If the JSON has no visible tags at all, do not show the X Tag Searcher block.
 - If the JSON syntax is invalid, treat it as a build or development error rather than a runtime UI state.
 
 ## Implementation Mapping
 
 | Design Item | Location |
 | --- | --- |
-| Tag Searcher component | `src/components/TagSearcher/` |
-| Tag data JSON | `src/data/` |
+| X Tag Searcher component | `src/components/TagSearcher/` |
+| Tag data JSON | `src/data/tag-searcher.json` |
