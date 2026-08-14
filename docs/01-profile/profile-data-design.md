@@ -1,6 +1,6 @@
 # Profile Data Design
 
-This document defines the Profile block preview and the data needed for the future `TopPage` implementation.
+This document defines the Profile block preview, current `profile.json`, and related data needed by `TopPage`.
 
 ## Asset Folder
 
@@ -96,8 +96,18 @@ export const profile = {
 
 Rules:
 
-- `links` stores the official Profile links.
+- `profile.json` is imported by `TopPage`.
+  - `name` stores the display name.
+  - `description` stores the character profile text shown in the Profile block.
+  - `links` stores the official Profile links.
+    - `links.label` stores the full display label.
+    - `links.shortLabel` stores the short label for compact UI.
+    - `links.href` stores the target URL.
+    - `links.kind` stores the link type used by the UI.
+  - `debutDate` stores the debut date.
+  - `graduationDate` stores the graduation date.
 - `links` only stores the current official X account and YouTube channel. It is different from Recreated Pages data.
+- Date fields use `YYYY-MM-DD`.
 
 ## Block Titles And Descriptions
 
@@ -149,7 +159,7 @@ export function getProfileStats(videos: Video[]) {
 Rules:
 
 - Do not copy statistics into another static JSON file unless the design intentionally freezes a release snapshot.
-- Future tests should not hardcode `279`, `76`, or `907` as assets imgs. They should compare against values derived from the current `videos.json`.
+- Future tests should not hardcode `279`, `76`, or `907` as assets imgs. They should calculate expected values from `videos.json`.
 - The members-only count should reflect the current data. Use `isMembers` now, and also count `isMembersOnly` if it appears during schema migration.
 - Keep playlist support for both `string` and `string[]`, because one video may belong to multiple playlists.
 
