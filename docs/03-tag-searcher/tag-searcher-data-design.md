@@ -127,8 +127,8 @@ Notes:
 ```json
 {
   "tagSearcher": {
-    "label": "X Tag Searcher",
-    "desc": "Open useful X searches for official, related, and fan-made tags."
+    "label": "X / Twitter Tag Searcher",
+    "desc": "Open useful X / Twitter searches for official, related, and fan-made tags."
   }
 }
 ```
