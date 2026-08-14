@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Himari Profile Wireframe Preview</title>
+    <style>
+      :root {
+        --bg: #fff7fb;
+        --paper: #ffffff;
+        --ink: #3d2b3d;
+        --muted: #7a5c7a;
+        --line: #e7bfd2;
+        --soft: #ffe8f2;
+        --soft-2: #f7f1fb;
+        --accent: #e87fab;
+        --purple: #9b6fc8;
+        --green: #6bad6b;
+        --shadow: 0 18px 44px rgba(61, 43, 61, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Segoe UI",
+          "Noto Sans TC",
+          "Noto Sans JP",
+          system-ui,
+          sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wireframe-shell {
+        display: grid;
+        grid-template-columns: 210px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+
+      .side-rail {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding: 24px 18px;
+        background: rgba(255, 255, 255, 0.78);
+        border-right: 1px solid var(--line);
+        backdrop-filter: blur(12px);
+      }
+
+      .side-rail h1 {
+        margin: 0 0 6px;
+        font-size: 19px;
+        line-height: 1.2;
+      }
+
+      .side-rail p {
+        margin: 0 0 22px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .rail-nav {
+        display: grid;
+        gap: 8px;
+      }
+
+      .rail-nav a {
+        padding: 9px 10px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .rail-nav a:hover {
+        border-style: solid;
+        color: var(--ink);
+      }
+
+      main {
+        padding: 28px clamp(18px, 4vw, 56px) 72px;
+      }
+
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+        padding: 12px 14px;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .logo-mark {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        font-weight: 800;
+      }
+
+      .logo-dot {
+        width: 30px;
+        height: 30px;
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        background: var(--soft);
+      }
+
+      .top-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip,
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 7px 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .button.primary {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .section {
+        margin-top: 20px;
+        scroll-margin-top: 20px;
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .wire-card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-card {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+        gap: 0;
+        min-height: 520px;
+        overflow: hidden;
+      }
+
+      .hero-visual {
+        position: relative;
+        display: grid;
+        place-items: end center;
+        min-height: 520px;
+        padding: 28px;
+        background:
+          linear-gradient(135deg, rgba(232, 127, 171, 0.18), rgba(155, 111, 200, 0.13)),
+          #fff;
+        border-right: 1px solid var(--line);
+      }
+
+      .standee {
+        width: min(78%, 300px);
+        height: 430px;
+        border: 2px solid var(--accent);
+        border-radius: 130px 130px 34px 34px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 232, 242, 0.92)),
+          repeating-linear-gradient(
+            -45deg,
+            rgba(232, 127, 171, 0.16) 0 10px,
+            rgba(255, 255, 255, 0.38) 10px 20px
+          );
+      }
+
+      .visual-note {
+        position: absolute;
+        left: 24px;
+        top: 24px;
+        padding: 8px 10px;
+        border: 1px dashed var(--accent);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.86);
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .hero-copy {
+        display: grid;
+        align-content: center;
+        gap: 22px;
+        padding: clamp(28px, 5vw, 56px);
+      }
+
+      .title-kicker {
+        width: 160px;
+        height: 14px;
+        border-radius: 999px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+      }
+
+      .hero-copy h2 {
+        margin: 0;
+        font-size: clamp(44px, 7vw, 86px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .copy-lines {
+        display: grid;
+        gap: 10px;
+        max-width: 520px;
+      }
+
+      .line {
+        height: 12px;
+        border-radius: 999px;
+        background: #efe0ea;
+      }
+
+      .line.short {
+        width: 62%;
+      }
+
+      .line.mid {
+        width: 84%;
+      }
+
+      .hero-actions,
+      .stats-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .stat {
+        min-width: 132px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--soft);
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 26px;
+        line-height: 1;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 0.55fr);
+        gap: 18px;
+      }
+
+      .module {
+        padding: 22px;
+      }
+
+      .module-header {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .module h3 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .input-wire {
+        height: 38px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background: var(--soft-2);
+      }
+
+      .filter-pills,
+      .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 18px;
+      }
+
+      .pill {
+        width: 92px;
+        height: 30px;
+        border: 1px dashed var(--line);
+        border-radius: 999px;
+        background: #fff;
+      }
+
+      .pill.wide {
+        width: 132px;
+      }
+
+      .video-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .video-row {
+        display: grid;
+        grid-template-columns: 86px minmax(0, 1fr) 90px;
+        gap: 12px;
+        align-items: center;
+        min-height: 72px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .thumb {
+        height: 52px;
+        border-radius: 6px;
+        background:
+          linear-gradient(135deg, rgba(232, 127, 171, 0.22), rgba(155, 111, 200, 0.2)),
+          #fff;
+        border: 1px dashed var(--accent);
+      }
+
+      .row-text {
+        display: grid;
+        gap: 8px;
+      }
+
+      .analytics-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .chart-box {
+        min-height: 170px;
+        padding: 14px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .bar {
+        height: 14px;
+        margin: 14px 0;
+        border-radius: 999px;
+        background: #ead4e2;
+      }
+
+      .bar:nth-child(2) {
+        width: 88%;
+      }
+
+      .bar:nth-child(3) {
+        width: 62%;
+      }
+
+      .bar:nth-child(4) {
+        width: 74%;
+      }
+
+      .donut {
+        width: 112px;
+        height: 112px;
+        margin: 8px auto;
+        border: 18px solid var(--soft);
+        border-top-color: var(--accent);
+        border-right-color: var(--purple);
+        border-radius: 50%;
+      }
+
+      .bubble-map {
+        position: relative;
+        min-height: 170px;
+      }
+
+      .bubble {
+        position: absolute;
+        border: 2px solid var(--purple);
+        border-radius: 50%;
+        background: rgba(155, 111, 200, 0.14);
+      }
+
+      .bubble.one {
+        width: 74px;
+        height: 74px;
+        left: 18%;
+        top: 18%;
+      }
+
+      .bubble.two {
+        width: 48px;
+        height: 48px;
+        left: 58%;
+        top: 12%;
+      }
+
+      .bubble.three {
+        width: 96px;
+        height: 96px;
+        left: 44%;
+        top: 42%;
+        border-color: var(--green);
+        background: rgba(107, 173, 107, 0.14);
+      }
+
+      .tag-section {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 260px;
+        gap: 18px;
+      }
+
+      .tag-token {
+        min-width: 86px;
+        min-height: 36px;
+        padding: 8px 12px;
+        border: 1px dashed var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .tag-token.strong {
+        border-style: solid;
+        border-color: var(--accent);
+        background: var(--soft);
+        color: var(--ink);
+      }
+
+      .fanart-strip {
+        display: grid;
+        grid-template-columns: 42px repeat(4, minmax(100px, 1fr)) 42px;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .arrow {
+        display: grid;
+        place-items: center;
+        height: 78px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 26px;
+        font-weight: 900;
+      }
+
+      .art-card {
+        aspect-ratio: 4 / 3;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(232, 127, 171, 0.16), rgba(255, 255, 255, 0.7)),
+          #fff;
+      }
+
+      .link-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .link-tile {
+        min-height: 120px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .mini-icon {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 18px;
+        border-radius: 10px;
+        border: 1px dashed var(--accent);
+        background: var(--soft);
+      }
+
+      .caption {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      @media (max-width: 1040px) {
+        .wireframe-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .side-rail {
+          position: static;
+          height: auto;
+        }
+
+        .rail-nav {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .hero-card,
+        .two-column,
+        .tag-section {
+          grid-template-columns: 1fr;
+        }
+
+        .link-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding: 18px 14px 48px;
+        }
+
+        .top-bar,
+        .module-header,
+        .toolbar {
+          grid-template-columns: 1fr;
+          align-items: stretch;
+        }
+
+        .top-bar {
+          display: grid;
+        }
+
+        .rail-nav {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-visual {
+          min-height: 360px;
+        }
+
+        .standee {
+          height: 300px;
+        }
+
+        .video-row {
+          grid-template-columns: 72px minmax(0, 1fr);
+        }
+
+        .video-row .chip {
+          grid-column: 1 / -1;
+          justify-self: start;
+        }
+
+        .fanart-strip {
+          grid-template-columns: 38px repeat(2, minmax(100px, 1fr)) 38px;
+        }
+
+        .fanart-strip .art-card:nth-of-type(n + 4) {
+          display: none;
+        }
+
+        .link-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wireframe-shell">
+      <aside class="side-rail">
+        <h1>Wireframe Preview</h1>
+        <p>暫時預覽，不寫入設計文件。</p>
+        <nav class="rail-nav" aria-label="Wireframe sections">
+          <a href="#profile">Profile</a>
+          <a href="#videos">Videos</a>
+          <a href="#analytics">Analytics</a>
+          <a href="#tags">Tags</a>
+          <a href="#fanarts">Fanarts</a>
+          <a href="#links">Links</a>
+        </nav>
+      </aside>
+
+      <main>
+        <header class="top-bar" aria-label="Page top navigation">
+          <div class="logo-mark">
+            <span class="logo-dot" aria-hidden="true"></span>
+            <span>結萌ひまり Archive</span>
+          </div>
+          <div class="top-actions">
+            <a class="button primary" href="#videos">Video Archive</a>
+            <a class="button" href="#tags">Tags</a>
+            <a class="button" href="#links">Links</a>
+          </div>
+        </header>
+
+        <section class="section" id="profile">
+          <div class="section-label">
+            <span>01 / Profile entry</span>
+            <span>first viewport</span>
+          </div>
+          <div class="wire-card hero-card">
+            <div class="hero-visual">
+              <div class="visual-note">main visual / standee</div>
+              <div class="standee" aria-label="Character visual placeholder"></div>
+            </div>
+            <div class="hero-copy">
+              <div class="title-kicker"></div>
+              <h2>結萌ひまり</h2>
+              <div class="copy-lines" aria-label="Profile summary placeholder">
+                <span class="line mid"></span>
+                <span class="line"></span>
+                <span class="line short"></span>
+              </div>
+              <div class="hero-actions">
+                <span class="button primary">YouTube</span>
+                <span class="button">X / Twitter</span>
+                <span class="button">Litlink</span>
+              </div>
+              <div class="stats-grid">
+                <div class="stat">
+                  <strong>279</strong>
+                  <span>Videos</span>
+                </div>
+                <div class="stat">
+                  <strong>28</strong>
+                  <span>Playlists</span>
+                </div>
+                <div class="stat">
+                  <strong>76</strong>
+                  <span>Members</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section two-column" id="videos">
+          <div>
+            <div class="section-label">
+              <span>02 / Video searcher</span>
+              <span>table + gallery switch</span>
+            </div>
+            <div class="wire-card module">
+              <div class="module-header">
+                <div>
+                  <h3>Video Archive</h3>
+                  <p class="caption">搜尋、playlist 篩選、Table/Gallery 切換。</p>
+                </div>
+                <div class="top-actions">
+                  <span class="chip">Table</span>
+                  <span class="chip">Gallery</span>
+                </div>
+              </div>
+              <div class="toolbar">
+                <div class="input-wire"></div>
+                <span class="button">Sort</span>
+                <span class="button">Clear</span>
+              </div>
+              <div class="filter-pills">
+                <span class="pill wide"></span>
+                <span class="pill"></span>
+                <span class="pill wide"></span>
+                <span class="pill"></span>
+              </div>
+              <div class="video-list">
+                <div class="video-row">
+                  <div class="thumb"></div>
+                  <div class="row-text">
+                    <span class="line mid"></span>
+                    <span class="line short"></span>
+                  </div>
+                  <span class="chip">public</span>
+                </div>
+                <div class="video-row">
+                  <div class="thumb"></div>
+                  <div class="row-text">
+                    <span class="line"></span>
+                    <span class="line short"></span>
+                  </div>
+                  <span class="chip">members</span>
+                </div>
+                <div class="video-row">
+                  <div class="thumb"></div>
+                  <div class="row-text">
+                    <span class="line mid"></span>
+                    <span class="line short"></span>
+                  </div>
+                  <span class="chip">public</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="section" id="analytics">
+            <div class="section-label">
+              <span>03 / Video analytics</span>
+              <span>summary</span>
+            </div>
+            <div class="wire-card module analytics-grid">
+              <div class="module-header">
+                <h3>Analyze</h3>
+                <span class="chip">Detail</span>
+              </div>
+              <div class="chart-box" aria-label="Bar chart placeholder">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+              <div class="chart-box" aria-label="Pie chart placeholder">
+                <div class="donut"></div>
+              </div>
+              <div class="chart-box bubble-map" aria-label="Bubble chart placeholder">
+                <span class="bubble one"></span>
+                <span class="bubble two"></span>
+                <span class="bubble three"></span>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" id="tags">
+          <div class="section-label">
+            <span>04 / Tag entry</span>
+            <span>site filter + X search</span>
+          </div>
+          <div class="wire-card module tag-section">
+            <div>
+              <div class="module-header">
+                <div>
+                  <h3>Tags</h3>
+                  <p class="caption">強 tag 顯示更明顯；點擊可篩選或跳 X 搜尋。</p>
+                </div>
+                <span class="button">Open X Search</span>
+              </div>
+              <div class="tag-cloud">
+                <span class="tag-token strong">#結萌ひまり</span>
+                <span class="tag-token">#GGST</span>
+                <span class="tag-token">#APEX</span>
+                <span class="tag-token strong">#fanart</span>
+                <span class="tag-token">#collab</span>
+                <span class="tag-token">#karaoke</span>
+                <span class="tag-token">#雑談</span>
+                <span class="tag-token">#shorts</span>
+              </div>
+            </div>
+            <aside class="note-card">
+              <h3>Tag behavior</h3>
+              <p class="caption">
+                這裡之後要決定：站內 AND/OR 篩選、部分一致、以及 X/Twitter 跳轉是否拆成兩個動作。
+              </p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section" id="fanarts">
+          <div class="section-label">
+            <span>05 / Fanart preview</span>
+            <span>carousel</span>
+          </div>
+          <div class="wire-card module">
+            <div class="module-header">
+              <div>
+                <h3>Fanarts</h3>
+                <p class="caption">水平卷軸，自動輪播，hover 停止，左右箭頭控制。</p>
+              </div>
+              <span class="chip">API pending</span>
+            </div>
+            <div class="fanart-strip">
+              <div class="arrow">‹</div>
+              <div class="art-card"></div>
+              <div class="art-card"></div>
+              <div class="art-card"></div>
+              <div class="art-card"></div>
+              <div class="arrow">›</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="links">
+          <div class="section-label">
+            <span>06 / Recreated pages + links</span>
+            <span>historical context</span>
+          </div>
+          <div class="wire-card module">
+            <div class="module-header">
+              <div>
+                <h3>Links / Recreated Pages</h3>
+                <p class="caption">外部連結與已刪頁面的再現入口。</p>
+              </div>
+              <span class="button">Open Modal</span>
+            </div>
+            <div class="link-grid">
+              <div class="link-tile">
+                <div class="mini-icon"></div>
+                <span class="line mid"></span>
+              </div>
+              <div class="link-tile">
+                <div class="mini-icon"></div>
+                <span class="line mid"></span>
+              </div>
+              <div class="link-tile">
+                <div class="mini-icon"></div>
+                <span class="line mid"></span>
+              </div>
+              <div class="link-tile">
+                <div class="mini-icon"></div>
+                <span class="line mid"></span>
+              </div>
+              <div class="link-tile">
+                <div class="mini-icon"></div>
+                <span class="line mid"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

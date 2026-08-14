@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>02 Video Block Demo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fbfaf6;
+      --surface: #fff9e7;
+      --surface-strong: #fff2c8;
+      --line: #25211a;
+      --soft-line: #ded5c5;
+      --text: #2f2b25;
+      --muted: #7a6e62;
+      --accent: #f58220;
+      --accent-dark: #c9590b;
+      --accent-soft: #ffe0c4;
+      --green-1: #dcebd5;
+      --green-2: #a9d092;
+      --green-3: #5c913b;
+      --green-4: #315b22;
+      --blue: #4775c7;
+      --blue-soft: #d9e5f8;
+      --gray: #a9a9a9;
+      font-family: "Segoe UI", "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 32px;
+      display: grid;
+      place-items: center;
+    }
+
+    .video-block {
+      width: min(1180px, 100%);
+      min-height: 640px;
+      border: 2px solid var(--line);
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar {
+      min-height: 58px;
+      border-bottom: 2px solid var(--line);
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      background: var(--surface-strong);
+    }
+
+    .tabs {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .tab {
+      min-width: 178px;
+      border: 0;
+      border-right: 2px solid var(--line);
+      background: #ffe7a7;
+      color: var(--accent-dark);
+      font-size: 24px;
+      line-height: 1;
+      padding: 16px 24px;
+    }
+
+    .tab[aria-selected="true"] {
+      background: #ffd0b4;
+    }
+
+    .open-list {
+      align-self: center;
+      margin-right: 26px;
+      border: 0;
+      background: transparent;
+      color: var(--accent-dark);
+      font-size: 22px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      padding: 8px 0;
+    }
+
+    .panel {
+      display: none;
+      min-height: 578px;
+      padding: 70px 72px 56px;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .distribution {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .heatmap {
+      display: grid;
+      grid-template-columns: 86px repeat(12, minmax(38px, 1fr)) 52px;
+      gap: 20px 22px;
+      align-items: center;
+    }
+
+    .month,
+    .year,
+    .total {
+      font-size: 23px;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .year {
+      text-align: right;
+      padding-right: 12px;
+    }
+
+    .cell {
+      width: 38px;
+      aspect-ratio: 1;
+      border: 2px solid #1f1a14;
+      background: #fff;
+      justify-self: center;
+      padding: 0;
+      position: relative;
+    }
+
+    .cell[data-count="0"] {
+      cursor: default;
+    }
+
+    .cell[data-count="1"] {
+      background: var(--green-1);
+    }
+
+    .cell[data-count="2"] {
+      background: var(--green-2);
+    }
+
+    .cell[data-count="3"] {
+      background: var(--green-3);
+    }
+
+    .cell[data-count="4"] {
+      background: var(--green-4);
+    }
+
+    .cell.active,
+    .cell:focus-visible {
+      outline: 4px solid #f6bb3d;
+      outline-offset: 3px;
+    }
+
+    .hint {
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 12px);
+      transform: translateX(-50%);
+      min-width: 102px;
+      background: #050505;
+      color: #fff;
+      padding: 9px 12px;
+      font-size: 15px;
+      line-height: 1;
+      white-space: nowrap;
+      display: none;
+      z-index: 3;
+    }
+
+    .cell.has-data:hover .hint,
+    .cell.active .hint {
+      display: block;
+    }
+
+    .month-detail {
+      margin: 46px auto 0;
+      width: min(610px, 100%);
+      display: none;
+      border: 2px solid var(--line);
+      background: #fff4cc;
+      min-height: 112px;
+      grid-template-columns: 190px 1fr 56px;
+      align-items: stretch;
+      box-shadow: 0 12px 24px rgba(92, 72, 31, 0.12);
+    }
+
+    .month-detail.open {
+      display: grid;
+    }
+
+    .detail-date,
+    .detail-title {
+      padding: 28px 22px;
+      font-size: 23px;
+      line-height: 1.45;
+    }
+
+    .detail-date {
+      text-align: right;
+      border-right: 1px solid var(--line);
+    }
+
+    .detail-close {
+      border: 0;
+      background: transparent;
+      color: var(--accent-dark);
+      font-size: 40px;
+      line-height: 1;
+      align-self: start;
+      padding: 14px 10px;
+    }
+
+    .donut-wrap {
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+    }
+
+    .donut {
+      width: min(420px, 72vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--blue) 0 79%, var(--accent) 79% 86%, var(--gray) 86% 100%);
+      position: relative;
+    }
+
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 31%;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+
+    .donut-label {
+      position: absolute;
+      z-index: 1;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .game-label {
+      right: 21%;
+      bottom: 29%;
+    }
+
+    .music-label {
+      left: 23%;
+      top: 42%;
+    }
+
+    .talk-label {
+      left: 38%;
+      top: 27%;
+    }
+
+    .legend {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 18px;
+      font-size: 20px;
+      color: #5d5a56;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .swatch {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+    }
+
+    .collab-wrap {
+      min-height: 500px;
+      display: grid;
+      place-items: center;
+    }
+
+    .collab-map {
+      width: min(520px, 76vw);
+      aspect-ratio: 1;
+      position: relative;
+    }
+
+    .avatar,
+    .empty-node {
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .avatar {
+      background: var(--blue);
+      border: 2px solid #1d4186;
+      overflow: hidden;
+    }
+
+    .avatar::before,
+    .avatar::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid var(--blue);
+    }
+
+    .avatar::before {
+      top: 21%;
+      width: 28%;
+      height: 28%;
+      border-radius: 50%;
+    }
+
+    .avatar::after {
+      bottom: -6%;
+      width: 54%;
+      height: 45%;
+      border-radius: 45% 45% 10% 10%;
+    }
+
+    .avatar.main {
+      width: 148px;
+      height: 148px;
+      left: 50%;
+      top: 50%;
+    }
+
+    .avatar.main::before {
+      width: 38%;
+      height: 38%;
+      top: 20%;
+    }
+
+    .avatar.main::after {
+      width: 66%;
+      height: 52%;
+    }
+
+    .avatar.small {
+      width: 68px;
+      height: 68px;
+    }
+
+    .empty-node {
+      width: 54px;
+      height: 54px;
+      background:
+        linear-gradient(45deg, transparent 47%, #1d2736 48%, #1d2736 52%, transparent 53%),
+        linear-gradient(-45deg, transparent 47%, #1d2736 48%, #1d2736 52%, transparent 53%),
+        var(--blue-soft);
+      border: 1px solid #334762;
+    }
+
+    .list-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 249, 231, 0.92);
+      display: none;
+      z-index: 10;
+      padding: 24px 30px 30px;
+    }
+
+    .list-overlay.open {
+      display: block;
+    }
+
+    .list-panel {
+      background: rgba(255, 255, 255, 0.94);
+      width: min(980px, calc(100% - 24px));
+      min-height: 548px;
+      max-height: calc(100% - 12px);
+      margin: 0 auto;
+      padding: 20px 22px;
+      overflow: auto;
+      box-shadow: 0 16px 40px rgba(72, 61, 46, 0.14);
+    }
+
+    .list-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .label-small {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .list-title {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1;
+      font-weight: 500;
+      color: #51463d;
+    }
+
+    .status {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+
+    .list-tools {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .search {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--soft-line);
+      border-radius: 8px;
+      padding: 0 16px;
+      color: var(--text);
+      background: #fff;
+    }
+
+    .view-toggle {
+      display: inline-flex;
+      border: 1px solid var(--soft-line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .view-button,
+    .clear-button,
+    .close-list {
+      border: 0;
+      background: #fff;
+      color: #6d6258;
+      font-weight: 700;
+      min-height: 40px;
+      padding: 0 16px;
+    }
+
+    .view-button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .clear-button {
+      border: 1px solid var(--soft-line);
+      border-radius: 8px;
+    }
+
+    .close-list {
+      border: 1px solid var(--soft-line);
+      border-radius: 8px;
+      font-size: 20px;
+      width: 42px;
+      padding: 0;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .chip {
+      border: 1px solid #d9d3ca;
+      border-radius: 999px;
+      background: #fff;
+      color: #75695e;
+      padding: 7px 13px;
+      font-size: 13px;
+      font-weight: 700;
+      max-width: 100%;
+    }
+
+    .chip.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+
+    .count {
+      margin: 0 0 12px;
+      font-weight: 700;
+      color: #75695e;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-top: 1px solid #eee9e0;
+      text-align: left;
+      padding: 13px 14px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fff6e7;
+      color: #80644e;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .title-cell {
+      font-weight: 700;
+      min-width: 280px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .video-card {
+      border: 1px solid #eee2d2;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .thumb {
+      aspect-ratio: 16 / 9;
+      background:
+        linear-gradient(135deg, rgba(245, 130, 32, 0.16), transparent 42%),
+        linear-gradient(45deg, rgba(71, 117, 199, 0.18), transparent 54%),
+        #f3eadb;
+      display: grid;
+      place-items: center;
+      color: #8a7763;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .card-body {
+      padding: 12px;
+    }
+
+    .card-date {
+      margin: 0 0 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .card-title {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        padding: 12px;
+        place-items: start center;
+      }
+
+      .video-block {
+        min-height: 720px;
+      }
+
+      .topbar {
+        display: block;
+      }
+
+      .tabs {
+        overflow-x: auto;
+      }
+
+      .tab {
+        min-width: 142px;
+        font-size: 18px;
+        padding: 14px 18px;
+      }
+
+      .open-list {
+        display: block;
+        margin: 12px 16px 12px auto;
+        font-size: 17px;
+      }
+
+      .panel {
+        padding: 36px 18px;
+      }
+
+      .distribution {
+        overflow-x: auto;
+        padding-bottom: 14px;
+      }
+
+      .heatmap {
+        width: 760px;
+        gap: 16px 14px;
+      }
+
+      .month,
+      .year,
+      .total {
+        font-size: 18px;
+      }
+
+      .month-detail.open {
+        grid-template-columns: 1fr 42px;
+      }
+
+      .detail-date {
+        grid-column: 1 / 2;
+        text-align: left;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 18px;
+      }
+
+      .detail-title {
+        grid-column: 1 / 2;
+        padding: 18px;
+      }
+
+      .detail-close {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+
+      .legend {
+        gap: 14px;
+        flex-wrap: wrap;
+        font-size: 16px;
+      }
+
+      .list-overlay {
+        padding: 10px;
+      }
+
+      .list-panel {
+        width: 100%;
+        padding: 16px;
+      }
+
+      .list-header,
+      .list-tools {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .view-toggle {
+        width: 100%;
+      }
+
+      .view-button {
+        flex: 1;
+      }
+
+      table {
+        min-width: 760px;
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="video-block" aria-label="02 Video Block Demo">
+      <header class="topbar">
+        <nav class="tabs" aria-label="Video block tabs">
+          <button class="tab" type="button" data-tab="distribution" aria-selected="true">Distribution</button>
+          <button class="tab" type="button" data-tab="collab" aria-selected="false">Collab</button>
+          <button class="tab" type="button" data-tab="genre" aria-selected="false">Genre</button>
+        </nav>
+        <button class="open-list" type="button" id="openList">See All Video</button>
+      </header>
+
+      <section class="panel active" id="distribution" aria-label="Distribution panel">
+        <div class="distribution">
+          <div class="heatmap" id="heatmap"></div>
+          <div class="month-detail" id="monthDetail" aria-live="polite">
+            <div class="detail-date" id="detailDates"></div>
+            <div class="detail-title" id="detailTitles"></div>
+            <button class="detail-close" type="button" id="closeDetail" aria-label="Close month detail">&times;</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="collab" aria-label="Collab panel">
+        <div class="collab-wrap">
+          <div class="collab-map" id="collabMap"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="genre" aria-label="Genre panel">
+        <div class="donut-wrap">
+          <div>
+            <div class="donut" aria-label="Genre ratio: Game 79 percent, Music 7 percent, Talk 14 percent">
+              <span class="donut-label game-label">79%</span>
+              <span class="donut-label music-label">7%</span>
+              <span class="donut-label talk-label">14%</span>
+            </div>
+            <div class="legend">
+              <span class="legend-item"><span class="swatch" style="background: var(--blue)"></span>Game</span>
+              <span class="legend-item"><span class="swatch" style="background: var(--accent)"></span>Music</span>
+              <span class="legend-item"><span class="swatch" style="background: var(--gray)"></span>Talk</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="list-overlay" id="listOverlay" aria-label="Video list overlay" aria-hidden="true">
+        <div class="list-panel">
+          <div class="list-header">
+            <div>
+              <div class="label-small">Video Block</div>
+              <h1 class="list-title">配信一覧 <span class="status">[In progress]</span></h1>
+            </div>
+            <button class="close-list" type="button" id="closeList" aria-label="Close video list">&times;</button>
+          </div>
+
+          <div class="list-tools">
+            <input class="search" id="searchInput" type="search" placeholder="タイトル・playlist・tag で検索">
+            <div class="view-toggle" aria-label="View mode">
+              <button class="view-button active" type="button" data-view="table">Table</button>
+              <button class="view-button" type="button" data-view="gallery">Gallery</button>
+            </div>
+            <button class="clear-button" type="button" id="clearFilters">Clear</button>
+          </div>
+
+          <div class="chips" id="chips"></div>
+          <p class="count" id="resultCount"></p>
+
+          <div class="table-scroll" id="tableView">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Playlist</th>
+                  <th>Duration</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody id="videoRows"></tbody>
+            </table>
+          </div>
+
+          <div class="gallery hidden" id="galleryView"></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const years = [2026, 2025, 2024, 2023];
+    const distribution = {
+      "2025-02": { count: 2, items: [{ date: "2025.02.14", title: "初マイクラ・エンドラ討伐！" }, { date: "2025.02.27", title: "記念配信" }] },
+      "2025-03": { count: 2, items: [{ date: "2025.03.05", title: "biohazard HD REMASTER" }, { date: "2025.03.22", title: "短編ストーリー" }] },
+      "2025-04": { count: 2, items: [{ date: "2025.04.10", title: "1周年記念！年表で1年を振り返ります" }, { date: "2025.04.16", title: "ドラゴンクエスト I&II HD-2D版" }] },
+      "2025-05": { count: 3, items: [{ date: "2025.05.08", title: "GameOverになったら帰られるBIOHAZARD" }, { date: "2025.05.19", title: "GUILTY GEAR -STRIVE- ストーリー" }, { date: "2025.05.28", title: "初ワロム！ELDEN RING" }] },
+      "2025-06": { count: 2, items: [{ date: "2025.06.06", title: "Street Fighter™ 6" }, { date: "2025.06.17", title: "Overwatch" }] },
+      "2025-07": { count: 4, items: [{ date: "2025.07.03", title: "ドラゴンクエスト II リメイク" }, { date: "2025.07.12", title: "雑談" }] },
+      "2025-08": { count: 4, items: [{ date: "2025.08.09", title: "Members Only" }, { date: "2025.08.23", title: "RPG" }] },
+      "2025-09": { count: 1, items: [{ date: "2025.09.13", title: "カードゲーム" }] },
+      "2025-10": { count: 1, items: [{ date: "2025.10.18", title: "コラボ" }] }
+    };
+
+    const videos = [
+      { date: "2026-04-16", title: "【ドラケエ2】マシュマロの中にチョコが入ってるのには意味があるらしい：初見ゲーム実況【結萌ひまり】ドラゴンクエスト I&II HD-2D版", playlist: "【進行中】初見！ドラクエ2リメイク", duration: "2h 43m", type: "公開", tags: ["RPG", "進行中"] },
+      { date: "2026-04-15", title: "【メン限】お知らせしました・・・！！", playlist: "メン限", duration: "1h 56m", type: "メン限", tags: ["Members Only", "メン限"] },
+      { date: "2026-04-12", title: "【メン限】参加型企画＆いっぱい雑談！", playlist: "メン限", duration: "4h 0m", type: "メン限", tags: ["雑談", "Members Only"] },
+      { date: "2026-04-10", title: "【雑談：chat】1周年記念！年表で1年を振り返ります", playlist: "記念配信", duration: "3h 10m", type: "公開", tags: ["記念配信", "雑談"] },
+      { date: "2026-04-09", title: "【メン限】作業雑談！一緒に作業しよう", playlist: "メン限", duration: "1h 59m", type: "メン限", tags: ["雑談", "メン限"] },
+      { date: "2025-06-17", title: "Overwatch 初見チャレンジ", playlist: "【完結】初マイクラ・エンドラ討伐！", duration: "2h 8m", type: "公開", tags: ["コラボ", "Game"] },
+      { date: "2025-06-06", title: "Street Fighter™ 6 ランクマッチ", playlist: "格ゲー", duration: "2h 21m", type: "公開", tags: ["格ゲー", "Game"] },
+      { date: "2025-05-19", title: "GUILTY GEAR -STRIVE- ストーリー", playlist: "【完結】GUILTY GEAR -STRIVE- ストーリー", duration: "1h 48m", type: "公開", tags: ["格ゲー", "完結"] }
+    ];
+
+    const chipLabels = ["【完結】初マイクラ・エンドラ討伐！", "【完結】biohazard HD REMASTER", "【完結】GUILTY GEAR -STRIVE- ストーリー", "【進行中】初見！ドラクエ2", "記念配信", "雑談", "Members Only", "RPG", "カードゲーム", "コラボ", "ショート", "その他", "ホラー", "マイクラ", "メン限"];
+    const selectedChips = new Set();
+    const totalArchiveCount = 279;
+    let activeView = "table";
+
+    const heatmap = document.getElementById("heatmap");
+    const monthDetail = document.getElementById("monthDetail");
+    const detailDates = document.getElementById("detailDates");
+    const detailTitles = document.getElementById("detailTitles");
+
+    function createHeatmap() {
+      heatmap.appendChild(document.createElement("span"));
+      months.forEach((month) => {
+        const label = document.createElement("span");
+        label.className = "month";
+        label.textContent = month;
+        heatmap.appendChild(label);
+      });
+      heatmap.appendChild(document.createElement("span"));
+
+      years.forEach((year) => {
+        const yearLabel = document.createElement("span");
+        yearLabel.className = "year";
+        yearLabel.textContent = year;
+        heatmap.appendChild(yearLabel);
+
+        let total = 0;
+        months.forEach((month, index) => {
+          const key = `${year}-${String(index + 1).padStart(2, "0")}`;
+          const data = distribution[key] || { count: 0, items: [] };
+          total += data.items.length || 0;
+          const cell = document.createElement("button");
+          cell.className = data.count > 0 ? "cell has-data" : "cell";
+          cell.type = "button";
+          cell.dataset.count = String(Math.min(data.count, 4));
+          cell.dataset.key = key;
+          cell.setAttribute("aria-label", `${year} ${month}: ${data.items.length} streams`);
+          if (data.count === 0) cell.tabIndex = -1;
+          const hint = document.createElement("span");
+          hint.className = "hint";
+          hint.textContent = `${data.items.length} Streams`;
+          cell.appendChild(hint);
+          cell.addEventListener("click", () => openMonthDetail(cell, data));
+          heatmap.appendChild(cell);
+        });
+
+        const totalLabel = document.createElement("span");
+        totalLabel.className = "total";
+        totalLabel.textContent = year === 2025 ? "15" : "0";
+        heatmap.appendChild(totalLabel);
+      });
+    }
+
+    function openMonthDetail(cell, data) {
+      if (!data.items.length) return;
+      document.querySelectorAll(".cell.active").forEach((item) => item.classList.remove("active"));
+      cell.classList.add("active");
+      detailDates.innerHTML = data.items.map((item) => item.date).join("<br>");
+      detailTitles.innerHTML = data.items.map((item) => item.title).join("<br>");
+      monthDetail.classList.add("open");
+    }
+
+    document.getElementById("closeDetail").addEventListener("click", () => {
+      monthDetail.classList.remove("open");
+      document.querySelectorAll(".cell.active").forEach((item) => item.classList.remove("active"));
+    });
+
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((item) => item.setAttribute("aria-selected", "false"));
+        document.querySelectorAll(".panel").forEach((panel) => panel.classList.remove("active"));
+        tab.setAttribute("aria-selected", "true");
+        document.getElementById(tab.dataset.tab).classList.add("active");
+      });
+    });
+
+    function createCollabMap() {
+      const map = document.getElementById("collabMap");
+      const main = document.createElement("span");
+      main.className = "avatar main";
+      map.appendChild(main);
+
+      for (let i = 0; i < 12; i += 1) {
+        const angle = (-90 + (360 / 12) * i) * Math.PI / 180;
+        const node = document.createElement("span");
+        node.className = "avatar small";
+        node.style.left = `${50 + Math.cos(angle) * 28}%`;
+        node.style.top = `${50 + Math.sin(angle) * 28}%`;
+        map.appendChild(node);
+      }
+
+      for (let i = 0; i < 28; i += 1) {
+        const angle = (-90 + (360 / 28) * i) * Math.PI / 180;
+        const node = document.createElement("span");
+        node.className = "empty-node";
+        node.style.left = `${50 + Math.cos(angle) * 43}%`;
+        node.style.top = `${50 + Math.sin(angle) * 43}%`;
+        map.appendChild(node);
+      }
+    }
+
+    function renderChips() {
+      const chipArea = document.getElementById("chips");
+      chipArea.innerHTML = "";
+      chipLabels.forEach((label) => {
+        const button = document.createElement("button");
+        button.className = selectedChips.has(label) ? "chip active" : "chip";
+        button.type = "button";
+        button.textContent = label;
+        button.addEventListener("click", () => {
+          if (selectedChips.has(label)) selectedChips.delete(label);
+          else selectedChips.add(label);
+          renderChips();
+          renderVideos();
+        });
+        chipArea.appendChild(button);
+      });
+    }
+
+    function filteredVideos() {
+      const query = document.getElementById("searchInput").value.trim().toLowerCase();
+      return videos.filter((video) => {
+        const haystack = [video.title, video.playlist, video.type, ...video.tags].join(" ").toLowerCase();
+        const queryOk = !query || haystack.includes(query);
+        const chipOk = selectedChips.size === 0 || [...selectedChips].some((chip) => haystack.includes(chip.toLowerCase()));
+        return queryOk && chipOk;
+      });
+    }
+
+    function renderVideos() {
+      const rows = document.getElementById("videoRows");
+      const gallery = document.getElementById("galleryView");
+      const data = filteredVideos();
+      const query = document.getElementById("searchInput").value.trim();
+      const visibleCount = query || selectedChips.size > 0 ? data.length : totalArchiveCount;
+      document.getElementById("resultCount").textContent = `Showing ${visibleCount} / ${totalArchiveCount} videos`;
+
+      rows.innerHTML = data.map((video) => `
+        <tr>
+          <td>${video.date}</td>
+          <td class="title-cell">${video.title}</td>
+          <td>${video.playlist}</td>
+          <td>${video.duration}</td>
+          <td>${video.type}</td>
+        </tr>
+      `).join("");
+
+      gallery.innerHTML = data.map((video) => `
+        <article class="video-card">
+          <div class="thumb">${video.type}</div>
+          <div class="card-body">
+            <p class="card-date">${video.date}</p>
+            <h2 class="card-title">${video.title}</h2>
+            <div class="card-meta">
+              <span>${video.duration}</span>
+              <span>${video.playlist}</span>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function setView(view) {
+      activeView = view;
+      document.querySelectorAll(".view-button").forEach((button) => {
+        button.classList.toggle("active", button.dataset.view === view);
+      });
+      document.getElementById("tableView").classList.toggle("hidden", view !== "table");
+      document.getElementById("galleryView").classList.toggle("hidden", view !== "gallery");
+    }
+
+    document.querySelectorAll(".view-button").forEach((button) => {
+      button.addEventListener("click", () => setView(button.dataset.view));
+    });
+
+    document.getElementById("openList").addEventListener("click", () => {
+      const overlay = document.getElementById("listOverlay");
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.getElementById("searchInput").focus();
+    });
+
+    document.getElementById("closeList").addEventListener("click", () => {
+      const overlay = document.getElementById("listOverlay");
+      overlay.classList.remove("open");
+      overlay.setAttribute("aria-hidden", "true");
+    });
+
+    document.getElementById("clearFilters").addEventListener("click", () => {
+      selectedChips.clear();
+      document.getElementById("searchInput").value = "";
+      renderChips();
+      renderVideos();
+    });
+
+    document.getElementById("searchInput").addEventListener("input", renderVideos);
+
+    createHeatmap();
+    createCollabMap();
+    renderChips();
+    renderVideos();
+    setView(activeView);
+  </script>
+</body>
+</html>

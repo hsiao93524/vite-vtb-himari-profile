@@ -10,7 +10,9 @@
 ref/
 ├─ chart_design.html
 ├─ himari_archive_react_preview.html
+├─ video-block-demo.html
 ├─ videos_check.html
+├─ wireframe-preview.html
 ├─ legacy-overview/
 │  ├─ README.md
 │  ├─ data-flow.md
@@ -31,7 +33,9 @@ ref/
 | --- | --- | --- |
 | `chart_design.html` | 靜態 HTML / CSS / JavaScript | 影片統計圖表設計稿。內建 `DATA` 範例資料，支援分類統計與合作對象統計，並可切換橫條圖、圓餅圖、泡泡圖。主要用於前端視覺與互動原型參考。 |
 | `himari_archive_react_preview.html` | 靜態 HTML / CSS / JavaScript | 類 React 風格的影片封存頁面預覽稿。包含頁首統計、搜尋列、篩選按鈕、表單入口、播放清單折疊區塊與 YouTube 縮圖。資料為內嵌範例 `data`。 |
+| `video-block-demo.html` | 靜態 HTML / CSS / JavaScript | 02 Video Analyze block 的互動原型。包含 Distribution / Collab / Genre tabs、月份熱度格、合作對象泡泡圖、genre donut，以及 `See All Video` 影片列表 overlay；列表支援搜尋、tag chip、Table / Gallery 切換與清除篩選。 |
 | `videos_check.html` | 產生出的檢查報表 HTML | `videos.json` 的資料檢查結果頁。含統計卡、分類篩選、警告篩選、文字搜尋與完整影片表格。應是由 `python/check.py` 產生，內含約 279 筆影片資料。 |
+| `wireframe-preview.html` | 靜態 HTML / CSS wireframe | 全頁版面 wireframe 預覽。包含側邊導覽、頂部操作列、Profile、Videos、Analytics、Tags、Fanarts 與 Links 區塊，主要用於頁面資訊架構與模組配置參考；整合時仍需對齊 active docs 的最終區塊命名。 |
 
 ## 舊 overview 參考文件
 
@@ -85,6 +89,8 @@ videos.json / 統計資料
   ↓
 chart_design.html
 himari_archive_react_preview.html
+video-block-demo.html
+wireframe-preview.html
 ```
 
 ## 重要欄位與資料模型
