@@ -22,6 +22,13 @@ The current category model uses two categories: official and unofficial.
 
 Official and unofficial are temporary categories. They can be replaced with custom categories in the future, so the UI should render categories from the JSON generically.
 
+### Current Categories
+
+| Category ID | Label | Meaning |
+| --- | --- | --- |
+| `official` | `公式・関連タグ` | Official name, community, fanart, and operator-related tags. |
+| `unofficial` | `ファン・アーカイブタグ` | Fan-made topics and memory/archive tags. |
+
 ## JSON Shape
 
 ```json
@@ -29,33 +36,33 @@ Official and unofficial are temporary categories. They can be replaced with cust
   "categories": [
     {
       "id": "official",
-      "label": "official",
-      "description": "Actually used or announced by the talent.",
+      "label": "公式・関連タグ",
+      "description": "本人名、コミュニティ、ファンアート、所属関連。",
       "tags": [
         {
-          "id": "official-main",
+          "id": "himari-name",
           "label": "#結萌ひまり",
           "query": "#結萌ひまり",
-          "description": ""
+          "description": "本人名タグ。"
         },
         {
           "id": "fanart",
           "label": "#ひまり色",
           "query": "#ひまり色",
-          "description": "fanart"
+          "description": "ファンアート向けタグ。"
         }
       ]
     },
     {
       "id": "unofficial",
-      "label": "unofficial",
-      "description": "Formed by fans, used for fanart, or used for archive organization.",
+      "label": "ファン・アーカイブタグ",
+      "description": "ファン発の話題や思い出の整理向け。",
       "tags": [
         {
-          "id": "lifestyle",
+          "id": "musubime-story",
           "label": "#むすびめから始まる物語",
           "query": "#むすびめから始まる物語",
-          "description": "Lifestyle habits started because of むすびめ."
+          "description": "むすびめ発の生活・思い出タグ。"
         }
       ]
     }
