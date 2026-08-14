@@ -46,19 +46,6 @@
 
 ![Framework wireframe](framework.png)
 
-## 參考資料
-
-| 位置 | 用途 |
-| --- | --- |
-| [ref/README.md](ref/README.md) | `docs/ref/` 內容說明。 |
-| [ref/chart_design.html](ref/chart_design.html) | 舊版分析圖設計參考。 |
-| [ref/himari_archive_react_preview.html](ref/himari_archive_react_preview.html) | 舊版 React 風格預覽。 |
-| [ref/videos_check.html](ref/videos_check.html) | `videos.json` 檢查報告 HTML。 |
-| [ref/python/](ref/python/) | YouTube 資料取得、轉換、檢查與縮圖下載腳本。 |
-| [ref/legacy-overview/](ref/legacy-overview/README.md) | 舊 overview 文件，只作為參考資料。 |
-
 ## 外部來源
 
-- [Notion source](https://www.notion.so/React-35254a9cebff81df8fc7c1fc381d26b4)
 - [GitHub Pages](https://hsiao93524.github.io/vite-vtb-himari-profile/)
-- [GitHub Pages deployments](https://github.com/hsiao93524/vite-vtb-himari-profile/deployments/github-pages)
