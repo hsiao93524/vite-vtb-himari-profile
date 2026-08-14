@@ -10,6 +10,7 @@
 | 了解 Profile 畫面 | [01-profile/profile-block-design.md](01-profile/profile-block-design.md) |
 | 了解 Profile 需要哪些資料 | [01-profile/profile-data-design.md](01-profile/profile-data-design.md) |
 | 預覽 Profile 設計圖 | [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png) |
+| 了解 X Tag Searcher 設計 | [03-tag-searcher/README.md](03-tag-searcher/README.md) |
 | 看全頁 wireframe | [framework.png](framework.png) |
 
 ## 資料夾地圖
@@ -28,6 +29,12 @@ docs/
 │   ├── profile-section-design.pptx
 │   └── assets/
 │       └── profile-section-design.png
+├── 03-tag-searcher/
+│   ├── README.md
+│   ├── tag-searcher-block-design.md
+│   ├── tag-searcher-checklist.md
+│   ├── tag-searcher-data-design.md
+│   └── tag-searcher-migration-checklist.md
 ├── framework.png
 ├── design.xlsx
 └── ref/
@@ -57,6 +64,12 @@ framework.png / design.xlsx
       -> 01-profile/profile-data-design.md
       -> 01-profile/assets/profile-section-design.png
 
+03-tag-searcher/README.md
+  -> 03-tag-searcher/tag-searcher-block-design.md
+  -> 03-tag-searcher/tag-searcher-data-design.md
+  -> 03-tag-searcher/tag-searcher-checklist.md
+  -> 03-tag-searcher/tag-searcher-migration-checklist.md
+
 ref/python/
   -> videos.json generation and checking
   -> ref/videos_check.html
@@ -73,6 +86,11 @@ ref/python/
 1. [01-profile/profile-block-design.md](01-profile/profile-block-design.md)
 2. [01-profile/profile-data-design.md](01-profile/profile-data-design.md)
 3. [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png)
+
+### 實作 X Tag Searcher 的設計書
+
+2. [03-tag-searcher/tag-searcher-block-design.md](03-tag-searcher/tag-searcher-block-design.md)
+3. [03-tag-searcher/tag-searcher-data-design.md](03-tag-searcher/tag-searcher-data-design.md)
 
 ### 要查看舊影片資料整理脈絡
 
