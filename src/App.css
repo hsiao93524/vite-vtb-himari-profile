@@ -346,15 +346,6 @@ main {
   filter: drop-shadow(0 18px 26px rgba(217, 106, 18, 0.22));
 }
 
-.eyebrow {
-  margin: 0;
-  color: var(--himari-deep-orange);
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .last-updated {
   margin: 8px 0 0;
   color: var(--text-muted);
@@ -427,6 +418,14 @@ main {
   box-shadow: 0 18px 60px rgba(51, 39, 34, 0.08);
 }
 
+.section-block h2 {
+  color: var(--himari-deep-orange);
+}
+
+.section-block h3 {
+  color: var(--himari-deep-orange);
+}
+
 .stats-grid div {
   padding: 18px;
 }
@@ -450,19 +449,27 @@ main {
   padding: 24px;
 }
 
+/* 260815: shared section heading uses label and description. */
 .section-heading {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: end;
+  display: grid;
+  justify-content: start;
+  gap: 6px;
+  align-items: start;
   margin-bottom: 18px;
 }
 
 .section-heading h2 {
-  margin: 4px 0 0;
-  color: var(--text-strong);
-  font-size: 28px;
-  line-height: 1.2;
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.section-description {
+  font-size: 13px;
+  margin: 0;
+  max-width: 720px;
+  color: var(--text-muted);
+  line-height: 1.6;
 }
 
 .publication-badge {
@@ -581,7 +588,6 @@ main {
 
 .tag-searcher-category-heading h3 {
   margin: 0;
-  color: var(--text-strong);
   font-size: 18px;
   line-height: 1.3;
 }

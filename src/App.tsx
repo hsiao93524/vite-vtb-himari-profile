@@ -32,6 +32,8 @@ export default function App() {
     toggleTag,
   } = useVideos()
   const [viewMode, setViewMode] = useState<ViewMode>('table')
+  // 260815: reserved for future Video Analyze description.
+  const videoAnalyzeDescription = ''
 
   useEffect(() => {
     console.log(filteredVideos)
@@ -48,13 +50,17 @@ export default function App() {
 
       {isSectionVisible('videos') && (
         <section className="section-block" id="videos">
+          {/* 260815: section heading uses shared label and description. */}
           <div className="section-heading">
-            <p className="eyebrow">Video Block</p>
             <h2>
-              配信一覧
+              {/* 260815: reserved for label. */}
+              Stream List
               {getSectionVisibilityLabel('videos') && <PublicationBadge>{getSectionVisibilityLabel('videos')}</PublicationBadge>}
               {isSectionInProgress('videos') && <PublicationBadge>In progress</PublicationBadge>}
             </h2>
+            {videoAnalyzeDescription && (
+              <p className="section-description">{videoAnalyzeDescription}</p>
+            )}
           </div>
 
           <div className="toolbar">
@@ -141,7 +147,10 @@ export default function App() {
         />
       )}
       {isSectionVisible('links') && (
-        <RelatedLinks publicationLabel={getSectionVisibilityLabel('links')} />
+        <RelatedLinks
+          publicationLabel={getSectionVisibilityLabel('links')}
+          showInProgress={isSectionInProgress('links')}
+        />
       )}
     </main>
   )

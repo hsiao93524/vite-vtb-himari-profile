@@ -16,6 +16,9 @@ export default function VideoAnalytics({
   videos,
   showInProgress = false,
 }: VideoAnalyticsProps) {
+  // 260815: reserved for future Video Analyze description.
+  const videoAnalyzeDescription = ''
+
   const byPlaylist = Array.from(
     videos.reduce((map, video) => {
       const key = getPlaylistLabel(video.playlist) || 'Unknown'
@@ -30,13 +33,17 @@ export default function VideoAnalytics({
 
   return (
     <section className="section-block" id="analytics">
+      {/* 260815: section heading uses shared label and description. */}
       <div className="section-heading">
-        <p className="eyebrow">Video Analyze</p>
         <h2>
+          {/* 260815: reserved for label. */}
           Playlist Distribution
           {publicationLabel && <PublicationBadge>{publicationLabel}</PublicationBadge>}
           {showInProgress && <PublicationBadge>In progress</PublicationBadge>}
         </h2>
+        {videoAnalyzeDescription && (
+          <p className="section-description">{videoAnalyzeDescription}</p>
+        )}
       </div>
       <div className="bar-chart" aria-label="Playlist video counts">
         {byPlaylist.map(([playlist, count]) => (

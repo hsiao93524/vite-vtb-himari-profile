@@ -12,18 +12,30 @@ const links = [
 ]
 
 type RelatedLinksProps = {
+  showInProgress?: boolean
   publicationLabel?: string | null
 }
 
-export default function RelatedLinks({ publicationLabel }: RelatedLinksProps) {
+export default function RelatedLinks({
+  publicationLabel,
+  showInProgress = false,
+}: RelatedLinksProps) {
+  // 260815: reserved for future Recreated Pages description.
+  const recreatedPagesDescription = ''
+
   return (
     <section className="section-block" id="links">
+      {/* 260815: section heading uses shared label and description. */}
       <div className="section-heading">
-        <p className="eyebrow">Related Links</p>
         <h2>
-          関連リンク集
+          {/* 260815: reserved for label. */}
+          Recreated Pages
           {publicationLabel && <PublicationBadge>{publicationLabel}</PublicationBadge>}
+          {showInProgress && <PublicationBadge>In progress</PublicationBadge>}
         </h2>
+        {recreatedPagesDescription && (
+          <p className="section-description">{recreatedPagesDescription}</p>
+        )}
       </div>
       <div className="link-list">
         {links.map((link) => (
