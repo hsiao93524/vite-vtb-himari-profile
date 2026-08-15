@@ -62,6 +62,7 @@ docs/01-profile/
 | Expression images | `src/assets/profile/expressions/` |
 | Profile static data | `src/data/profile.json` |
 | Video-derived stats | `src/data/videos.json` + `src/hooks/useVideos.ts` |
+| Shared block text | `src/data/block-descriptions.json` `profile` entry after DYS-IMPL-07.01 |
 
 ## Asset Rules
 

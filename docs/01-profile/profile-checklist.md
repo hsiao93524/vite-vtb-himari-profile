@@ -5,7 +5,7 @@
 - [ ] Profile static data is read from `src/data/profile.json`.
 - [ ] Profile visual assets are read from `src/assets/profile/`.
 - [ ] Video-derived stats are calculated from `src/data/videos.json` through `useVideos`.
-- [ ] The shared block title and description source keeps `profile` in the `{ "label": string, "desc": string }` shape.
+- [ ] `src/data/block-descriptions.json` keeps `profile` in the `{ "label": string, "desc": string }` shape with empty `label` and `desc`.
 
 ## Identity
 

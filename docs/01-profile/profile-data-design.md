@@ -7,7 +7,11 @@ This document defines the Profile block preview, current `profile.json`, and rel
 Notes:
 
 - The character profile text inside the `Profile Static Data` also uses `description` as key, but it is not the block function description.
-- The `Profile` block itself does not use `description` or `label`. To keep every block consistent, the JSON still keeps these fields and leaves them empty.
+- The `Profile` block itself does not show shared `label` or `desc`.
+- When the `profile` entry is added to `src/data/block-descriptions.json`, it should keep the same shared block shape and leave both fields empty.
+- The shared block `label` / `desc` entry belongs to `src/data/block-descriptions.json`, not `src/data/profile.json`.
+
+Expected shared block entry:
 
 ```json
 {
@@ -20,12 +24,13 @@ Notes:
 
 ## Data Source
 
-The Profile block uses three Profile-owned data groups and one shared site metadata field:
+The Profile block uses Profile-owned assets and data, video-derived statistics, shared site metadata, and planned shared block text:
 
 - Profile visual assets in `src/assets/profile/`.
 - Profile static data in `src/data/profile.json`.
 - Video-derived statistics from `src/data/videos.json` through `src/hooks/useVideos.ts`.
 - Shared site metadata: `lastUpdated` from `src/data/site.json`.
+- Shared block title/description data: `src/data/block-descriptions.json`.
 
 ### Asset Folder
 
@@ -57,7 +62,7 @@ Current files:
 
 - Image sizes are not all the same.
 - Most images are `360 x 360` squares.
-- The future UI should place these images in fixed square frames and use `object-fit: cover`.
+- The UI should place these images in fixed square frames and use `object-fit: cover`.
 - Do not use the original image size to decide the layout.
 
 Render rule:
@@ -154,7 +159,7 @@ Rules:
 
 Rules:
 
-- `site.json` is shared site-level metadata, not Profile-owned data.
+- `site.json` is shared site-level metadata, not Profile-owned data and not the shared block description source.
 - Profile currently reads `lastUpdated` from `src/data/site.json`.
 - `lastUpdated` is shown by the Profile block as secondary supporting text.
 - If more site-level fields are added, define the canonical schema in an overview or shared data document.
@@ -218,6 +223,7 @@ src/
 |           |-- expression-02.jpg
 |           `-- ...
 |-- data/
+|   |-- block-descriptions.json
 |   |-- profile.json
 |   |-- site.json        # shared site metadata
 |   `-- videos.json
