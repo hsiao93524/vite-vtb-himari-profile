@@ -1,6 +1,11 @@
 # 03 X Tag Searcher Docs
 
-This folder contains the design documents for the third homepage block, `X Tag Searcher`. Its scope is limited to generating X / Twitter search entry points from prepared tag data. It does not cover site-side video filtering or AND/OR search conditions.
+## Purpose
+
+- Define the third homepage block, `X Tag Searcher`.
+- Keep the block scope limited to generating X / Twitter search entry points from prepared tag data.
+- Separate X Tag Searcher from site-side video filtering.
+- Keep AND/OR search conditions outside the current block scope.
 
 ## Recommended Reading Order
 
@@ -46,15 +51,6 @@ docs/03-tag-searcher/
 | X / Twitter search URL builder | `buildXSearchUrl` in `src/components/TagSearcher/index.tsx` |
 
 `TagSearcher` remains the internal component name. `X Tag Searcher` is the user-facing block name.
-
-## Data Rules
-
-- X Tag Searcher entries are managed by an independent JSON file.
-- The JSON top level is `categories`.
-- The initial categories are official and unofficial, but the UI must not be visually locked to those two categories.
-- Each tag must include at least `id`, `label`, and `query`.
-- `description` may be empty. When it is empty, no description text is shown.
-- `label` is the user-facing display text. `query` is the search text used by the X / Twitter search URL.
 
 ## Relationship To Overview Docs
 

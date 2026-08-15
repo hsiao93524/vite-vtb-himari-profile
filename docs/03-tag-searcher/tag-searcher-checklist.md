@@ -27,7 +27,7 @@
 - [x] Tag display text uses `label`.
 - [x] `label` and `query` can be different without breaking display or link generation.
 
-## Layout
+## Desktop Layout
 
 - [x] Categories are displayed as independent sections.
 - [x] Tags are displayed under their category.

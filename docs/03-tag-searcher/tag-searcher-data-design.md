@@ -7,6 +7,22 @@ Notes:
 - X Tag Searcher data is not the same as video search/filter data.
 - Do not merge X Tag Searcher categories into `videos.json`.
 
+## Block Titles And Descriptions
+
+Notes:
+
+- The category `description` inside `tag-searcher.json` explains one tag category, not the block function description.
+- The shared block text should stay in the block description JSON and use the same `{ "label": string, "desc": string }` shape as other blocks.
+
+```json
+{
+  "tagSearcher": {
+    "label": "X / Twitter Tag Searcher",
+    "desc": "Open useful X / Twitter searches for official, related, and fan-made tags."
+  }
+}
+```
+
 ## Data Source
 
 X Tag Searcher uses an independent JSON file as its data source.
@@ -29,7 +45,7 @@ Official and unofficial are temporary categories. They can be replaced with cust
 | `official` | `公式・関連タグ` | Official name, community, fanart, and operator-related tags. |
 | `unofficial` | `ファン・アーカイブタグ` | Fan-made topics and memory/archive tags. |
 
-## JSON Shape
+### JSON Shape
 
 ```json
 {
@@ -70,7 +86,9 @@ Official and unofficial are temporary categories. They can be replaced with cust
 }
 ```
 
-## Category Fields
+### Field Rules
+
+#### Category Fields
 
 | Field | Required | Purpose |
 | --- | --- | --- |
@@ -79,7 +97,7 @@ Official and unofficial are temporary categories. They can be replaced with cust
 | `description` | No | Optional category meaning and classification rule. |
 | `tags` | Yes | Tag entries in this category. |
 
-## Tag Fields
+#### Tag Fields
 
 | Field | Required | Purpose |
 | --- | --- | --- |
@@ -91,6 +109,13 @@ Official and unofficial are temporary categories. They can be replaced with cust
 `label` and `query` may be different. For example, the label can be `結萌ひまり` while the query is `"結萌ひまり"`.
 
 The initial version supports one query per tag. It does not support multiple queries or OR-combined query strings.
+
+### Empty Data Rules
+
+- If `description` of `Category` or `Tag` is empty or missing, do not show description text.
+- If a category object's `tags` array is empty (`[]`), do not show that category.
+- If the JSON has no visible tags at all, e.g. `categories` is empty, do not show the X Tag Searcher block.
+- If the JSON syntax is invalid, treat it as a build or development error rather than a runtime UI state.
 
 ## URL Generation
 
@@ -109,29 +134,6 @@ Rules:
 - Encode `query` before putting it into the URL.
 - Keep the raw tag text in JSON. Do not pre-encode `query` in `tag-searcher.json`.
 - Keep URL generation in code, not in the JSON data file.
-
-## Empty Data Rules
-
-- If `description` is empty or missing, do not show description text.
-- If a category has no tags, do not show that category.
-- If the JSON has no visible tags at all, do not show the X Tag Searcher block.
-- If the JSON syntax is invalid, treat it as a build or development error rather than a runtime UI state.
-
-## Block Titles And Descriptions
-
-Notes:
-
-- The category `description` inside `tag-searcher.json` explains one tag category, not the block function description.
-- The shared block text should stay in the block description JSON and use the same `{ "label": string, "desc": string }` shape as other blocks.
-
-```json
-{
-  "tagSearcher": {
-    "label": "X / Twitter Tag Searcher",
-    "desc": "Open useful X / Twitter searches for official, related, and fan-made tags."
-  }
-}
-```
 
 ## Suggested Final Structure
 
