@@ -13,6 +13,8 @@ Notes:
 
 - The category `description` inside `tag-searcher.json` explains one tag category, not the block function description.
 - The shared block text should stay in the block description JSON and use the same `{ "label": string, "desc": string }` shape as other blocks.
+- Current shared block description file: `src/data/block-descriptions.json`.
+- Do not put the shared block `label` / `desc` inside `src/data/tag-searcher.json`.
 
 ```json
 {
@@ -140,6 +142,7 @@ Rules:
 ```text
 src/
 |-- data/
+|   |-- block-descriptions.json
 |   `-- tag-searcher.json
 |-- types/
 |   `-- tag-searcher.ts

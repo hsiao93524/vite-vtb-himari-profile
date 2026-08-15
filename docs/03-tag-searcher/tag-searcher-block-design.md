@@ -50,7 +50,8 @@ On narrow screens, categories and tags should stack vertically.
 
 | Content | Purpose | Source |
 | --- | --- | --- |
-| Section heading | Identify the block as X Tag Searcher | Component text or shared block description |
+| Section heading | Identify the block as X Tag Searcher | `src/data/block-descriptions.json` `tagSearcher.label` |
+| Section description | Explain the X / Twitter search handoff | `src/data/block-descriptions.json` `tagSearcher.desc` |
 | Category label | Group related X / Twitter search tags | `src/data/tag-searcher.json` category `label` |
 | Category description | Explain the category when provided | category `description` |
 | Tag label | Show the clickable search entry | tag `label` |

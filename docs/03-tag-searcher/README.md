@@ -47,10 +47,12 @@ docs/03-tag-searcher/
 | Design Item | Current or Planned Location |
 | --- | --- |
 | X Tag Searcher component | `src/components/TagSearcher/` |
+| Shared block text | `src/data/block-descriptions.json` `tagSearcher` |
 | Tag data JSON | `src/data/tag-searcher.json` |
 | X / Twitter search URL builder | `buildXSearchUrl` in `src/components/TagSearcher/index.tsx` |
 
 `TagSearcher` remains the internal component name. `X Tag Searcher` is the user-facing block name.
+The shared block `label` / `desc` belongs to `block-descriptions.json`; category and tag descriptions stay in `tag-searcher.json`.
 
 ## Relationship To Overview Docs
 

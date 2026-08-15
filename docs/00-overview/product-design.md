@@ -58,6 +58,8 @@ The page is divided into five major blocks.
 For future expansion, each main block title and purpose are provided by JSON.
 This section defines that JSON only. The detailed data for each block is defined in that block's own design document.
 
+These shared block are be defined in [block-descriptions.json](../../src/data/block-descriptions.json) currently.
+
 JSON shape:
 
 ```json
@@ -79,11 +81,10 @@ Rules:
 
 Current spec:
 
-- When `label` is not empty, use the block name from the Page Structure table.
 - There are five main blocks. Their ids are:
   - `profile`: `Profile`
   - `videoAnalyze`: `Video Analyze`
-  - `xTagSearcher`: `X Tag Searcher`
+  - `tagSearcher`: `X / Twitter Tag Searcher`
   - `fanarts`: `Fanarts`
   - `recreatedPages`: `Recreated Pages`
 

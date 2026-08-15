@@ -18,6 +18,8 @@
 ## Required Content
 
 - [x] The X Tag Searcher block is visible when the JSON contains at least one visible tag.
+- [ ] The shared block label comes from `src/data/block-descriptions.json` `tagSearcher.label`.
+- [ ] The shared block description comes from `src/data/block-descriptions.json` `tagSearcher.desc`.
 - [x] Category labels must be visible.
 - [x] Category descriptions are visible when provided.
 - [x] Empty or missing category descriptions are not rendered.
