@@ -1,8 +1,33 @@
 # Profile Data Design
 
-This document defines the Profile block preview, current `profile.json`, and related data needed by `TopPage`.
+This document defines the Profile block preview, current `profile.json`, and related shared data needed by `TopPage`.
 
-## Asset Folder
+## Block Titles And Descriptions
+
+Notes:
+
+- The character profile text inside the `Profile Static Data` also uses `description` as key, but it is not the block function description.
+- The `Profile` block itself does not use `description` or `label`. To keep every block consistent, the JSON still keeps these fields and leaves them empty.
+
+```json
+{
+  "profile": {
+    "label": "",
+    "desc": ""
+  }
+}
+```
+
+## Data Source
+
+The Profile block uses three Profile-owned data groups and one shared site metadata field:
+
+- Profile visual assets in `src/assets/profile/`.
+- Profile static data in `src/data/profile.json`.
+- Video-derived statistics from `src/data/videos.json` through `src/hooks/useVideos.ts`.
+- Shared site metadata: `lastUpdated` from `src/data/site.json`.
+
+### Asset Folder
 
 [Main visual image](../../src/assets/profile/hero.png)
 
@@ -45,7 +70,7 @@ Render rule:
 }
 ```
 
-## Random Expression Selection
+### Random Expression Selection
 
 Implementation:
 
@@ -69,11 +94,11 @@ const selectedExpressions = useMemo(
 
 If stable test results are needed later, replace `Math.random()` with a seeded shuffle helper.
 
-## Profile Static Data
+### JSON Shape
 
 Current data file: `src/data/profile.json`.
 
-Data shape:
+Profile static data shape:
 
 ```json
 {
@@ -98,6 +123,18 @@ Data shape:
 }
 ```
 
+Current shared site metadata used by Profile:
+
+```json
+{
+  "lastUpdated": "2026-07-14"
+}
+```
+
+### Field Rules
+
+#### Profile Static Data Fields
+
 Rules:
 
 - `profile.json` is imported by `TopPage`.
@@ -113,23 +150,17 @@ Rules:
 - `links` only stores the current official X account and YouTube channel. It is different from Recreated Pages data.
 - Date fields use `YYYY-MM-DD`.
 
-## Block Titles And Descriptions
+#### Shared Site Metadata Used By Profile
 
-Notes:
+Rules:
 
-- The character profile text inside the `Profile Static Data` also uses `description` as key, but it is not the block function description.
-- The `Profile` block itself does not use `description` or `label`. To keep every block consistent, the JSON still keeps these fields and leaves them empty.
+- `site.json` is shared site-level metadata, not Profile-owned data.
+- Profile currently reads `lastUpdated` from `src/data/site.json`.
+- `lastUpdated` is shown by the Profile block as secondary supporting text.
+- If more site-level fields are added, define the canonical schema in an overview or shared data document.
+- Date text should use `YYYY-MM-DD` unless a display format helper is added later.
 
-```json
-{
-  "profile": {
-    "label": "",
-    "desc": ""
-  }
-}
-```
-
-## Statistics Data
+#### Statistics Fields
 
 Statistics are loaded from `src/data/videos.json` through `useVideos`, then calculated inside `TopPage`.
 
@@ -167,6 +198,14 @@ Rules:
 - The members-only count should reflect the current data. Use `isMembers` now, and also count `isMembersOnly` if it appears during schema migration.
 - Keep playlist support for both `string` and `string[]`, because one video may belong to multiple playlists.
 
+### Empty Data Rules
+
+- If `description` is empty or missing, do not render an empty profile text area.
+- If `links` is empty, do not render an empty official-link row.
+- If shared `lastUpdated` is empty or missing, do not render blank last-updated text.
+- If `videos.json` is empty, calculate statistics from the empty list and avoid hard-coded fallback values.
+- If JSON syntax is invalid, treat it as a build or development error.
+
 ## Suggested Final Structure
 
 ```text
@@ -180,6 +219,7 @@ src/
 |           `-- ...
 |-- data/
 |   |-- profile.json
+|   |-- site.json        # shared site metadata
 |   `-- videos.json
 |-- hooks/
 |   `-- useVideos.ts

@@ -1,4 +1,11 @@
-# Acceptance Checklist
+# Profile Acceptance Checklist
+
+## Data Source
+
+- [ ] Profile static data is read from `src/data/profile.json`.
+- [ ] Profile visual assets are read from `src/assets/profile/`.
+- [ ] Video-derived stats are calculated from `src/data/videos.json` through `useVideos`.
+- [ ] The shared block title and description source keeps `profile` in the `{ "label": string, "desc": string }` shape.
 
 ## Identity
 
@@ -67,7 +74,14 @@
 - [ ] Body/profile text uses `#3D2B3D` or another approved main text color from `product-design.md`.
 - [ ] Secondary/supporting text uses `#7A5C7A` or another approved muted text color from `product-design.md`.
 
-## Links and Interaction
+## Interaction
 
 - [ ] Clicking the X link opens `https://x.com/RAG_Himari`.
 - [ ] Clicking the YouTube link opens `https://www.youtube.com/@raghimari`.
+
+## Empty Data Rules
+
+- [ ] Empty Profile description does not leave a blank text area.
+- [ ] Empty official links do not leave a blank link row.
+- [ ] Missing or insufficient expression images are treated as data or setup issues instead of duplicated UI.
+- [ ] Statistics are calculated from current `videos.json` data instead of hard-coded fallback values.

@@ -4,13 +4,28 @@ Source: [Profile design image](assets/profile-section-design.png) and [wireframe
 
 This document defines the `Profile` block in the wireframe. It is the first Profile area visitors see on the public page.
 
-## Goal
+## Scope
 
-The Profile block is the first impression of the site. It should immediately communicate:
+This block covers the first-view identity area for 結萌ひまり.
 
-- This is the Profile area for 結萌ひまり.
-- The site is a fan archive with memorial and preservation intent, while also functioning as a dashboard for the VTuber's activity record.
-- The statistics should quickly show the shape of the VTuber's streaming and video activity.
+This block includes:
+
+- Character main visual and expression images.
+- Display name and short profile copy.
+- Current official X and YouTube links.
+- Activity period.
+- High-level archive statistics for videos, members-only videos, and total hours.
+- `lastUpdated` display from shared site metadata.
+
+This block does not include:
+
+- Video search, video filters, table/gallery views, or detailed video metadata.
+- X / Twitter tag search entry points.
+- Fanart gallery or fanart collection behavior.
+- Recreated Pages, historical links, Litlink, Twitch, old X accounts, or sub-account history.
+- Future interactive ideas such as counters or expression unlock systems, unless they become part of the current implementation scope.
+
+Profile links should stay limited to the current official X account and YouTube channel. Historical or preserved links belong to `Recreated Pages`.
 
 ## Wireframe Reference
 
@@ -32,7 +47,7 @@ Profile block
 
 ## Layout
 
-Desktop layout:
+### Desktop layout or Behavior
 
 - Use a two-column first-view composition.
 - Place the character main visual on the left.
@@ -40,7 +55,7 @@ Desktop layout:
 - The right-column content order follows the structure shown in the Wireframe Reference.
 - Allow the name banner to overlap the upper area, echoing the slanted orange title shape in the wireframe.
 
-Mobile layout:
+### Mobile layout or Behavior
 
 - Stack content vertically.
 - Show the name and profile summary before longer statistics.
@@ -61,67 +76,41 @@ Mobile layout:
 | Total hours | Show archive volume | Sum of `duration`, rounded to hours |
 | Active period | Provide historical context | Derived from min/max `date` or static graduation data |
 
-## Profile Static Data
+## Details
 
-Profile text and links should not be hardcoded in `TopPage`.
+### Profile Text And Links
 
-File:
+The Profile block shows the display name, short profile copy, and current official links.
 
-```text
-src/data/profile.json
-```
+- The display name appears in the name banner.
+- The profile copy appears below the name banner.
+- Official X and YouTube links appear near the expression images.
+- These links are only current official Profile links.
+- Historical or preserved links belong to `Recreated Pages`.
 
-Rules:
+Data shape is defined in [Profile Data Design](./profile-data-design.md).
 
-- `name` is the display name in the orange banner.
-- `description` is the main profile copy under the name banner.
-- `links` drive the official X / YT icons.
-- `links` only include official SNS entry points for Profile. Do not put `Recreated Pages` content here.
-- `debutDate` may be used later as the start date for the active period.
-- `graduationDate` can be used for active-period display.
+### Last Updated Display
 
-## Boundary of Profile Links in Profile block
+The Profile block shows the shared site data snapshot date as supporting text.
 
-- Profile links are the official links shown in the Profile block.
-- They help visitors to make a quick jump to official SNS page.
-- The function of these links / pages is different from links / pages in `Recreated Pages` block.
+- The text appears near the lower-right side of the Profile block.
+- The text should stay secondary and should not compete with the name, main visual, or statistics.
 
-## Other Static Data
+The value comes from shared site metadata. Profile only defines how this text is displayed.
 
-File:
+### Expression Image Behavior
 
-```text
-src/data/site.json
-```
+The Profile block shows three expression images.
 
-Rules:
-
-- `lastUpdated` is shown at the lower-right side of the Profile block.
-
-## Random Expression Selection
-
-The Profile block should show three expression images.
-
-Behavior:
-
-- On each page entry or page load, randomly pick three different images from `src/assets/profile/expressions/`.
-- Keep the three selected images stable during the same render session.
+- Pick three different expression images on page load.
+- Keep the selected images stable during the same render session.
 - Do not shuffle again on every component re-render.
 - The random choice does not need to persist after a browser refresh.
 
-[Expression image folder](../../src/assets/profile/expressions/)
+Asset folder and implementation details are defined in [Profile Data Design](./profile-data-design.md).
 
-```text
-src/assets/profile/expressions/
-```
-
-## Current Implementation Mapping
-
-Current component:
-
-- `src/components/TopPage/index.tsx`
-
-## Visual Direction
+### Visual Direction
 
 Use the palette from [`../00-overview/product-design.md`](../00-overview/product-design.md):
 
@@ -150,16 +139,13 @@ Primary interactions:
 
 ## Future Ideas
 
-- Bring visitors back:
-  - Cat clicker
-    - Clicking the cat starts a counter.
-    - The counter is shared by all visitors.
-      - Todo: Decide how to make a shared counter on GitHub Pages.
-    - Todo: Decide the counter name.
-  - Expression unlocker
-    - Group expressions by N, R, SR, and SSR levels, and use them as appearance rates.
-    - Todo: Decide how to show users which expressions they have unlocked.
+These ideas are not part of the current implementation scope.
 
-## Checklist
-
-[Checklist](./profile-checklist.md)
+- Cat clicker
+  - Clicking the cat starts a counter.
+  - The counter is shared by all visitors.
+  - Research needed: Decide how to make a shared counter on GitHub Pages.
+  - Research needed: Decide the counter name.
+- Expression unlocker
+  - Group expressions by N, R, SR, and SSR levels, and use them as appearance rates.
+  - Research needed: Decide how to show users which expressions they have unlocked.
