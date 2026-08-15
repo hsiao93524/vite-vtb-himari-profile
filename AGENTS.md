@@ -1,48 +1,35 @@
 # AGENTS.md
 
-## Design And Implementation Guardrails
-
-- X Tag Searcher 的 shared description id 固定使用 `tagSearcher`，並與目前的 `TagSearcher` implementation、`src/data/tag-searcher.json`、publication id 對齊。不得因對外名稱是 `X Tag Searcher` 而改成 `xTagSearcher`，除非使用者同意另開 id migration。
-- Checklist是使用者用來手動確認的項目
-- Checklist原則上不由AI進行勾選，除非使用者同意
-- 撰寫程式階段時，依照設計書進行，所以不能修改設計書。如果遇到需要修改設計書的內容，需要詢問使用者。
-
-## 暫時限制紀錄：Staged 內容待確認（已停用）
-
-本章節只保留有 Staged 內容時需要使用的 agent.md 文本，不再作為有效工作規則。
-
-```text
-## 暫時限制：Staged 內容待確認（啟用中）
-
-- 目前 Git index 內已有一批 staged 內容等待使用者確認。
-- 只要使用者要求修改本專案的任何檔案，開始修改前都必須先提醒：「目前 staged 內容尚待確認。」
-- 在使用者明確表示「已完成確認」或同等意思之前：
-  - 不得 commit、unstage、restore 或改寫目前 staged 內容。
-  - 不得把其他檔案加入 staged 內容。
-  - 可以依使用者要求修改 working tree，但修改前仍需先提醒 staged 內容尚待確認。
-- 純讀取、調查、說明或執行不會改變檔案與 Git index 的唯讀操作，不需要重複提醒。
-- 使用者明確表示已完成確認後，將本章節改成「已停用」紀錄。
-```
-
-## Top Page / Top Profile 工作守則
-
-Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
-
-- Top/Profile 的主要實作位置是 `src/components/TopPage/index.tsx`，相關樣式通常在 `src/App.css` 的 `.top-profile*` 區塊。
-- 修改前先檢查 `docs/01-top-visual/top-visual-block-design.md`、`docs/01-top-visual/top-visual-data-design.md`、`docs/01-top-visual/top-visual-checklist.md`。
-- Profile 文字、外部連結、出道日、畢業日使用 `src/data/profile.json`；不要重新 hardcode 到 component。
-- 桌面版維持主視覺與 profile 內容的雙欄構圖；手機版可垂直排列，但主視覺、名稱、profile 文案與 stats 都要可讀。
-- 若移動或替換 Top/Profile 資產，同步檢查 React import、Markdown docs、根目錄 preview HTML。
-
-## 基本回覆規則
+## Working Agreements
 
 - 一律用繁體中文回答。
 - 回答保持精簡；若涉及架構、資料流、部署流程或跨檔案設計，需說明取捨與影響範圍。
 - 寫程式或修改檔案前，先用簡短段落說明計畫。
-- 修改程式後必須跑驗證；若無法跑測試或專案沒有測試指令，需明確說明原因與已改跑的替代驗證。
 - 不要回復或覆蓋使用者既有變更，除非使用者明確要求。
 
-## 專案概況
+## Design To Implementation Workflow
+
+- 此專案遵循「設計文件 -> 程式修正」的工作流。
+- 先確認設計文件與 `todo.md` 是否一致。
+- 如果設計文件之間有落差，停止程式檢查並回報需要調整的文件內容。
+- 只有在設計文件與 `todo.md` 一致時，才檢查程式與設計書的落差。
+- 設計文件是設計基準與目標狀態；不要因為程式尚未實作，就要求設計文件加入 `未完成`、`planned` 等用語。
+- 只有當設計文件明確宣稱某項內容是 current implementation / current data source，但實際程式或資料尚未符合時，才需要把文件語氣改成 planned / target / expected，或回報使用者決定。
+- 撰寫程式階段時，依照設計書進行，所以不能修改設計書。如果遇到需要修改設計書的內容，需要詢問使用者。
+
+## Checklist Rules
+
+- Checklist 是使用者用來手動確認的項目。
+- Checklist 原則上不由 AI 進行勾選，除非使用者同意。
+- 新增或更新設計 checklist 時，必須建立明確的測試步驟。
+- Checklist 不只列「要符合什麼」，也要寫清楚如何驗證、使用哪個指令或畫面條件。
+
+## Stable Contracts
+
+- X Tag Searcher 的 shared description id 固定使用 `tagSearcher`。
+- 不得因對外名稱是 `X Tag Searcher` 而改成 `xTagSearcher`，除非使用者同意另開 id migration。
+
+## Project Overview
 
 - 本專案是 React、TypeScript、Vite、自訂 CSS 的 VTuber fan-made profile/archive site。
 - 這是非官方 fan project；文字、素材與外部連結需避免暗示官方授權、官方營運或隸屬關係。
@@ -51,7 +38,7 @@ Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
 - 資料讀取、正規化、搜尋與篩選邏輯集中在 `src/hooks/useVideos.ts`。
 - 縮圖放在 `public/thumbnails/{videoId}.jpg`，前端路徑需考慮 Vite `base` 與 `import.meta.env.BASE_URL`。
 
-## 常用指令
+## Commands
 
 - `npm run dev`：啟動本機開發伺服器。
 - `npm run build`：執行 TypeScript build 與 Vite build。
@@ -61,14 +48,14 @@ Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
 - `npm run preview`：預覽 build 後的成果。
 - `npm run deploy:local`：先執行 `npm run build:pages`，再以 `gh-pages -d dist` 發布；不要在未經要求時主動部署。
 
-## 開發流程
+## Verification
 
 - 功能或修正完成後，至少執行 `npm run build`。
 - 若變更包含 lint 風險，例如 hook、component、型別或 import 調整，也執行 `npm run lint`。
 - 若是純文件變更，可不跑 build，但最終回覆需說明「僅文件變更，未執行程式驗證」。
 - 若啟動 dev server 或使用瀏覽器檢查 UI，需回報實際 URL 與檢查範圍。
 
-## 程式規範
+## Code Rules
 
 - 優先沿用現有 React function component、hook 與 CSS class 寫法。
 - 型別要從 `src/types/video.ts` 擴充，不要在元件內重複定義資料模型。
@@ -77,7 +64,7 @@ Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
 - 不要新增大型狀態管理、router、UI framework 或資料 fetching library，除非需求明確需要。
 - 避免留下開發用 `console.log`；若需要暫時除錯，完成前移除或說明保留理由。
 
-## 資料規範
+## Data Rules
 
 - `src/data/videos.json` 是目前 app 直接 import 的資料來源；修改 schema 時要同步更新 `Video` 型別與 `useVideos` 的正規化邏輯。
 - `playlist` 目前處於 `string | string[]` 過渡期；新邏輯應優先支援 `string[]`，並保留相容處理直到資料完成遷移。
@@ -85,22 +72,45 @@ Codex 處理 Top page 或 Top/Profile 區塊時，先依照以下規則工作：
 - 新增縮圖時，檔名需使用 YouTube `videoId`，格式為 `public/thumbnails/{videoId}.jpg`。
 - 不要把私密 token、YouTube API key、個人憑證或未公開資料放入 repo。
 
-## 文件與編碼
+## Documentation Rules
 
-- 文件預設使用 UTF-8。若看到中文或日文變成亂碼，先確認讀檔編碼，不要直接判定內容損壞。
+- 文件預設使用 UTF-8。
+- 若看到中文或日文變成亂碼，先確認讀檔編碼，不要直接判定內容損壞。
 - 更新 `docs/` 或 `todo.md` 時，保留原本的任務結構與決策脈絡。
 - 資料流、schema 遷移或部署規則有變更時，同步更新 README 或 `docs/` 相關文件。
-- 新增或更新設計 checklist 時，必須建立明確的測試步驟。Checklist 不只列「要符合什麼」，也要寫清楚如何驗證、使用哪個指令或畫面條件。
 
-## 前端體驗規範
+## Frontend Rules
 
 - 這個站點是資料瀏覽型 archive/profile site；優先確保搜尋、篩選、表格、圖廊與統計資訊清楚可用。
 - 響應式版面要維持可讀性；修改 CSS 後需檢查桌面與窄螢幕寬度。
 - 外部影片連結使用 `target="_blank"` 時需搭配 `rel="noreferrer"`。
 - 圖片需避免破圖；縮圖路徑修改後要確認 GitHub Pages base path 仍可運作。
 
-## Git 與變更範圍
+## Git And Commit Rules
 
 - 變更應保持小而聚焦；不要順手重構不相關檔案。
 - 若工作區已有使用者未提交變更，需保留並繞開；不得使用 destructive git 指令。
 - 不要主動提交 commit、push 或 deploy，除非使用者明確要求。
+- 提供 commit subject 或 description 前，先檢查 `git status --short`、`git diff --cached --stat`、`git diff --cached --check`。
+- Commit subject 使用簡單英文，優先採 Conventional Commits：`type(scope): short summary`。
+- 常用 type 包含 `docs`、`feat`、`fix`、`refactor`、`chore`、`ci`。
+- scope 可選，使用實際影響範圍，例如 `profile`、`tag-searcher`；沒有清楚範圍時省略。
+- subject 必須描述目前 staged diff 的實際內容；不要沿用舊 staged 狀態、過寬摘要或抽象字詞。
+
+## Inactive Historical Notes
+
+本章節只保留曾啟用的 staged 內容提醒，不再作為有效工作規則。
+
+```text
+## 暫時限制：Staged 內容待確認（啟用中）
+
+- 此限制用於當使用者忘記有尚未 commit 的內容時，用以提醒使用者不可進行修改。
+- 目前 Git index 內已有一批 staged 內容等待使用者確認。
+- 只要使用者要求修改本專案的任何檔案，開始修改前都必須先提醒：「目前 staged 內容尚待確認。」
+- 在使用者明確表示「已完成確認」或同等意思之前：
+  - 不得 commit、unstage、restore 或改寫目前 staged 內容。
+  - 不得把其他檔案加入 staged 內容。
+  - 可以依使用者要求修改 working tree，但修改前仍需先提醒 staged 內容尚待確認。
+- 純讀取、調查、說明或執行不會改變檔案與 Git index 的唯讀操作，不需要重複提醒。
+- 使用者明確表示已完成確認後，將本章節改成「已停用」紀錄。
+```
