@@ -1,40 +1,39 @@
-
 # Acceptance Checklist
 
 ## Identity
 
 - [ ] The Profile block is rendered before the video/archive list section.
 - [ ] The visible display name text is exactly `結萌ひまり`.
-- [ ] 主視覺 `src/assets/profile/hero.png` 有顯示。
-- [ ] 畫面剛好顯示三張表情圖片。
-- [ ] 三張表情圖片不重複。
-- [ ] 重新載入頁面時，可以出現不同的表情圖片組合。
-- [ ] 不同來源尺寸的表情圖片會被裁切到一致的正方形框內。
-- [ ] Profile description 有顯示。
+- [ ] The main visual from `src/assets/profile/hero.png` is displayed.
+- [ ] Exactly three expression images are displayed.
+- [ ] The three expression images are not repeated.
+- [ ] A different set of expression images can appear after reloading the page.
+- [ ] Expression images with different source sizes are cropped into consistent square frames.
+- [ ] The Profile description is displayed.
 
 ## Desktop Layout
 
-- [ ] 全身主視覺出現在左側。
-- [ ] 名稱 banner 出現在右側。
-- [ ] 名稱 banner 具有傾斜形狀。
-- [ ] 名稱 banner 右側有斜線裝飾。
-- [ ] Profile description 出現在名稱 banner 下方。
-- [ ] X / YT icons 出現在表情圖片左側。
-- [ ] 三張表情圖片水平排列。
-- [ ] 三個統計圓形水平排列。
-- [ ] Last updated text 出現在右下角。
-- [ ] 整體構圖接近 1280 x 720 reference layout。
+- [ ] The full-body main visual appears on the left.
+- [ ] The name banner appears on the right.
+- [ ] The name banner uses a slanted shape.
+- [ ] The name banner has slash decoration on the right.
+- [ ] The Profile description appears below the name banner.
+- [ ] X / YT icons appear to the left of the expression images.
+- [ ] The three expression images are arranged horizontally.
+- [ ] The three statistic circles are arranged horizontally.
+- [ ] The Last updated text appears at the lower-right corner.
+- [ ] The overall composition is close to the 1280 x 720 reference layout.
 
 ## Mobile Layout
 
-- [ ] Mobile 寬度下 layout 變成單欄。
-- [ ] 主視覺不會超出 viewport。
-- [ ] 名稱 banner 不會超出。
-- [ ] Profile description 不會與其他元素重疊。
-- [ ] 三張表情圖片維持正方形。
-- [ ] 統計圓形改成垂直排列。
-- [ ] Last updated text 仍然可見。
-- [ ] 頁面沒有水平捲軸。
+- [ ] At mobile width, the layout becomes a single column.
+- [ ] The main visual does not overflow the viewport.
+- [ ] The name banner does not overflow.
+- [ ] The Profile description does not overlap other elements.
+- [ ] The three expression images remain square.
+- [ ] The statistic circles change to a vertical layout.
+- [ ] The Last updated text remains visible.
+- [ ] The page has no horizontal scrollbar.
 
 ## Required Content
 
@@ -49,10 +48,10 @@
 - [ ] The displayed total hours count equals the sum of `duration` rounded to hours.
 - [ ] The active period is displayed.
 - [ ] The displayed active period is derived from min/max `date` or the configured graduation date.
-- [ ] `Last updated: 2026-xx-xx` 有顯示。
-- [ ] `VIDEOS` 的值符合目前 `videos.json` 的總數。
-- [ ] `MEMBERS` 的值符合從 `videos.json` 推導出的 members-only 數量。
-- [ ] `HOURS` 的值符合從 `videos.json` 推導出的目前總 duration。
+- [ ] `Last updated: 2026-xx-xx` is displayed.
+- [ ] The `VIDEOS` value matches the current total count in `videos.json`.
+- [ ] The `MEMBERS` value matches the members-only count derived from `videos.json`.
+- [ ] The `HOURS` value matches the current total duration derived from `videos.json`.
 
 ## Statistics
 
@@ -68,7 +67,7 @@
 - [ ] Body/profile text uses `#3D2B3D` or another approved main text color from `product-design.md`.
 - [ ] Secondary/supporting text uses `#7A5C7A` or another approved muted text color from `product-design.md`.
 
-## 連結與互動
+## Links and Interaction
 
 - [ ] Clicking the X link opens `https://x.com/RAG_Himari`.
 - [ ] Clicking the YouTube link opens `https://www.youtube.com/@raghimari`.
