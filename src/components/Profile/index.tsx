@@ -91,43 +91,43 @@ export default function Profile({ publicationLabel, videos }: ProfileProps) {
   return (
     <section
       aria-label={profileSectionLabel}
-      className="top-profile"
+      className="profile"
       id="hero"
     >
-      <div className="top-profile-character">
+      <div className="profile-character">
         <img alt={`${profile.name} 全身視覺`} src={heroImage} />
       </div>
 
-      <div className="top-profile-content">
-        <h1 className="top-profile-name">
-          <span className="top-profile-name-text">
+      <div className="profile-content">
+        <h1 className="profile-name">
+          <span className="profile-name-text">
             <span>{profile.name}</span>
           </span>
-          <span className="top-profile-name-trails" aria-hidden="true">
-            <span className="top-profile-name-trail top-profile-name-trail-primary" />
-            <span className="top-profile-name-trail top-profile-name-trail-secondary" />
-            <span className="top-profile-name-trail top-profile-name-trail-tertiary" />
+          <span className="profile-name-trails" aria-hidden="true">
+            <span className="profile-name-trail profile-name-trail-primary" />
+            <span className="profile-name-trail profile-name-trail-secondary" />
+            <span className="profile-name-trail profile-name-trail-tertiary" />
           </span>
         </h1>
         {publicationLabel && (
-          <p className="top-profile-publication">
+          <p className="profile-publication">
             <PublicationBadge>{publicationLabel}</PublicationBadge>
           </p>
         )}
         {profileDescription && (
-          <p className="top-profile-copy">
+          <p className="profile-copy">
             {profileDescription}
           </p>
         )}
-        <p className="top-profile-graduation">
+        <p className="profile-graduation">
           Active: {profile.debutDate}~{profile.graduationDate}
         </p>
-        <div className="top-profile-middle">
+        <div className="profile-middle">
           {visibleProfileLinks.length > 0 && (
-            <nav className="top-profile-links" aria-label="Official Profile links">
+            <nav className="profile-links" aria-label="Official Profile links">
               {visibleProfileLinks.map((link) => (
                 <a
-                  className={`top-profile-link top-profile-link-${link.kind}`}
+                  className={`profile-link profile-link-${link.kind}`}
                   href={link.href}
                   key={link.href}
                   rel="noreferrer"
@@ -140,18 +140,18 @@ export default function Profile({ publicationLabel, videos }: ProfileProps) {
             </nav>
           )}
 
-          <div className="top-profile-expressions" aria-label="表情差分預覽">
+          <div className="profile-expressions" aria-label="表情差分預覽">
             {selectedExpressions.map((src, index) => (
-              <div className="top-profile-expression" key={src}>
+              <div className="profile-expression" key={src}>
                 <img alt={`${profile.name} 表情差分 ${index + 1}`} src={src} />
               </div>
             ))}
           </div>
         </div>
 
-        <dl className="top-profile-stats" aria-label="統計資訊">
+        <dl className="profile-stats" aria-label="統計資訊">
           {stats.map((item) => (
-            <div className="top-profile-stat" key={item.label}>
+            <div className="profile-stat" key={item.label}>
               <dt>{item.label}</dt>
               <dd>{item.value.toLocaleString('en-US')}</dd>
             </div>
@@ -160,7 +160,7 @@ export default function Profile({ publicationLabel, videos }: ProfileProps) {
       </div>
 
       {lastUpdated && (
-        <p className="top-profile-updated">Last updated: {lastUpdated}</p>
+        <p className="profile-updated">Last updated: {lastUpdated}</p>
       )}
     </section>
   )
