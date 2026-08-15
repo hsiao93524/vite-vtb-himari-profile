@@ -1,5 +1,12 @@
 # AGENTS.md
 
+## Design And Implementation Guardrails
+
+- X Tag Searcher 的 shared description id 固定使用 `tagSearcher`，並與目前的 `TagSearcher` implementation、`src/data/tag-searcher.json`、publication id 對齊。不得因對外名稱是 `X Tag Searcher` 而改成 `xTagSearcher`，除非使用者同意另開 id migration。
+- Checklist是使用者用來手動確認的項目
+- Checklist原則上不由AI進行勾選，除非使用者同意
+- 撰寫程式階段時，依照設計書進行，所以不能修改設計書。如果遇到需要修改設計書的內容，需要詢問使用者。
+
 ## 暫時限制紀錄：Staged 內容待確認（已停用）
 
 本章節只保留有 Staged 內容時需要使用的 agent.md 文本，不再作為有效工作規則。
