@@ -21,7 +21,7 @@ import blockDescriptions from '../../data/block-descriptions.json'
 import profile from '../../data/profile.json'
 import site from '../../data/site.json'
 
-type TopPageProps = {
+type ProfileProps = {
   videos: Video[]
   publicationLabel?: string | null
 }
@@ -64,7 +64,7 @@ function getVisibleProfileLinks(links: typeof profile.links) {
   )
 }
 
-export default function TopPage({ publicationLabel, videos }: TopPageProps) {
+export default function Profile({ publicationLabel, videos }: ProfileProps) {
   const selectedExpressions = useMemo(
     () => pickRandomExpressions(expressionImages, 3),
     [],

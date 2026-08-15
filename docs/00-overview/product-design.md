@@ -148,7 +148,7 @@ Current spec:
 ```text
 src/
 ├── components/
-│   ├── TopPage/          # Main visual, profile, and stats
+│   ├── Profile/          # Main visual, profile, and stats
 │   ├── VideoTable/       # Dense table view
 │   ├── VideoGallery/     # Thumbnail card view
 │   ├── TagSearcher/      # Categorized X/Twitter tag search links

@@ -1,6 +1,6 @@
 # Profile Data Design
 
-This document defines the Profile block preview, current `profile.json`, and related shared data needed by `TopPage`.
+This document defines the Profile block preview, current `profile.json`, and related shared data needed by the `Profile` component.
 
 ## Block Titles And Descriptions
 
@@ -142,7 +142,7 @@ Current shared site metadata used by Profile:
 
 Rules:
 
-- `profile.json` is imported by `TopPage`.
+- `profile.json` is imported by the `Profile` component.
   - `name` stores the display name.
   - `description` stores the character profile text shown in the Profile block.
   - `links` stores the official Profile links.
@@ -167,7 +167,7 @@ Rules:
 
 #### Statistics Fields
 
-Statistics are loaded from `src/data/videos.json` through `useVideos`, then calculated inside `TopPage`.
+Statistics are loaded from `src/data/videos.json` through `useVideos`, then calculated inside the `Profile` component.
 
 Current Profile statistics:
 
@@ -230,6 +230,6 @@ src/
 |-- hooks/
 |   `-- useVideos.ts
 `-- components/
-    `-- TopPage/
+    `-- Profile/
         `-- index.tsx
 ```

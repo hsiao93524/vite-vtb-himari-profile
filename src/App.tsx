@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import FanartPreview from './components/FanartPreview'
+import Profile from './components/Profile'
 import RelatedLinks from './components/RelatedLinks'
 import TagSearcher from './components/TagSearcher'
-import TopPage from './components/TopPage'
 import VideoAnalytics from './components/VideoAnalytics'
 import VideoGallery from './components/VideoGallery'
 import VideoTagFilter from './components/VideoTagFilter'
@@ -42,7 +42,7 @@ export default function App() {
   return (
     <main>
       {isSectionVisible('hero') && (
-        <TopPage
+        <Profile
           publicationLabel={getSectionVisibilityLabel('hero')}
           videos={allVideos}
         />

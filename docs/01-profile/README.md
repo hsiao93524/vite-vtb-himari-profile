@@ -11,7 +11,7 @@ This folder collects the design materials for the top `Profile` block on the hom
 - Use high-level statistics to show the shape of her streaming and video activity.
 - Keep the Profile design image, source presentation, and acceptance checklist.
 - Explain which images, text, links, and statistics the React implementation needs.
-- Serve as the spec entry point before implementing `src/components/TopPage/`.
+- Serve as the spec entry point before implementing `src/components/Profile/`.
 - Separate assets imported by the React app from preview assets used only by design docs.
 
 ## Design Preview
@@ -57,7 +57,7 @@ docs/01-profile/
 
 | Design Item | Current or Planned Location |
 | --- | --- |
-| Profile component | `src/components/TopPage/index.tsx` |
+| Profile component | `src/components/Profile/index.tsx` |
 | Main visual image | `src/assets/profile/hero.png` |
 | Expression images | `src/assets/profile/expressions/` |
 | Profile static data | `src/data/profile.json` |
