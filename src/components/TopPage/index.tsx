@@ -17,6 +17,7 @@ import expression14 from '../../assets/profile/expressions/expression-14.jpg'
 import expression15 from '../../assets/profile/expressions/expression-15.jpg'
 import PublicationBadge from '../PublicationBadge'
 import type { Video } from '../../types/video'
+import blockDescriptions from '../../data/block-descriptions.json'
 import profile from '../../data/profile.json'
 import site from '../../data/site.json'
 
@@ -51,6 +52,18 @@ function pickRandomExpressions(images: string[], count = 3) {
   return [...images].sort(() => Math.random() - 0.5).slice(0, count)
 }
 
+function getVisibleText(value?: string) {
+  return value?.trim() ?? ''
+}
+
+function getVisibleProfileLinks(links: typeof profile.links) {
+  return links.filter(
+    (link) =>
+      getVisibleText(link.href) &&
+      (getVisibleText(link.label) || getVisibleText(link.shortLabel)),
+  )
+}
+
 export default function TopPage({ publicationLabel, videos }: TopPageProps) {
   const selectedExpressions = useMemo(
     () => pickRandomExpressions(expressionImages, 3),
@@ -69,10 +82,15 @@ export default function TopPage({ publicationLabel, videos }: TopPageProps) {
     { label: 'MEMBERS', value: membersCount },
     { label: 'HOURS', value: formatHours(totalDuration) },
   ]
+  const profileDescription = getVisibleText(profile.description)
+  const visibleProfileLinks = getVisibleProfileLinks(profile.links)
+  const lastUpdated = getVisibleText(site.lastUpdated)
+  const profileBlockLabel = getVisibleText(blockDescriptions.profile.label)
+  const profileSectionLabel = profileBlockLabel || `${profile.name} Profile`
 
   return (
     <section
-      aria-label={`${profile.name} Top/Profile`}
+      aria-label={profileSectionLabel}
       className="top-profile"
       id="hero"
     >
@@ -96,27 +114,31 @@ export default function TopPage({ publicationLabel, videos }: TopPageProps) {
             <PublicationBadge>{publicationLabel}</PublicationBadge>
           </p>
         )}
-        <p className="top-profile-copy">
-          {profile.description}
-        </p>
+        {profileDescription && (
+          <p className="top-profile-copy">
+            {profileDescription}
+          </p>
+        )}
         <p className="top-profile-graduation">
           Active: {profile.debutDate}~{profile.graduationDate}
         </p>
         <div className="top-profile-middle">
-          <nav className="top-profile-links" aria-label="外部連結">
-            {profile.links.map((link) => (
-              <a
-                className={`top-profile-link top-profile-link-${link.kind}`}
-                href={link.href}
-                key={link.href}
-                rel="noreferrer"
-                target="_blank"
-              >
-                <span className="visually-hidden">{link.label}</span>
-                {link.shortLabel}
-              </a>
-            ))}
-          </nav>
+          {visibleProfileLinks.length > 0 && (
+            <nav className="top-profile-links" aria-label="Official Profile links">
+              {visibleProfileLinks.map((link) => (
+                <a
+                  className={`top-profile-link top-profile-link-${link.kind}`}
+                  href={link.href}
+                  key={link.href}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <span className="visually-hidden">{link.label}</span>
+                  {link.shortLabel || link.label}
+                </a>
+              ))}
+            </nav>
+          )}
 
           <div className="top-profile-expressions" aria-label="表情差分預覽">
             {selectedExpressions.map((src, index) => (
@@ -137,7 +159,9 @@ export default function TopPage({ publicationLabel, videos }: TopPageProps) {
         </dl>
       </div>
 
-      <p className="top-profile-updated">Last updated: {site.lastUpdated}</p>
+      {lastUpdated && (
+        <p className="top-profile-updated">Last updated: {lastUpdated}</p>
+      )}
     </section>
   )
 }
