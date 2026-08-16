@@ -46,7 +46,8 @@
 - `npm run build:pages`：目前等同 `npm run build:publications`，供部署流程使用。
 - `npm run lint`：執行 ESLint。
 - `npm run preview`：預覽 build 後的成果。
-- `npm run deploy:local`：先執行 `npm run build:pages`，再以 `gh-pages -d dist` 發布；不要在未經要求時主動部署。
+- `npm run deploy:local`：先執行 `npm run build:pages`，再以 `gh-pages -d dist` 發布。
+- Do not deploy unless the deploy action is explicitly requested.
 
 ## Verification
 
@@ -78,6 +79,12 @@
 - 若看到中文或日文變成亂碼，先確認讀檔編碼，不要直接判定內容損壞。
 - 更新 `docs/` 或 `todo.md` 時，保留原本的任務結構與決策脈絡。
 - 資料流、schema 遷移或部署規則有變更時，同步更新 README 或 `docs/` 相關文件。
+
+## 維護規則
+- 新增設計圖但不會被 React import 時，放在該設計資料夾的 `assets/`。
+- 移動文件後，同步更新：
+  - [README.md](README.md)
+  - [docs/README.md](docs/README.md)
 
 ## Frontend Rules
 

@@ -1,51 +1,121 @@
 # Docs Index
 
-這裡整理專案內的設計書、資料規格、草圖與參考資料。
+This folder keeps the design docs, data notes, wireframes, and reference files for this project.
 
-建議先從 `00-overview/product-design.md` 看現行整體方向，再看各 block 的設計文件。
+Start with [Product Design](00-overview/product-design.md) for the overall direction. Then read each numbered block folder when you need details for one page section.
 
-## 00 Overview
+## Quick Links
 
-| 檔案 | 用途 |
+| Goal | Start Here |
 | --- | --- |
-| [00-overview/product-design.md](00-overview/product-design.md) | 主設計書快照，整理 Notion 的核心規格。 |
+| Understand the full product direction | [Product Design](00-overview/product-design.md) |
+| Read Profile docs | [Profile Docs](01-profile/README.md) |
+| Read Video Analyze docs | Preparing... |
+| Read X Tag Searcher docs | [X Tag Searcher Docs](03-tag-searcher/README.md) |
+| Read Fanarts docs | Preparing... |
+| Read Recreated Page docs | Preparing... |
+| See the live site | [GitHub Pages](https://hsiao93524.github.io/vite-vtb-himari-profile/) |
 
-## 01 Profile
+## Overall Framework Preview
 
-| 檔案 | 用途 |
+![Overall framework wireframe](00-overview/assets/01-framework.png)
+
+| File | Purpose |
 | --- | --- |
-| [01-profile/README.md](01-profile/README.md) | Profile 區塊設計資料夾索引。 |
-| [01-profile/profile-block-design.md](01-profile/profile-block-design.md) | Profile 區塊的 UI 設計說明。 |
-| [01-profile/profile-data-design.md](01-profile/profile-data-design.md) | Profile 區塊的資料需求與欄位設計。 |
-| [01-profile/profile-checklist.md](01-profile/profile-checklist.md) | Profile 實作完成後的驗收清單。 |
-| [01-profile/profile-section-design.pptx](01-profile/profile-section-design.pptx) | Profile 區塊設計簡報原始檔。 |
-| [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png) | Profile 區塊設計圖預覽。 |
+| [00-overview/design.xlsx](00-overview/design.xlsx) | Original wireframe workbook. |
+| [00-overview/assets/00-rough-draft.png](00-overview/assets/00-rough-draft.png) | First rough page draft. |
+| [00-overview/assets/01-framework.png](00-overview/assets/01-framework.png) | Full page framework wireframe. |
 
-### Profile 區塊設計圖
+## Folder Map
+
+```text
+docs/
+├── README.md
+├── 00-overview/
+│   ├── product-design.md
+│   ├── design.xlsx
+│   └── assets/
+│       ├── 00-rough-draft.png
+│       └── 01-framework.png
+├── 01-profile/
+│   ├── README.md
+│   ├── profile-block-design.md
+│   ├── profile-data-design.md
+│   ├── profile-checklist.md
+│   ├── profile-section-design.pptx
+│   └── assets/
+├── 02-video-analyze/
+│   ├── video-analyze-design.pptx
+│   └── assets/
+├── 03-tag-searcher/
+│   ├── README.md
+│   ├── tag-searcher-block-design.md
+│   ├── tag-searcher-data-design.md
+│   ├── tag-searcher-checklist.md
+│   └── tag-searcher-migration-checklist.md
+├── 04-fanarts/
+│   ├── fanarts-design.pptx
+│   └── assets/
+├── 05-recreated-page/
+│   ├── recreated-page-design.pptx
+│   └── assets/
+├── ref/
+```
+
+## Design Docs
+
+### 00 Overview
+
+| File | Purpose |
+| --- | --- |
+| [00-overview/product-design.md](00-overview/product-design.md) | Main product design snapshot and project direction. |
+
+### 01 Profile
 
 ![Profile section design](01-profile/assets/profile-section-design.png)
 
-## 03 X Tag Searcher
-
-| 檔案 | 用途 |
+| File | Purpose |
 | --- | --- |
-| [03-tag-searcher/README.md](03-tag-searcher/README.md) | X Tag Searcher 區塊設計資料夾索引。 |
-| [03-tag-searcher/tag-searcher-block-design.md](03-tag-searcher/tag-searcher-block-design.md) | X Tag Searcher 區塊的 UI、layout 與 X / Twitter 搜尋互動規格。 |
-| [03-tag-searcher/tag-searcher-data-design.md](03-tag-searcher/tag-searcher-data-design.md) | X Tag Searcher 使用的 JSON schema、分類定義與資料規則。 |
-| [03-tag-searcher/tag-searcher-checklist.md](03-tag-searcher/tag-searcher-checklist.md) | X Tag Searcher 實作完成後的驗收清單。 |
-| [03-tag-searcher/tag-searcher-migration-checklist.md](03-tag-searcher/tag-searcher-migration-checklist.md) | 拆分影片 tag filter 與 X Tag Searcher 的 X / Twitter search handoff 行為的 migration checklist。 |
+| [01-profile/README.md](01-profile/README.md) | Profile docs index. |
+| [01-profile/profile-block-design.md](01-profile/profile-block-design.md) | Profile UI and layout notes. |
+| [01-profile/profile-data-design.md](01-profile/profile-data-design.md) | Profile data fields and data rules. |
+| [01-profile/profile-checklist.md](01-profile/profile-checklist.md) | Profile acceptance checklist. |
+| [01-profile/profile-section-design.pptx](01-profile/profile-section-design.pptx) | Profile source design deck. |
+| [01-profile/assets/profile-section-design.png](01-profile/assets/profile-section-design.png) | Profile design preview image. |
 
-## Wireframe / 原始草稿
+### 02 Video Analyze
 
-| 檔案 | 用途 |
+| File | Purpose |
 | --- | --- |
-| [framework.png](framework.png) | 全頁 wireframe 圖片預覽。 |
-| [design.xlsx](design.xlsx) | 原始 wireframe Excel 草稿。 |
+| [02-video-analyze/video-analyze-design.pptx](02-video-analyze/video-analyze-design.pptx) | Video Analyze source design deck. |
+| [02-video-analyze/assets/](02-video-analyze/assets/) | Video Analyze slide preview images. |
 
-### 全頁 Wireframe
+### 03 X Tag Searcher
 
-![Framework wireframe](framework.png)
+| File | Purpose |
+| --- | --- |
+| [03-tag-searcher/README.md](03-tag-searcher/README.md) | X Tag Searcher docs index. |
+| [03-tag-searcher/tag-searcher-block-design.md](03-tag-searcher/tag-searcher-block-design.md) | X Tag Searcher UI, layout, and X search behavior. |
+| [03-tag-searcher/tag-searcher-data-design.md](03-tag-searcher/tag-searcher-data-design.md) | JSON schema, categories, and tag data rules. |
+| [03-tag-searcher/tag-searcher-checklist.md](03-tag-searcher/tag-searcher-checklist.md) | X Tag Searcher acceptance checklist. |
+| [03-tag-searcher/tag-searcher-migration-checklist.md](03-tag-searcher/tag-searcher-migration-checklist.md) | Migration checklist for splitting video tag filters from X search handoff. |
 
-## 外部來源
+### 04 Fanarts
 
-- [GitHub Pages](https://hsiao93524.github.io/vite-vtb-himari-profile/)
+| File | Purpose |
+| --- | --- |
+| [04-fanarts/fanarts-design.pptx](04-fanarts/fanarts-design.pptx) | Fanarts source design deck. |
+| [04-fanarts/assets/](04-fanarts/assets/) | Fanarts slide preview images. |
+
+### 05 Recreated Pages
+
+| File | Purpose |
+| --- | --- |
+| [05-recreated-page/recreated-page-design.pptx](05-recreated-page/recreated-page-design.pptx) | Recreated Pages source design deck. |
+| [05-recreated-page/assets/](05-recreated-page/assets/) | Recreated Pages slide preview images. |
+
+## References
+
+| File | Purpose |
+| --- | --- |
+| [ref/README.md](ref/README.md) | Reference file index. |

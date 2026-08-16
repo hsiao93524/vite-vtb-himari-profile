@@ -57,4 +57,4 @@ The shared block `label` / `desc` belongs to `block-descriptions.json`; category
 ## Relationship To Overview Docs
 
 - Site direction: [`../00-overview/product-design.md`](../00-overview/product-design.md)
-- Document map: [`../design-doc-map.md`](../design-doc-map.md)
+- Docs index: [`../README.md`](../README.md)

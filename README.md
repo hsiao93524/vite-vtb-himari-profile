@@ -2,29 +2,39 @@
 
 A fan-made archive and profile site for a VTuber, built as a personal frontend project.
 
+This is not an official site and is not affiliated with or endorsed by any talent agency.
+
 ## Overview
 
-This project displays stream history, video archives, and channel information in a clean, browsable interface. Data is sourced from a structured JSON dataset and rendered with a custom UI.
+The site presents channel profile information, video archive data, fanart links, and related archive pages in a browsable frontend. The app is data-driven and currently reads its main video dataset from `src/data/videos.json`.
+
+The main product blocks are planned around:
+
+- Profile
+- Video Analyze
+- X Tag Searcher
+- Fanarts
+- Recreated Pages
+
+For feature details, see the `docs/` folder.
 
 ## Tech Stack
 
-- **React** + **TypeScript**
-- **Vite**
-- **CSS** (custom, no UI framework)
+- React
+- TypeScript
+- Vite
+- Custom CSS
 
-## Features
+## Local Development
 
-- Video archive browsing by playlist / category
-- Channel profile display
-- Responsive layout
-- Data-driven rendering from a curated JSON dataset
+```text
+npm install    # install dependencies
+npm run dev    # start the local dev server
+npm run build  # build the app
+npm run lint   # run ESLint
+```
 
 ## Publication Modes
-
-This project publishes two versions at the same time:
-
-- Public: `/vite-vtb-himari-profile/`
-- HR: `/vite-vtb-himari-profile/hr/`
 
 Section visibility is controlled in `src/config/publication.ts`.
 
@@ -32,58 +42,31 @@ Section visibility is controlled in `src/config/publication.ts`.
 - `wip-visible`: visible only in the HR version, with `[In progress]`
 - `hidden`: hidden in both versions
 
-Local development defaults to the public view. Use `?v=d` to show every
-section with its visibility label: `[public]`, `[limit]`, or `[hidden]`.
+Local development defaults to the public view. Use `?v=d` to show every section with its visibility label: `[public]`, `[limit]`, or `[hidden]`.
 
 Preview publication views without restarting the dev server:
 
-```bash
+```text
 http://localhost:5173/vite-vtb-himari-profile/
 http://localhost:5173/vite-vtb-himari-profile/?v=h
 http://localhost:5173/vite-vtb-himari-profile/?v=d
 ```
 
-Build both versions into `dist/`:
+## Project Docs
 
-```bash
-npm run build:publications
-```
-
-Deploy publishes both versions:
-
-```bash
-npm run deploy:local
-```
+- [Product Design](docs/00-overview/product-design.md)
+- [Wireframe](docs/00-overview/assets/01-framework.png)
+- [Original Wireframe Workbook](docs/00-overview/design.xlsx)
 
 ## Live Site
 
 - [GitHub Pages](https://hsiao93524.github.io/vite-vtb-himari-profile/)
 - [GitHub Pages deployments](https://github.com/hsiao93524/vite-vtb-himari-profile/deployments/github-pages)
 
-## Design Docs
-
-- [Design Doc Map](docs/design-doc-map.md)
-- [Profile Docs](docs/01-profile/README.md)
-- [Profile Block Design](docs/01-profile/profile-block-design.md)
-- [Profile Data Design](docs/01-profile/profile-data-design.md)
-- [Product Design](docs/00-overview/product-design.md)
-- [Wireframe](docs/framework.png)
-- [Original Wireframe Workbook](docs/design.xlsx)
-- [Notion source](https://www.notion.so/React-35254a9cebff81df8fc7c1fc381d26b4)
-
-## Background
-
-Built as a side project to practice frontend development with React and TypeScript, as well as data pipeline work (Python scripts for fetching and structuring YouTube data via the YouTube Data API).
-
-The supporting tooling includes:
-- Python scripts for fetching video metadata and durations via the YouTube Data API v3
-- Excel-based data management with `openpyxl`
-- A browser-based data checker for validating the JSON dataset
-
 ## Status
 
-Work in progress. Core UI and data pipeline are functional; additional features planned.
+Work in progress. Core UI and data pipeline are functional, while product blocks and data schema cleanup are still being refined.
 
 ## License
 
-Personal/fan project. Not affiliated with or endorsed by any talent agency.
+Personal fan project. Not affiliated with or endorsed by any talent agency.

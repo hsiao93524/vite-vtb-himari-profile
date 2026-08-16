@@ -74,4 +74,4 @@ docs/01-profile/
 ## Relationship To Overview Docs
 
 - Site direction: [`../00-overview/product-design.md`](../00-overview/product-design.md)
-- Doc map: [`../design-doc-map.md`](../design-doc-map.md)
+- Docs index: [`../README.md`](../README.md)

@@ -126,8 +126,8 @@ Current spec:
 
 ## Wireframe And Assets
 
-- [Wireframe PNG](../framework.png)
-- [Original wireframe workbook](../design.xlsx)
+- [Wireframe PNG](assets/01-framework.png)
+- [Original wireframe workbook](design.xlsx)
 - Figma source: [結萌ひまり 卒業アルバム - Wireframe](https://www.figma.com/design/qRIG39WtxY0JosIujPBGd7)
 
 ## Visual Tokens

@@ -12,7 +12,7 @@ This block does not control the site-side video tag filter or video list state. 
 
 ## Wireframe Reference
 
-In `docs/framework.png`, this block corresponds to the third homepage block, `X Tag Searcher`.
+This block corresponds to the third homepage block, `X Tag Searcher`.
 
 Main elements:
 

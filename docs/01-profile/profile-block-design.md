@@ -1,6 +1,6 @@
 # Profile Block Design
 
-Source: [Profile design image](assets/profile-section-design.png) and [wireframe image](../framework.png)
+Source: [Profile design image](assets/profile-section-design.png)
 
 This document defines the `Profile` block in the wireframe. It is the first Profile area visitors see on the public page.
 
@@ -29,7 +29,7 @@ Profile links should stay limited to the current official X account and YouTube 
 
 ## Wireframe Reference
 
-In `docs/framework.png`, this block corresponds to the upper yellow `Profile` block.
+This block corresponds to the upper yellow `Profile` block.
 
 Main elements:
 
