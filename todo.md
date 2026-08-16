@@ -46,7 +46,7 @@
 - [ ] 清理 `src/types/video.ts` 裡的 `isMembers?: boolean`
 - [ ] 將 `src/types/video.ts` 的 `isMembersOnly?: boolean` 改成必要欄位 `isMembersOnly: boolean`
 - [ ] 檢查並移除前端所有使用 `video.isMembers` 的地方
-- [ ] 更新 `useVideos`、`TopPage`、`VideoTable` 等會員影片判斷邏輯，只依賴 `isMembersOnly`
+- [ ] 更新 `useVideos`、`Profile`、`VideoTable` 等會員影片判斷邏輯，只依賴 `isMembersOnly`
 - [ ] 重新執行資料轉換與前端 build，確認沒有型別錯誤
 
 ## Playlist 欄位清理
@@ -94,8 +94,8 @@
 
 目標：在畫面左側加入章節選單，讓使用者可以快速跳到各個 block。
 
-- [x] 確認每個主要 block 都有穩定的 `id`，例如 `hero`、`videos`、`analytics`、`tag-searcher`、`fanart-preview`、`links`
-- [ ] 新增章節選單資料結構，例如 `{ id: 'videos', label: 'Video Block' }`
+- [x] 確認每個主要 block 都有穩定的 `id`，例如 `profile`、`videos`、`tag-searcher`、`fanart-preview`、`links`
+- [ ] 新增章節選單資料結構，例如 `{ id: 'videos', label: 'Video Analyze' }`
 - [ ] 建立 `SectionNav` 或類似元件
 - [ ] 在桌面版將章節選單固定於左側，使用 `position: sticky`
 - [ ] 點擊章節項目時使用 anchor 跳轉到對應 block，例如 `href="#videos"`

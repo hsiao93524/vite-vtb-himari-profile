@@ -10,6 +10,8 @@
 ## Identity
 
 - [ ] The Profile block is rendered before the video/archive list section.
+- [ ] The Profile block uses `profile` as its section id / page anchor. Verify by inspecting the rendered Profile section.
+- [ ] `hero` is used only for the character main visual asset, not for the Profile block id or publication section id. Verify by searching source references for `hero`.
 - [ ] The visible display name text is exactly `結萌ひまり`.
 - [ ] The main visual from `src/assets/profile/hero.png` is displayed.
 - [ ] Exactly three expression images are displayed.

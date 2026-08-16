@@ -67,7 +67,7 @@ Profile block
 | Content | Purpose | Source |
 | --- | --- | --- |
 | Name | Clearly identify the page subject | Static profile text |
-| Main visual | Create the first visual anchor | `src/assets/profile/hero.png` or replacement asset |
+| Main visual | Show the character as the first visual signal | `src/assets/profile/hero.png` or replacement asset; `hero` means the character image asset |
 | Short profile copy | Explain the archive purpose | Static profile text |
 | X link | Link to the official external identity source | Static URL |
 | YouTube link | Link to the official external channel | Static URL |
@@ -77,6 +77,13 @@ Profile block
 | Active period | Provide historical context | Derived from min/max `date` or static graduation data |
 
 ## Details
+
+### Naming Boundary
+
+- `Profile` is the block name and section name.
+- `profile` is the block-level section id, page anchor, and publication section identity.
+- `hero` only means the character main visual asset, such as `src/assets/profile/hero.png` or a local `heroImage` variable.
+- Do not use `hero` to name the whole Profile block, its section id, or its publication section id.
 
 ### Profile Text And Links
 

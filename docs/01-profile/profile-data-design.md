@@ -34,6 +34,8 @@ The Profile block uses Profile-owned assets and data, video-derived statistics, 
 
 ### Asset Folder
 
+In this document, `hero` means the character main visual asset. It is smaller than the full `Profile` block and should not be used as the Profile block id, page anchor, or publication section id.
+
 [Main visual image](../../src/assets/profile/hero.png)
 
 ```text

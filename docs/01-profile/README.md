@@ -58,7 +58,8 @@ docs/01-profile/
 | Design Item | Current or Planned Location |
 | --- | --- |
 | Profile component | `src/components/Profile/index.tsx` |
-| Main visual image | `src/assets/profile/hero.png` |
+| Profile block anchor | `profile` |
+| Main visual image asset | `src/assets/profile/hero.png`; here `hero` means the character visual asset, not the block id |
 | Expression images | `src/assets/profile/expressions/` |
 | Profile static data | `src/data/profile.json` |
 | Video-derived stats | `src/data/videos.json` + `src/hooks/useVideos.ts` |
