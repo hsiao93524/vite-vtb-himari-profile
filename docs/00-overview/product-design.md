@@ -1,31 +1,22 @@
 # Product Design
 
-Source: [Notion design document](https://www.notion.so/React-35254a9cebff81df8fc7c1fc381d26b4)
-
-This document is the repository-side product design reference for the React web version. Use the Notion page as the working draft, and keep this file aligned with implementation decisions that affect the codebase.
+This document is the overview design document for the project.
 
 ## Document Role
 
-This file answers three questions:
-
-1. What kind of site is this project building?
-2. Which page blocks and user interactions are in scope?
-3. Which decisions are already fixed, and which specifications still need design detail?
-
-Related detailed documents:
-
-- [Profile Block Design](../01-profile/profile-block-design.md): detailed Profile UI design.
-- [Profile Data Design](../01-profile/profile-data-design.md): Profile data requirements.
+Use this document as the overview reference for the project. It explains the site scope, the five main blocks, the current example dataset, and the design choices that affect the whole page.
 
 ## Project Summary
 
-Build a one-page React site for the VTuber archive/profile of 結萌ひまり and publish it on GitHub Pages.
+Build a simple frontend-only archive and profile site for VTubers. This project currently uses Himari as the example profile and dataset, and is published on GitHub Pages.
 
-The site should work as a fan-made profile and archive page. It collects public channel/profile information, organizes preserved video metadata, and provides entry points to tags, fanart, and recreated historical pages.
+The site should work as a fan-made profile and archive page that can be adapted for different VTubers. It organizes public profile information, activity data, video metadata, tag search entry points, fanart content, and recreated or archived related pages.
+
+**Example VTuber Profile:**
 
 | Item | Content |
 | --- | --- |
-| Target VTuber | 結萌ひまり |
+| Example VTuber | 結萌ひまり |
 | Affiliation | Re:AcT Gaming |
 | X | <https://x.com/RAG_Himari> |
 | YouTube | <https://www.youtube.com/@raghimari> |
@@ -36,10 +27,11 @@ The site should work as a fan-made profile and archive page. It collects public 
 
 ## Design Goals
 
-- Preserve profile and archive information in a static site that can be hosted on GitHub Pages.
-- Make the page readable as a memorial/profile page first, then usable as a video archive.
+- Make it easy for fans or VTubers to build a simple profile and archive site.
+- Keep the first release frontend-only and easy to host on GitHub Pages.
+- Start with dummy or static data, and keep the option open for a future backend.
+- Preserve profile and archive information as static content in the first release.
 - Keep data and UI boundaries explicit so later sections can be implemented in phases.
-- Avoid requiring a backend for the initial release.
 
 ## Page Structure
 
@@ -48,8 +40,8 @@ The page is divided into five major blocks.
 | Order | Block | Purpose | Main Content |
 | --- | --- | --- | --- |
 | 1 | Profile | First-view identity and summary | Main visual, short profile, official SNS links, total videos, members-only count, total hours, active period |
-| 2 | Video Analyze | Archive exploration | Stream type charts, collaboration analysis, full video archive, detail/search mode |
-| 3 | X Tag Searcher | External X / Twitter search entry points from prepared tag data | Prepared tags, category display, X / Twitter search handoff |
+| 2 | Video Analyze | Activity data analysis | Stream type charts, collaboration analysis, full video archive, detail/search mode |
+| 3 | X Tag Searcher | Quick access to related tag search results on X / Twitter | Prepared tags, category display, X / Twitter search handoff |
 | 4 | Fanarts | Fanart preview | Horizontal carousel, auto-scroll, pause-on-hover, left/right controls |
 | 5 | Recreated Pages | Preserved historical material | Litlink, YouTube, Twitch, Twitter, sub-Twitter page candidates |
 
@@ -58,7 +50,7 @@ The page is divided into five major blocks.
 For future expansion, each main block title and purpose are provided by JSON.
 This section defines that JSON only. The detailed data for each block is defined in that block's own design document.
 
-These shared block are be defined in [block-descriptions.json](../../src/data/block-descriptions.json) currently.
+These shared blocks are currently defined in [block-descriptions.json](../../src/data/block-descriptions.json).
 
 JSON shape:
 
@@ -88,87 +80,6 @@ Current spec:
   - `fanarts`: `Fanarts`
   - `recreatedPages`: `Recreated Pages`
 
-## Interaction Design
+## Wireframe
 
-### Profile
-
-- The site is a single-page experience.
-- Section-level navigation should scroll to the relevant block instead of opening separate pages.
-- detail: [docs/01-profile/profile-block-design.md](../01-profile/profile-block-design.md)
-
-### Video Archive
-
-- `Video Analyze` should support both overview charts and detailed archive browsing.
-- Expected visualizations:
-  - Bar chart for major stream categories.
-  - Pie/cake chart for composition summary.
-  - Bubble chart for collaboration or tag distribution.
-- Detail/search behavior can refer to [videos_check.html](../ref/videos_check.html), but the final UI should be adapted for the public-facing React page.
-
-### X Tag Searcher
-
-- X Tag Searcher turns prepared tag data into external X / Twitter search links.
-- Tag clicks should open an X / Twitter search page for that tag.
-- This block does not control the site-side video tag filter or video list state.
-
-### Fanart Preview
-
-- Intended UI is a horizontal carousel.
-- Auto-scroll should run only when the user is not hovering or interacting.
-- Hover should pause movement.
-- Left/right controls should remain available for manual navigation.
-
-### Recreated Pages
-
-- `Recreated pages` should expose preserved local material without implying official ownership.
-- Public/private boundaries must be decided before publishing any recreated or archived content.
-- Links / pages in `Recreated Pages` should be different from the official links shown in the `Profile` block.
-
-## Wireframe And Assets
-
-- [Wireframe PNG](assets/01-framework.png)
-- [Original wireframe workbook](design.xlsx)
-- Figma source: [結萌ひまり 卒業アルバム - Wireframe](https://www.figma.com/design/qRIG39WtxY0JosIujPBGd7)
-
-## Visual Tokens
-
-| Usage | Color |
-| --- | --- |
-| Deep pink | `#E87FAB` |
-| Pale pink | `#FFEEF5` |
-| Mid pink | `#F9C8DC` |
-| Dark text | `#3D2B3D` |
-| Muted text | `#7A5C7A` |
-| Purple | `#9B6FC8` |
-| Green | `#6BAD6B` |
-| White | `#FFFFFF` |
-
-## Component Design
-
-```text
-src/
-├── components/
-│   ├── Profile/          # Main visual, profile, and stats
-│   ├── VideoTable/       # Dense table view
-│   ├── VideoGallery/     # Thumbnail card view
-│   ├── TagSearcher/      # Categorized X/Twitter tag search links
-│   ├── VideoAnalytics/   # Charts: bar, bubble, pie
-│   ├── FanartPreview/    # Fanart preview/gallery
-│   └── RelatedLinks/     # Recreated links
-├── data/
-│   └── videos.json
-├── hooks/
-│   └── useVideos.ts
-└── App.tsx
-```
-
-## Technology Choices
-
-| Area | Choice | Reason |
-| --- | --- | --- |
-| Framework | React + Vite + TypeScript | Keep the app simple and static |
-| Styling | Custom CSS in current repo | Current implementation does not use Tailwind |
-| Charts | Recharts or equivalent React chart library | Better fit for future chart work |
-| Data source | Static `videos.json` | No backend required for early phases |
-| Deploy | GitHub Pages | Free static hosting |
-| Future data sync | Google Sheets API | Possible later automation path |
+![profile-section-design](assets/01-framework.png)
