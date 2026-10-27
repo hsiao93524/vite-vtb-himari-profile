@@ -1,10 +1,10 @@
 # VTuber Archive & Profile Site
 
-A fan-made archive and profile site for VTubers, built as a personal frontend project.
+A fan-made archive and profile website for VTubers, developed as a personal frontend project.
 
-This project uses Himari, a VTuber, as the example profile and dataset.
+Himari (結萌ひまり) is featured as the sample profile and dataset for demonstration purposes.
 
-This is not an official site and is not affiliated with or endorsed by any talent agency.
+This website is unofficial and has no affiliation with, sponsorship from, or endorsement by Himari or any talent agency.
 
 ## Overview
 
@@ -33,20 +33,20 @@ For feature details, see the `docs/` folder.
 
 ## Publication Modes
 
-Because the project is still in development, content is shown through section visibility controls. The site has two publication views: an SNS version and a portfolio version. The SNS version has already been shared on X / Twitter. Section visibility is controlled in `src/config/publication.ts`:
+Section visibility is controlled in `src/config/publication.ts`:
 
-- `public`: visible in both the SNS version and the portfolio version
-- `wip-visible`: visible only in the portfolio version, with sections marked as `[In progress]`
-- `hidden`: hidden in both versions
+- `public`: visible in all publication views
+- `wip-visible`: visible only in the portfolio view, marked as `[In progress]`
+- `hidden`: hidden in all publication views
 
-Local development defaults to the public view. Use `?v=d` to show every section with its visibility label: `[public]`, `[limit]`, or `[hidden]`.
+The public view is used by default during local development. Append `?v=d` to the URL to show all sections and their visibility labels: `[public]`, `[limit]` (= `wip-visible`), or `[hidden]`.
 
-Preview publication views without restarting the dev server:
+Preview publication views without restarting the development server:
 
 ```text
-http://localhost:5173/vite-vtb-himari-profile/
-http://localhost:5173/vite-vtb-himari-profile/?v=h
-http://localhost:5173/vite-vtb-himari-profile/?v=d
+http://localhost:5173/vite-vtb-himari-profile/       # public view
+http://localhost:5173/vite-vtb-himari-profile/?v=h   # portfolio view
+http://localhost:5173/vite-vtb-himari-profile/?v=d   # debug view (all sections)
 ```
 
 ## Project Docs
